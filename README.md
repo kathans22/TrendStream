@@ -796,7 +796,7 @@ COMMIT;
 
 ## 4. **Project Directory Setup**
 
-Navigate to `C:\xampp\htdocs` (Windows) or `/Applications/XAMPP/htdocs` (macOS).
+Navigate to `C:\xampp\htdocs` (Windows) or `/Applications/XAMPP/htdocs` (macOS) or `/opt/lampp/htdocs` (Linux).
 
 1. Create a folder named `mycode`.
 2. Inside `mycode`, create another folder named `template`.
