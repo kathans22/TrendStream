@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+      shrink-to-fit=no">
+    <title>TrendStream</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../css/style1.css">
+    <link rel="stylesheet" href="../../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="../../js/select.dataTables.min.css">
+
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../vendors/font-awesome/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="stylesheet" href="../../vendors/jquery-toast-plugin/jquery.toast.min.css">
+
+    <link rel="shortcut icon" href="../../images/favicon.png" />
+    <style>
+        .Error {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="align-content-center justify-content-center">
+        <div class="col-md-4 col-sm-6 grid-margin stretch-card m-auto pt-5" id="loader">
+            <div class="dot-opacity-loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <div class="body-content" style="display: none;">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row" id="navbar">
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_settings-panel.html -->
+            <div class="theme-setting-wrapper">
+                <div id="settings-trigger"><i class="ti-settings"></i></div>
+                <div id="theme-settings" class="settings-panel">
+                    <i class="settings-close ti-close"></i>
+                    <p class="settings-heading">SIDEBAR SKINS</p>
+                    <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+                        <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+                    </div>
+                    <div class="sidebar-bg-options" id="sidebar-dark-theme">
+                        <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+                    </div>
+                    <p class="settings-heading mt-2">HEADER SKINS</p>
+                    <div class="color-tiles mx-0 px-4">
+                        <div class="tiles success"></div>
+                        <div class="tiles warning"></div>
+                        <div class="tiles danger"></div>
+                        <div class="tiles info"></div>
+                        <div class="tiles dark"></div>
+                        <div class="tiles default"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="right-sidebar" class="settings-panel">
+                <i class="settings-close ti-close"></i>
+                <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab"
+                            aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab"
+                            aria-controls="chats-section">CHATS</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="setting-content">
+                    <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+                        aria-labelledby="todo-section">
+                        <div class="add-items d-flex px-3 mb-0">
+                            <form class="form w-100">
+                                <div class="form-group d-flex">
+                                    <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                                    <button type="submit" class="add btn btn-primary
+                      todo-list-add-btn" id="add-task">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="list-wrapper px-3">
+                            <ul class="d-flex flex-column-reverse todo-list">
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox">
+                                            Team review meeting at 3.00 PM
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox">
+                                            Prepare for presentation
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox">
+                                            Resolve all the low priority tickets due today
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li class="completed">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox" checked>
+                                            Schedule meeting for next week
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li class="completed">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox" checked>
+                                            Project review
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <h4 class="px-3 text-muted mt-5 fw-light mb-0">Events</h4>
+                        <div class="events pt-4 px-3">
+                            <div class="wrapper d-flex mb-2">
+                                <i class="ti-control-record text-primary me-2"></i>
+                                <span>Feb 11 2018</span>
+                            </div>
+                            <p class="mb-0 font-weight-thin text-gray">Creating component
+                                page build a js</p>
+                            <p class="text-gray mb-0">The total number of sessions</p>
+                        </div>
+                        <div class="events pt-4 px-3">
+                            <div class="wrapper d-flex mb-2">
+                                <i class="ti-control-record text-primary me-2"></i>
+                                <span>Feb 7 2018</span>
+                            </div>
+                            <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
+                            <p class="text-gray mb-0 ">Call Sarah Graves</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- partial -->
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            </nav>
+            <div class="main-panel" id="main-panel">
+
+            </div>
+            <!-- <div class="containerc"></div> -->
+            <!-- main-panel ends -->
+        </div>
+        <!-- <h1>aa</h1>
+    <img src="../../images/uploadimage/Screenshot (2).png"> -->
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <script src="./main.js"></script>
+    <script src="../../js/msidebar.js"></script>
+    <script src="../../js/mnavbar.js"></script>
+    <script src="./script.js"> </script>
+    <script>
+        //             var targetDiv = document.getElementById('content-cardc');
+        // var content = '<div class="card"><div align=center>                <i class="mdi mdi-dots-horizontal"></i>              </div>              <div class="card-top">                <img src="download.jpg" alt="Blog Name">              </div>              <div class="card-bottom flex-row">                <span class="cspaan date">Monday, Jan 20, 2021</span>                <p class="cp"><img class="profile-pic" src="images/faces/face1.jpg"> Blogger name</p>              </div>              <div class="card-info">                <h2 class="btitle">JavaScript Quote Generator</h2>              </div>              <div class="card-bottom flex-row">                <button type="button" class="btn btn-outline-primary btn-sm">blog c.</button>                <p class="nav">                  <i class="lcv mdi mdi-heart"></i>&nbsp;12                  <i class="lcv mdi mdi-comment"></i>&nbsp;20                  <i class="lcv mdi mdi-eye"></i>&nbsp;200                </p>              </div>            </div>';
+        // targetDiv.appendChild(content);
+        //             var targetDiv = document.getElementById('content-cardc');
+        //             // for(var i = 0 ; i<10 ;i++){
+        // targetDiv.innerHTML('');
+        // }
+        // searchvalue = null;
+        // tableindex = 0;
+        // function timeconvert(value) {
+        //     const postdate = value.split(" ")[0].split("-");
+        //     const sdate = new Date(postdate[0], postdate[1] - 1, postdate[2]);
+        //     const date = sdate.toString().split(" ");
+        //     var strdate = date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
+        //     return strdate;
+        // }
+        $(document).ready(function () {
+            checklogin();
+            navbar();
+            // showSwal('auto-close', "Not suport in your account", "Please convert bloger account.");
+            sidebar();
+            $.ajax({
+                url: "../../api/masteradmin/dashbord.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'dba' }),
+                dataType: "JSON",
+                async: false,
+                success: (data) => {
+                    console.log(data);
+                    content = `<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"
+                    id="modal">
+                </div>
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="home-tab">
+                                <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab"
+                                                href="#overview" role="tab" aria-controls="overview"
+                                                aria-selected="true">Home</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content tab-content-basic">
+                                    <div class="tab-pane fade show active" id="overview" role="tabpanel"
+                                        aria-labelledby="overview">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div
+                                                    class="statistics-details d-flex align-items-center justify-content-between">
+                                                    <div class="d-none d-md-block">
+                                                        <p class="statistics-title">Active Blogs</p>
+                                                        <h3 class="rate-percentage">`+ data.activeblogs[0].totalavtiveblogs + `</h3>
+                                                        <!-- <p class="text-success d-flex"><i
+                                                                class="mdi mdi-menu-down"></i><span>+0.8%</span></p> -->
+                                                    </div>
+                                                    <div>
+                                                        <p class="statistics-title">Total accounts</p>
+                                                        <h3 class="rate-percentage">`+ data.totalaccounts[0].totalaccounts + `</h3>
+                                                        <!-- <p class="text-danger d-flex"><i
+                                                                class="mdi mdi-menu-down"></i><span>-0.5%</span></p> -->
+                                                    </div>
+                                                    <div>
+                                                        <p class="statistics-title">Total bloggers</p>
+                                                        <h3 class="rate-percentage">`+ data.totalblogger[0].totalbloggeraccounts + `</h3>
+                                                        <!-- <p class="text-success d-flex"><i
+                                                                class="mdi mdi-menu-up"></i><span>+0.1%</span></p> -->
+                                                    </div>
+                                                    <div>
+                                                        <p class="statistics-title">Total users</p>
+                                                        <h3 class="rate-percentage">`+ data.totaluser[0].totaluseraccounts + `</h3>
+                                                        <!-- <p class="text-danger d-flex"><i
+                                                                class="mdi mdi-menu-down"></i><span>68.8%</span></p> -->
+                                                    </div>
+                                                    <div>
+                                                        <p class="statistics-title">categorys</p>
+                                                        <h3 class="rate-percentage">`+ data.totalcategory[0].totalcategorys + `</h3>
+                                                        <!-- <p class="text-danger d-flex"><i
+                                                                class="mdi mdi-menu-down"></i><span>68.8%</span></p> -->
+                                                    </div>
+                                                    <div>
+                                                        <p class="statistics-title">languages</p>
+                                                        <h3 class="rate-percentage">`+ data.totallanguage[0].totallanguages + `</h3>
+                                                        <!-- <p class="text-danger d-flex"><i
+                                                                class="mdi mdi-menu-down"></i><span>68.8%</span></p> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-8 d-flex flex-column">
+                                                <div class="row flex-grow">
+                                                    <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
+                                                        <div class="card card-rounded">
+                                                            <div class="card-body">
+                                                                <div
+                                                                    class="d-sm-flex justify-content-between align-items-start">
+                                                                    <div>
+                                                                        <h4 class="card-title card-title-dash">
+                                                                            Posted blogs
+                                                                        </h4>
+                                                                        <h5 class="card-subtitle card-subtitle-dash">
+                                                                            Difference of last 2 weeeks posted blogs
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div id="performance-line-legend"></div>
+                                                                </div>
+                                                                <div class="chartjs-wrapper mt-4">
+                                                                    <canvas id="performaneLine"></canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 d-flex flex-column">
+                                                <div class="row flex-grow">
+                                                    <div class="col-md-6 col-lg-12 grid-margin stretch-card">
+                                                        <div class="card bg-primary card-rounded">
+                                                            <div class="card-body pb-0">
+                                                                <h4 class="card-title card-title-dash text-white mb-4">
+                                                                    Today Posted blogs</h4>
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <h2 class="text-info">`+ data.todaypostedblogs[0].total_posted_blogs + `</h2>
+                                                                    </div>
+                                                                    <div class="col-sm-8">
+                                                                        <div class="status-summary-chart-wrapper pb-4">
+                                                                            <canvas id="status-summary"></canvas>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-12 grid-margin stretch-card">
+                                                        <div class="card card-rounded">
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <div
+                                                                            class="d-flex justify-content-between align-items-center mb-2 mb-sm-0">
+                                                                            <!-- <div class="circle-progress-width">
+                                                                                <div id="totalVisitors"
+                                                                                    class="progressbar-js-circle pr-2">
+                                                                                </div>
+                                                                            </div> -->
+                                                                            <div>
+                                                                                <p class="text-small mb-2">Available
+                                                                                    Blogs</p>
+                                                                                <h4 class="mb-0 fw-bold">`+ data.r1[2].newtotal +`</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <div
+                                                                            class="d-flex justify-content-between align-items-center">
+                                                                            <!-- <div class="circle-progress-width">
+                                                                                <div id="visitperday"
+                                                                                    class="progressbar-js-circle pr-2">
+                                                                                </div>
+                                                                            </div> -->
+                                                                            <div>
+                                                                                <p class="text-small mb-2">Deleted
+                                                                                    Blogs</p>
+                                                                                <h4 class="mb-0 fw-bold">`+ data.r1[0].newtotal +`</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                                    <div class="col-md-6 col-lg-6 grid-margin stretch-card">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                            <h4 class="card-title">Top categories</h4>
+                                                            <canvas id="barChart1"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-6 grid-margin stretch-card">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                            <h4 class="card-title">Top languages</h4>
+                                                            <canvas id="barChart2"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                        <div class="row">
+                                            <div class="col-lg-8 d-flex flex-column">
+                                                <div class="row">
+                                                    <div class="col-12 grid-margin stretch-card">
+                                                        <div class="card card-rounded">
+                                                            <div class="card-body">
+                                                                <div
+                                                                    class="d-sm-flex justify-content-between align-items-start">
+                                                                    <div>
+                                                                        <h4 class="card-title card-title-dash">Top
+                                                                            bloggers</h4>
+                                                                        <p class="card-subtitle card-subtitle-dash">Text
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="table-responsive  mt-1">
+                                                                    <table class="table select-table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Bloggers</th>
+                                                                                <th>blogs</th>
+                                                                                <th>views</th>
+                                                                                <th>likes</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>`
+                    for (i = 0; i < data.topblogger.length; i++) {
+                        if (i == data.topblogger.length - 1) {
+                            content += `<tr>
+                                                                                <td>
+                                                                                    <div class="d-flex">`
+                            if (data.topblogger[i].photo == null || data.topblogger[i].photo == "") {
+                                content += `
+                                                                                                                                                            <img src="../../images/faces/profile/default.png" alt="">`
+                            } else {
+                                content += `
+                                                                                                                                                            <img src="../../images/faces/profile/`+ data.topblogger[i].photo + `" alt="">`
+                            }
+                            content += `
+                                                                                        <div>
+                                                                                            <h6>`+ data.topblogger[i].username + `</h6>
+                                                                                            <p>`
+                            if (data.topblogger[i].ufname == null && data.topblogger[i].ulname == null) {
+                                content += '--------';
+                            } else {
+                                if (data.topblogger[i].ufname == null)
+                                    content += data.topblogger[i].ulname;
+                                else if (data.topblogger[i].ulname == null)
+                                    content += data.topblogger[i].ufname;
+                                else
+                                    content += data.topblogger[i].ufname + ` ` + data.topblogger[i].ulname;
+                            }
+                            content += `</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div>
+                                                                                        <div
+                                                                                            class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
+                                                                                            <p class="text-success">`+ (parseInt((100 * data.topblogger[i].active) / data.topblogger[i].totalblogs)) + `%
+                                                                                            </p>
+                                                                                            <p>`+ data.topblogger[i].active + `/` + data.topblogger[i].totalblogs + `</p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="progress progress-md">
+                                                                                            <div class="progress-bar bg-success"
+                                                                                                role="progressbar"
+                                                                                                style="width: `+ (parseInt((100 * data.topblogger[i].active) / data.topblogger[i].totalblogs)) + `%"
+                                                                                                                                                                aria-valuenow="`+ (parseInt((100 * (data.topblogger[i].active)) / data.topblogger[i].totalblogs)) + `"
+                                                                                                                                                                aria-valuemin="0"
+                                                                                                aria-valuemax="100">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>`+ data.topblogger[i].newavgviews + `</td>
+                                                                                <td>`+ data.topblogger[i].totallikes + `</td>
+                                                                            </tr>`
+                        } else {
+
+                            content += `                                           <tr>
+                                                                                                                                                <td>
+                                                                                                                                                    <div class="d-flex ">`
+                            if (data.topblogger[i].photo == null || data.topblogger[i].photo == "") {
+                                content += `
+                                                                                                                                                            <img src="../../images/faces/profile/default.png" alt="">`
+                            } else {
+                                content += `
+                                                                                                                                                            <img src="../../images/faces/profile/`+ data.topblogger[i].photo + `" alt="">`
+                            }
+                            content += `<div>
+                                                                                                                                                            <h6>`+ data.topblogger[i].username + `</h6>
+                                                                                                                                                            <p>`
+                            if (data.topblogger[i].ufname == null && data.topblogger[i].ulname == null) {
+                                content += '--------';
+                            } else {
+                                if (data.topblogger[i].ufname == null)
+                                    content += data.topblogger[i].ulname;
+                                else if (data.topblogger[i].ulname == null)
+                                    content += data.topblogger[i].ufname;
+                                else
+                                    content += data.topblogger[i].ufname + ` ` + data.topblogger[i].ulname;
+                            }
+                            content += `</p>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                                                                                                </td>
+                                                                                                                                                <td>
+                                                                                                                                                    <div>
+                                                                                                                                                        <div
+                                                                                                                                                            class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
+                                                                                                                                                            <p class="text-success">`+ (parseInt((100 * data.topblogger[i].active) / data.topblogger[i].totalblogs)) + `%
+                                                                                                                                                            </p>
+                                                                                                                                                            <p>`+ data.topblogger[i].active + `/` + data.topblogger[i].totalblogs + `</p>
+                                                                                                                                                        </div>
+                                                                                                                                                        <div
+                                                                                                                                                            class="progress progress-md">
+                                                                                                                                                            <div class="progress-bar bg-success"
+                                                                                                                                                                role="progressbar"
+                                                                                                                                                                style="width: `+ (parseInt((100 * data.topblogger[i].active) / data.topblogger[i].totalblogs)) + `%"
+                                                                                                                                                                aria-valuenow="`+ (parseInt((100 * (data.topblogger[i].active)) / data.topblogger[i].totalblogs)) + `"
+                                                                                                                                                                aria-valuemin="0"
+                                                                                                                                                                aria-valuemax="100">
+                                                                                                                                                            </div>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                                                                                                </td>
+                                                                                                                                                <td>`+ data.topblogger[i].newavgviews + `</td>
+                                                                                                                                                <td>`+ data.topblogger[i].totallikes + `</td>
+                                                                                                                                            </tr>`
+
+                        }
+                    }
+                    content += `
+                                                                           
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 d-flex flex-column">
+                                                <div class="row flex-grow">
+                                                    <div class="col-12 grid-margin stretch-card">
+                                                        <div class="card card-rounded">
+                                                            <div class="card-body">
+                                                                <div>
+                                                                    <h4 class="card-title card-title-dash">Total users
+                                                                    </h4>
+                                                                    <h3 class="mt-3 mb-5">`+ data.totalaccounts[0].totalaccounts + `</h3>
+                                                                    <div class="progress mt-5">
+                                                                        <div class="progress-bar bg-info"
+                                                                            role="progressbar" style="width: `+ (parseInt((data.totalblogger[0].totalbloggeraccounts * 100) / data.totalaccounts[0].totalaccounts)) + `%"
+                                                                            aria-valuenow="15" aria-valuemin="0"
+                                                                            aria-valuemax="100" data-placement="top"
+                                                                            data-toggle="tooltip" title="`+ (parseInt((data.totalblogger[0].totalbloggeraccounts * 100) / data.totalaccounts[0].totalaccounts)) + `%"></div>
+                                                                        <div class="progress-bar bg-primary"
+                                                                            role="progressbar" style="width: `+ (parseInt(((data.totalaccounts[0].totalaccounts - data.totalblogger[0].totalbloggeraccounts) * 100) / data.totalaccounts[0].totalaccounts)) + `%"
+                                                                            aria-valuenow="30" aria-valuemin="0"
+                                                                            aria-valuemax="100" aria-valuemax="100"
+                                                                            data-placement="top" data-toggle="tooltip"
+                                                                            title="`+ (parseInt(((data.totalaccounts[0].totalaccounts - data.totalblogger[0].totalbloggeraccounts) * 100) / data.totalaccounts[0].totalaccounts)) + `%"></div>
+                                                                        <!-- <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" aria-valuemax="100" data-placement="top" data-toggle="tooltip" title="10%"></div> -->
+                                                                    </div>
+                                                                    <div
+                                                                        class="lenear-multiple-progress-legends d-flex justify-content-between">
+                                                                        <div>
+                                                                            <h3>`+ (parseInt((data.totalblogger[0].totalbloggeraccounts * 100) / data.totalaccounts[0].totalaccounts)) + `%</h3>
+                                                                            <h4><span class="bg-info"></span>Blogger
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h3>`+ (parseInt(((data.totalaccounts[0].totalaccounts - data.totalblogger[0].totalbloggeraccounts) * 100) / data.totalaccounts[0].totalaccounts)) + `%</h3>
+                                                                            <h4><span class="bg-primary"></span>Normal
+                                                                                user</h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <div class="row flex-grow">
+                                                    <div class="col-12 grid-margin stretch-card">
+                                                        <div class="card card-rounded">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                                <h4 class="card-title card-title-dash">Gender</h4>
+                                                                </div>
+                                                                <canvas class="my-auto" id="doughnutChart1" height="200"></canvas>
+                                                                <div id="doughnut-chart-legend" class="mt-5 text-center"></div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+                    $("#main-panel").html(content);
+                    if ($("#doughnutChart1").length) {
+                        var doughnutChartCanvas = $("#doughnutChart1").get(0).getContext("2d");
+                        var doughnutPieData = {
+                            datasets: [{
+                                data: [data.gender[0].gendercount, data.gender[1].gendercount, data.gender[2].gendercount, (parseInt(data.totalaccounts[0].totalaccounts) - (parseInt(data.gender[0].gendercount) + parseInt(data.gender[1].gendercount) + parseInt(data.gender[2].gendercount)))],
+                                backgroundColor: [
+                                    "#1F3BB3",
+                                    "#FDD0C7",
+                                    "#52CDFF",
+                                    "#81DADA"
+                                ],
+                                borderColor: [
+                                    "#1F3BB3",
+                                    "#FDD0C7",
+                                    "#52CDFF",
+                                    "#81DADA"
+                                ],
+                            }],
+
+                            // These labels appear in the legend and in the tooltips when hovering different arcs
+                            labels: [
+                                'Male',
+                                'Female',
+                                'Other',
+                                'Null',
+                            ]
+                        };
+                        var doughnutPieOptions = {
+                            cutoutPercentage: 50,
+                            animationEasing: "easeOutBounce",
+                            animateRotate: true,
+                            animateScale: false,
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            showScale: true,
+                            legend: false,
+                            legendCallback: function (chart) {
+                                var text = [];
+                                text.push('<div class="chartjs-legend"><ul class="justify-content-center">');
+                                for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
+                                    text.push('<li><span style="background-color:' + chart.data.datasets[0].backgroundColor[i] + '">');
+                                    text.push('</span>');
+                                    if (chart.data.labels[i]) {
+                                        text.push(chart.data.labels[i]);
+                                    }
+                                    text.push('</li>');
+                                }
+                                text.push('</div></ul>');
+                                return text.join("");
+                            },
+
+                            layout: {
+                                padding: {
+                                    left: 0,
+                                    right: 0,
+                                    top: 0,
+                                    bottom: 0
+                                }
+                            },
+                            tooltips: {
+                                callbacks: {
+                                    title: function (tooltipItem, data) {
+                                        return data['labels'][tooltipItem[0]['index']];
+                                    },
+                                    label: function (tooltipItem, data) {
+                                        return data['datasets'][0]['data'][tooltipItem['index']];
+                                    }
+                                },
+
+                                backgroundColor: '#fff',
+                                titleFontSize: 14,
+                                titleFontColor: '#0B0F32',
+                                bodyFontColor: '#737F8B',
+                                bodyFontSize: 11,
+                                displayColors: false
+                            }
+                        };
+                        var doughnutChart = new Chart(doughnutChartCanvas, {
+                            type: 'doughnut',
+                            data: doughnutPieData,
+                            options: doughnutPieOptions
+                        });
+                        document.getElementById('doughnut-chart-legend').innerHTML = doughnutChart.generateLegend();
+                    }
+                    if ($("#leaveReport").length) {
+
+                        var leaveReportChart = document.getElementById("leaveReport").getContext('2d');
+                        var leaveReportData = {
+                            labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+                            datasets: [{
+                                label: 'Last week',
+                                data: [18, 25, 39, 11, 24],
+                                backgroundColor: "#52CDFF",
+                                borderColor: [
+                                    '#52CDFF',
+                                ],
+                                borderWidth: 0,
+                                fill: true, // 3: no fill
+
+                            }]
+                        };
+
+                        var leaveReportOptions = {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                yAxes: [{
+                                    gridLines: {
+                                        display: true,
+                                        drawBorder: false,
+                                        color: "rgba(255,255,255,.05)",
+                                        zeroLineColor: "rgba(255,255,255,.05)",
+                                    },
+                                    ticks: {
+                                        beginAtZero: true,
+                                        autoSkip: true,
+                                        maxTicksLimit: 5,
+                                        fontSize: 10,
+                                        color: "#6B778C"
+                                    }
+                                }],
+                                xAxes: [{
+                                    barPercentage: 0.5,
+                                    gridLines: {
+                                        display: false,
+                                        drawBorder: false,
+                                    },
+                                    ticks: {
+                                        beginAtZero: false,
+                                        autoSkip: true,
+                                        maxTicksLimit: 7,
+                                        fontSize: 10,
+                                        color: "#6B778C"
+                                    }
+                                }],
+                            },
+                            legend: false,
+
+                            elements: {
+                                line: {
+                                    tension: 0.4,
+                                }
+                            },
+                            tooltips: {
+                                backgroundColor: 'rgba(31, 59, 179, 1)',
+                            }
+                        }
+                        var leaveReport = new Chart(leaveReportChart, {
+                            type: 'bar',
+                            data: leaveReportData,
+                            options: leaveReportOptions
+                        });
+                    }
+
+                    if ($("#performaneLine").length) {
+                        thisweekdata = [];
+                        lastweekdata = [];
+                        for (i = 0; i < 13; i++) {
+                            thisweekdata.push(data.differncegrapcurentdata[i].total_blogs)
+                            lastweekdata.push(data.differncegrapprevdata[i].total_blogs)
+                        }
+                        // for(i = 0;i<data.differncegraphdata.length ; i++){
+                        //     if(i != data.differncegraphdata[i].day){
+                        //         i--;
+                        //         thisweekdata.push[0]
+                        //         lastweekdata.push[0]
+                        //     }else{
+                        //         thisweekdata.push[data.differncegraphdata[i].this_week_data]
+                        //         lastweekdata.push[data.differncegraphdata[i].last_week_data];
+                        //     }
+                        // }
+                        console.log(thisweekdata);
+                        console.log(lastweekdata);
+                        var graphGradient = document.getElementById("performaneLine").getContext('2d');
+                        var graphGradient2 = document.getElementById("performaneLine").getContext('2d');
+                        var saleGradientBg = graphGradient.createLinearGradient(5, 0, 5, 100);
+                        saleGradientBg.addColorStop(0, 'rgba(26, 115, 232, 0.18)');
+                        saleGradientBg.addColorStop(1, 'rgba(26, 115, 232, 0.02)');
+                        var saleGradientBg2 = graphGradient2.createLinearGradient(100, 0, 50, 150);
+                        saleGradientBg2.addColorStop(0, 'rgba(0, 208, 255, 0.19)');
+                        saleGradientBg2.addColorStop(1, 'rgba(0, 208, 255, 0.03)');
+                        var salesTopData = {
+                            labels: ["SUN", "sun", "MON", "mon", "TUE", "tue", "WED", "wed", "THU", "thu", "FRI", "fri", "SAT"],
+                            datasets: [{
+                                label: 'This week',
+                                data: thisweekdata,
+                                backgroundColor: saleGradientBg,
+                                borderColor: [
+                                    '#1F3BB3',
+                                ],
+                                borderWidth: 1.5,
+                                fill: true, // 3: no fill
+                                pointBorderWidth: 3,
+                                pointRadius: [4, 4, 4, 4, 4, 4, 4],
+                                pointHoverRadius: [2, 2, 2, 2, 2, 2, 2],
+                                pointBackgroundColor: ['#1F3BB3)', '#1F3BB3', '#1F3BB3', '#1F3BB3', '#1F3BB3)', '#1F3BB3', '#1F3BB3', '#1F3BB3', '#1F3BB3)', '#1F3BB3', '#1F3BB3', '#1F3BB3', '#1F3BB3)'],
+                                pointBorderColor: ['#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff',],
+                            }, {
+                                label: 'Last week',
+                                data: lastweekdata,
+                                backgroundColor: saleGradientBg2,
+                                borderColor: [
+                                    '#52CDFF',
+                                ],
+                                borderWidth: 1.5,
+                                fill: true, // 3: no fill
+                                pointBorderWidth: 1,
+                                pointRadius: [0, 0, 0, 4, 0],
+                                pointHoverRadius: [0, 0, 0, 2, 0],
+                                pointBackgroundColor: ['#52CDFF)', '#52CDFF', '#52CDFF', '#52CDFF', '#52CDFF)', '#52CDFF', '#52CDFF', '#52CDFF', '#52CDFF)', '#52CDFF', '#52CDFF', '#52CDFF', '#52CDFF)'],
+                                pointBorderColor: ['#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff',],
+                            }]
+                        };
+
+                        var salesTopOptions = {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                yAxes: [{
+                                    gridLines: {
+                                        display: true,
+                                        drawBorder: false,
+                                        color: "#F0F0F0",
+                                        zeroLineColor: '#F0F0F0',
+                                    },
+                                    ticks: {
+                                        beginAtZero: false,
+                                        autoSkip: true,
+                                        maxTicksLimit: 4,
+                                        fontSize: 10,
+                                        color: "#6B778C"
+                                    }
+                                }],
+                                xAxes: [{
+                                    gridLines: {
+                                        display: false,
+                                        drawBorder: false,
+                                    },
+                                    ticks: {
+                                        beginAtZero: false,
+                                        autoSkip: true,
+                                        maxTicksLimit: 7,
+                                        fontSize: 10,
+                                        color: "#6B778C"
+                                    }
+                                }],
+                            },
+                            legend: false,
+                            legendCallback: function (chart) {
+                                var text = [];
+                                text.push('<div class="chartjs-legend"><ul>');
+                                for (var i = 0; i < chart.data.datasets.length; i++) {
+                                    console.log(chart.data.datasets[i]); // see what's inside the obj.
+                                    text.push('<li>');
+                                    text.push('<span style="background-color:' + chart.data.datasets[i].borderColor + '">' + '</span>');
+                                    text.push(chart.data.datasets[i].label);
+                                    text.push('</li>');
+                                }
+                                text.push('</ul></div>');
+                                return text.join("");
+                            },
+
+                            elements: {
+                                line: {
+                                    tension: 0.4,
+                                }
+                            },
+                            tooltips: {
+                                backgroundColor: 'rgba(31, 59, 179, 1)',
+                            }
+                        }
+                        var salesTop = new Chart(graphGradient, {
+                            type: 'line',
+                            data: salesTopData,
+                            options: salesTopOptions
+                        });
+                        document.getElementById('performance-line-legend').innerHTML = salesTop.generateLegend();
+                    }
+                    console.log(data.topcategory);
+                    console.log(data.toplanguage);
+
+                    var data1 = {
+                        labels: [data.topcategory[0].bcname, data.topcategory[1].bcname, data.topcategory[2].bcname, data.topcategory[3].bcname, data.topcategory[4].bcname],
+                        datasets: [{
+                            label: '# of Votes',
+                            data: [data.topcategory[0].total, data.topcategory[1].total, data.topcategory[2].total, data.topcategory[3].total, data.topcategory[4].total],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1,
+                            fill: false
+                        }]
+                    };
+                    var options = {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        elements: {
+                            point: {
+                                radius: 0
+                            }
+                        }
+
+                    };
+                    if ($("#barChart1").length) {
+                        var barChartCanvas = $("#barChart1").get(0).getContext("2d");
+                        // This will get the first returned node in the jQuery collection.
+                        var barChart = new Chart(barChartCanvas, {
+                            type: 'bar',
+                            data: data1,
+                            options: options
+                        });
+                    }
+                    var data1 = {
+                        labels: [data.toplanguage[0].lname, data.toplanguage[1].lname, data.toplanguage[2].lname, data.toplanguage[3].lname, data.toplanguage[4].lname],
+                        datasets: [{
+                            label: '# of Votes',
+                            data: [data.toplanguage[0].total, data.toplanguage[1].total, data.toplanguage[2].total, data.toplanguage[3].total, data.toplanguage[4].total],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1,
+                            fill: false
+                        }]
+                    };
+                    if ($("#barChart2").length) {
+                        var barChartCanvas = $("#barChart2").get(0).getContext("2d");
+                        // This will get the first returned node in the jQuery collection.
+                        var barChart = new Chart(barChartCanvas, {
+                            type: 'bar',
+                            data: data1,
+                            options: options
+                        });
+                    }
+
+                    if ($('#totalVisitors').length) 
+                    {
+                        var bar = new ProgressBar.Circle(totalVisitors, {
+                        color: '#fff',
+                        // This has to be the same size as the maximum width to
+                        // prevent clipping
+                        strokeWidth: 15,
+                        trailWidth: 15, 
+                        easing: 'easeInOut',
+                        duration: 1400,
+                        text: {
+                            autoStyleContainer: false
+                        },
+                        from: {
+                            color: '#52CDFF',
+                            width: 15
+                        },
+                        to: {
+                            color: '#677ae4',
+                            width: 15
+                        },
+                        // Set default step function for all animate calls
+                        step: function(state, circle) {
+                            circle.path.setAttribute('stroke', state.color);
+                            circle.path.setAttribute('stroke-width', state.width);
+
+                            var value = Math.round(circle.value() * 100);
+                            if (value === 0) {
+                            circle.setText('');
+                            } else {
+                            circle.setText(value);
+                            }
+
+                        }
+                        });
+
+                        bar.text.style.fontSize = '0rem';
+                        bar.animate(.64); // Number from 0.0 to 1.0
+                    }
+                },
+                error: (error) => console.log(error)
+            })
+
+        })
+    </script>
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <!-- plugins:js -->
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="../../vendors/sweetalert/sweetalert.min.js"></script>
+    <script src="../../vendors/jquery-toast-plugin/jquery.toast.min.js"></script>
+    <script src="../../vendors/progressbar.js/progressbar.min.js"></script>
+
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../js/off-canvas.js"></script>
+    <script src="../../js/jq.tablesort.js"></script>
+
+
+    <script src="../../vendors/chart.js/Chart.min.js"></script>
+
+    <script src="../../js/hoverable-collapse.js"></script>
+    <script src="../../js/template.js"></script>
+    <script src="../../js/settings.js"></script>
+    <script src="../../js/todolist.js"></script>
+    <!-- endinject -->
+    <script src="../../js/toastDemo.js"></script>
+    <script src="../../js/popover.js"></script>
+    <script src="../../js/tooltips.js"></script>
+    <!-- Custom js for this page-->
+    <script src="../../js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="../../js/dashboard.js"></script>
+    <script src="../../js/Chart.roundedBarCharts.js"></script>
+
+    <script src="../../js/alertp.js"></script>
+    <script src="../../js/modal-demo.js"></script>
+    <script src="../../js/tablesorter.js"></script>
+
+    <!-- <script src="../../js/chart.js"></script>   -->
+
+    <!-- End custom js for this page-->
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.7/jquery.lazyload.js"></script>
+      <script type="text/javascript" charset="utf-8">
+  $(function() {
+    $("div.lazy").lazyload({
+      effect : "fadeIn"
+     });
+
+  }); -->
+    </script>
+</body>
+
+</html>

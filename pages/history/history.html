@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+      shrink-to-fit=no">
+  <title>TrendStream</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../../css/style1.css">
+  <link rel="stylesheet" href="../../vendors/feather/feather.css">
+  <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+  <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="../../vendors/jquery-toast-plugin/jquery.toast.min.css">
+
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="../../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="../../js/select.dataTables.min.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="../../images/favicon.png" />
+  <style>
+    .card-a {
+      text-decoration: none;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="align-content-center justify-content-center">
+    <div class="col-md-4 col-sm-6 grid-margin stretch-card m-auto pt-5" id="loader">
+      <div class="dot-opacity-loader">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <div class="body-content" style="display: none;">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row" id="navbar">
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div class="theme-setting-wrapper">
+        <div id="settings-trigger"><i class="ti-settings"></i></div>
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close ti-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+            <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+          </div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme">
+            <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+          </div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles success"></div>
+            <div class="tiles warning"></div>
+            <div class="tiles danger"></div>
+            <div class="tiles info"></div>
+            <div class="tiles dark"></div>
+            <div class="tiles default"></div>
+          </div>
+          <p class="settings-heading mt-2 divnotification">Notification</p>
+          <div class="mx-0 px-4 divnotification">
+            <div class="form-check form-check-success">
+              <div class="d-flex">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" id="notificationstatus">
+                </label>
+                <span id="notificationstatustext">Off</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      </nav>
+      <div class="main-panel" id="main-panel">
+
+      </div>
+      <!-- <div class="containerc"></div> -->
+      <!-- main-panel ends -->
+    </div>
+    <!-- <h1>aa</h1>
+    <img src="../../images/uploadimage/Screenshot (2).png"> -->
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <script src="../create/main.js"></script>
+  <script src="../../js/sidebar.js"></script>
+  <script src="../../js/navbar.js"></script>
+  <script>
+    //             var targetDiv = document.getElementById('content-cardc');
+    // var content = '<div class="card"><div align=center>                <i class="mdi mdi-dots-horizontal"></i>              </div>              <div class="card-top">                <img src="download.jpg" alt="Blog Name">              </div>              <div class="card-bottom flex-row">                <span class="cspaan date">Monday, Jan 20, 2021</span>                <p class="cp"><img class="profile-pic" src="images/faces/face1.jpg"> Blogger name</p>              </div>              <div class="card-info">                <h2 class="btitle">JavaScript Quote Generator</h2>              </div>              <div class="card-bottom flex-row">                <button type="button" class="btn btn-outline-primary btn-sm">blog c.</button>                <p class="nav">                  <i class="lcv mdi mdi-heart"></i>&nbsp;12                  <i class="lcv mdi mdi-comment"></i>&nbsp;20                  <i class="lcv mdi mdi-eye"></i>&nbsp;200                </p>              </div>            </div>';
+    // targetDiv.appendChild(content);
+    //             var targetDiv = document.getElementById('content-cardc');
+    //             // for(var i = 0 ; i<10 ;i++){
+    // targetDiv.innerHTML('');
+    // }
+    $(document).ready(function () {
+      setlogindata();
+      sidebar();
+      navbar();
+      checknotification();
+
+      if (!checkguest()) {
+        $.ajax({
+          url: "../../api/historysave.php",
+          type: "POST",
+          data: JSON.stringify({ key: 'display_history' }),
+          dataType: "JSON",
+          success: (data) => {
+            content = `
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" id="modal">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content" id="modal-content">
+                                      </div>
+                                    </div>
+                                  </div>
+            <div class="content-wrapper">
+          <div class="d-flex align-items-center">
+            <h4 class="mb-0">Read history</h4>
+            <button type="button" class="btn btn-info ms-auto btn-rounded btn-sm fw-bold" id="clearhistory">
+              <i class="mdi mdi-delete-forever ms-auto "></i><span class="ms-2">Clear History</span>
+            </button>
+          </div>
+            <div class="cards grid-row" id="content-cardc">`
+            console.log(data);
+            if (data.allblogsdata.length == 0) {
+              blog = ` <div class="align-items-center text-center p-5">
+              <span>This list has no blogs</span>
+            </div>`;
+            } else {
+              blog = ``;
+              for (var i = 0; i < data.allblogsdata.length; i++) {
+                if (data.allblogsdata[i].blog_status == "posted") {
+                  const postdate = data.allblogsdata[i].blog_post_time.split(" ")[0].split("-");
+                  const sdate = new Date(postdate[0], postdate[1] - 1, postdate[2]);
+                  const date = sdate.toString().split(" ");
+                  var strdate = date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
+                  //  const spdate = sdate.split(" ");
+                  // console.log(strdate);
+                  blog += `<div class="card blog" id="card-` + data.allblogsdata[i].lcid + `">
+                    <div class="dropdown" align= center>
+                      <i class="mdi mdi-dots-horizontal" type="button" id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                              <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">`
+                  if (data.userdata[0].usid == data.allblogsdata[i].usid) {
+                    blog += `<a class="dropdown-item updateblog" href="../create/create.html?key=update&s=` + data.allblogsdata[i].blog_id + `"><i class="mdi mdi-pencil text-info"></i><span class="ms-2">Update</span></a>
+                                                           <a class="dropdown-item deleteblog" data-id="`+ data.allblogsdata[i].blog_id + `"><i class="mdi mdi-delete text-info"></i><span class="ms-2">Delete</span></a>`;
+                  }
+                  blog += `<a class="dropdown-item removehistory"  data-id="` + data.allblogsdata[i].lcid + `"><i class="mdi mdi-delete text-info"></i><span class="ms-2">Remove to History</span></a>
+                                          <a class="dropdown-item savereadlater"  data-id="`+ data.allblogsdata[i].blog_id + `"><i class="mdi mdi-clock text-info"></i><span class="ms-2">Save to Read later</span></a>
+                                          <a class="dropdown-item savereadlist"  data-id="`+ data.allblogsdata[i].blog_id + `" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="Add blog in read-list"><i class="mdi mdi-playlist-plus fw-bold text-info"></i><span class="ms-2">Save to Readlist</span></a>`
+                  if (data.userdata[0].usid != data.allblogsdata[i].usid) {
+                    blog += `<a class="dropdown-item reportblog"  data-id="` + data.allblogsdata[i].blog_id + `"><i class="mdi mdi-block-helper text-info"></i><span class="ms-2">Report</span></a>`
+                  }
+                  blog += `
+                                                </div>
+                                                </div>
+                                                <div class="card-top blogpreview loding" data-id="`+ data.allblogsdata[i].blog_id + `">
+                                              <img src="../../images/uploadimage/`+ data.allblogsdata[i].blog_cover_photo + `" alt="Blog Name">
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <span class="cspaan date">`+ strdate + `</span>
+                                              <p class="cp hover-cursor show-profile" data-id=`+ data.allblogsdata[i].usid + `><img class="profile-pic" src="../../images/faces/face1.jpg">` + data.allblogsdata[i].username + `</p>
+                                            </div>
+                                            <div class="card-info">
+                                              <h2 class="btitle">`+ data.allblogsdata[i].blog_title + `</h2>
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <a class="btn btn-outline-primary btn-sm" href="./blog.html?s=`+ data.allblogsdata[i].blog_id + `">Read
+                                              </a>
+                                              <p class="nav">
+                                              <i class="lcv mdi mdi-heart"></i>&nbsp;`+ data.allblogsdata[i].likes + `
+                                              <i class="lcv mdi mdi-comment"></i>&nbsp;`+ data.allblogsdata[i].comments + `
+                                              <i class="lcv mdi mdi-eye"></i>&nbsp;`+ data.allblogsdata[i].totalviews + `
+                                              </p>  
+                                            </div> 
+                                      </div>`;
+                  // $("#content-cardc").append(blog);
+                }
+              }
+            }
+            content += blog;
+            content += `</div>
+            </div>`
+            $("#main-panel").html(content);
+            $("#loader").hide()
+            $(".body-content").show();
+          }, error: (error) => servererror(error)
+        });
+      }
+      $(document).on("click", "#clearhistory", () => {
+        // alert(11)
+        swal({
+          title: 'Are you sure?',
+          text: "Clear watch history?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3f51b5',
+          cancelButtonColor: '#ff4081',
+          confirmButtonText: 'Great ',
+          buttons: {
+            cancel: {
+              text: "Cancel",
+              value: null,
+              visible: true,
+              className: "btn btn-danger btn-sm",
+              closeModal: true,
+            },
+            confirm: {
+              text: "Clear read history",
+              value: true,
+              visible: true,
+              className: "btn btn-primary btn-sm",
+              closeModal: true
+            }
+          }
+        }).then((result) => {
+          if (result) {
+            $.ajax({
+              url: "http://localhost/mycode/template/star1/api/historysave.php",
+              type: "POST",
+              data: JSON.stringify({ key: 'clear_history' }),
+              dataType: "JSON",
+              success: (data) => {
+                console.log(data);
+                if (data.status) {
+                  // alert(1)
+                  showSuccessToast("cleared", data.message);
+                  blog = ` <div class="align-items-center text-center p-5">
+                           <span>This list has no blogs</span>
+                           </div>`;
+                  $("#content-cardc").html(blog);
+                }
+              },
+              error: (error) => servererror(error)
+            })
+          }
+        })
+      })
+    })
+    $(document).on("click", ".removehistory", function () {
+      // alert()
+      id = $(this).data("id");
+      $.ajax({
+        url: "http://localhost/mycode/template/star1/api/historysave.php",
+        type: "POST",
+        data: JSON.stringify({ key: 'delete_history', lcid: id }),
+        dataType: "JSON",
+        success: function (data) {
+          console.log(data);
+          if (data.status) {
+            showSuccessToast("Remove", data.message);
+            if (data.blogdata.length == 0) {
+              blog = ` <div class="align-items-center text-center p-5">
+                  <span>This list has no blogs</span>
+                  </div>`;
+              $("#content-cardc").html(blog);
+            } else {
+              $("#card-" + id).remove();
+            }
+            // console.log(data.message);
+          } else {
+            showInfoToast("Remove from history", "Please try agian after some time.")
+          }
+        },
+        error: (error) => servererror(error)
+      })
+    })
+
+  </script>
+  <script src="../../vendors/js/vendor.bundle.base.js"></script>
+  <!-- plugins:js -->
+  <script src="../../js/allfilefunction.js"></script>
+
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <script src="../../vendors/sweetalert/sweetalert.min.js"></script>
+  <script src="../../vendors/jquery-toast-plugin/jquery.toast.min.js"></script>
+
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../../js/off-canvas.js"></script>
+
+  <script src="../../js/hoverable-collapse.js"></script>
+  <script src="../../js/template.js"></script>
+  <script src="../../js/settings.js"></script>
+  <script src="../../js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+
+  <script src="../../js/toastDemo.js"></script>
+  <script src="../../js/desktop-notification.js"></script>
+  <script src="../../js/jquery.cookie.js" type="text/javascript"></script>
+  <script src="../../js/dashboard.js"></script>
+  <script src="../../js/Chart.roundedBarCharts.js"></script>
+  <script src="../../js/alertp.js"></script>
+  <script src="../../js/modal-demo.js"></script>
+
+  <!-- End custom js for this page-->
+  <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.7/jquery.lazyload.js"></script>
+      <script type="text/javascript" charset="utf-8">
+  $(function() {
+    $("div.lazy").lazyload({
+      effect : "fadeIn"
+     });
+
+  }); -->
+  </script>
+</body>
+<audio id="audioBox">
+  <source src="../../audio/notify.mp3" type="audio/mpeg" />
+  <source src="../../audio/notify.wav" type="audio/wav" />
+  <source src="../../audio/notify.ogg" type="audio/ogg" />
+</audio>
+
+</html>

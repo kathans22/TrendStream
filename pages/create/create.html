@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>TrendStream</title>
+
+  <!-- plugins:css -->
+  <!-- <script type="text/javascript" src="ck9/ckeditor.js"></script> -->
+  <!-- <script>
+    window.onload = ()=>{
+        fetch("http://localhost/mycode/template/star1/api/login.php", {
+                method: "POST",
+                body: JSON.stringify({
+                 fkey: 'checklogin'
+                }),
+            })
+            .then(response=>response.json()).then((data) => {
+              console.log(data);
+                if (data.userdata[0].user_type == "user") {
+                  window.location = "http://localhost/mycode/template/star1/pages/blogs/home.html";
+                }
+            })
+      }
+  </script> -->
+  <!-- <script type="text/javascript" src="cktry1/ckeditor.js"></script> -->
+  <!-- <script type="text/javascript" src="ckfinder/ckfinder.js"></script> -->
+  <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+  <link rel="stylesheet" href="../../vendors/feather/feather.css">
+  <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+  <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="../../vendors/dropzone/dropzone.css">
+  <link rel="stylesheet" href="../../vendors/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../vendors/jquery-bar-rating/bars-1to10.css">
+  <link rel="stylesheet" href="../../vendors/jquery-bar-rating/bars-horizontal.css">
+  <link rel="stylesheet" href="../../vendors/jquery-bar-rating/bars-movie.css">
+  <link rel="stylesheet" href="../../vendors/jquery-bar-rating/bars-pill.css">
+  <link rel="stylesheet" href="../../vendors/jquery-bar-rating/bars-reversed.css">
+  <link rel="stylesheet" href="../../vendors/jquery-bar-rating/bars-square.css">
+  <link rel="stylesheet" href="../../vendors/jquery-bar-rating/bootstrap-stars.css">
+  <link rel="stylesheet" href="../../vendors/jquery-bar-rating/css-stars.css">
+  <link rel="stylesheet" href="../../vendors/jquery-bar-rating/examples.css">
+  <link rel="stylesheet" href="../../vendors/jquery-bar-rating/fontawesome-stars-o.css">
+  <link rel="stylesheet" href="../../vendors/jquery-bar-rating/fontawesome-stars.css">
+  <link rel="stylesheet" href="../../vendors/jquery-asColorPicker/css/asColorPicker.min.css">
+  <link rel="stylesheet" href="../../vendors/x-editable/bootstrap-editable.css">
+  <link rel="stylesheet" href="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" href="../../vendors/dropify/dropify.min.css">
+  <link rel="stylesheet" href="../../vendors/jquery-file-upload/uploadfile.css">
+  <link rel="stylesheet" href="../../vendors/jquery-tags-input/jquery.tagsinput.min.css">
+  <link rel="stylesheet" href="../../vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet" href="../../vendors/jquery-toast-plugin/jquery.toast.min.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="../../images/favicon.png">
+  <!-- <script type="text/javascript" src="cktry1/ckeditor.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+    crossorigin="anonymous"></script>
+
+  <style>
+    .Error {
+      border: 1px solid red;
+    }
+
+    /* #editordiv{
+      resize: both;
+        overflow: auto;
+    } */
+  </style>
+</head>
+
+<body>
+
+  <div class="align-content-center justify-content-center">
+    <div class="col-md-4 col-sm-6 grid-margin stretch-card m-auto pt-5" id="loader">
+      <div class="dot-opacity-loader">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <div class="body-content" style="display: none;">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row" id="navbar">
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div class="theme-setting-wrapper">
+        <div id="settings-trigger"><i class="ti-settings"></i></div>
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close ti-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+            <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+          </div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme">
+            <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+          </div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles success"></div>
+            <div class="tiles warning"></div>
+            <div class="tiles danger"></div>
+            <div class="tiles info"></div>
+            <div class="tiles dark"></div>
+            <div class="tiles default"></div>
+          </div>
+          <p class="settings-heading mt-2 divnotification">Notification</p>
+          <div class="mx-0 px-4 divnotification">
+            <div class="form-check form-check-success">
+              <div class="d-flex">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" id="notificationstatus">
+                </label>
+                <span id="notificationstatustext">Off</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      </nav>
+      <!-- main-panel ends -->
+      <!-- <div class="container"> -->
+
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-6 grid-margin stretch-card">
+              <div class="card" id="blogdetailscontent">
+                <div class="card-body">
+
+                  <h4 class="card-title">Blog details</h4>
+                  <form class="forms-sample">
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">blog title</label>
+                      <input type="text" class="form-control" id="blogtitle" placeholder="Enter blog title">
+                      <label>Language</label>
+                      <!-- <div class="col-sm-9"> -->
+                      <div id="languageboxcontent">
+                        <select class="form-control" id="languagebox">
+                          <option>Select language</option>
+                        </select>
+                      </div>
+                      <label>Category</label>
+                      <!-- <div class="col-sm-9"> -->
+                      <div id="categoryboxcontent">
+                        <select class="form-control" id="categorybox">
+                          <option>Select category</option>
+                        </select>
+                      </div>
+
+                      <!-- </div> -->
+                    </div>
+                    <!-- <button class="btn btn-light">Cancel</button> -->
+                  </form>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 grid-margin stretch-card">
+              <div class="card " id="coverimagecontent">
+                <div class="card-body" id="imagecontent">
+                  <h4 class="card-title d-flex">Cover photo
+                    <small class="ms-auto align-self-end">
+                    </small>
+                  </h4>
+                  <div id="droifycontent">
+                    <input type="file" class="dropify" id="coverimage" name="coverimage" />
+                    <br>
+                    <center>
+                      <button type="button" class="btn btn-primary btn-sm" id="coverphoto">Upload</button>
+                    </center>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+
+                  <h4 class="card-title">Blog tag</h4>
+                  <form class="forms-sample">
+                    <div class="form-group">
+                      <input name="tags" id="tags" value="blog" />
+                    </div>
+                    <!-- <button class="btn btn-light">Cancel</button> -->
+                  </form>
+                  <!-- <button class="btn btn-inverse-dark btn-sm" id="addtag">submit</button> -->
+
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-lg-6 grid-margin stretch-card">
+
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Dropzone</h4>
+                  <form action="/file-upload" class="dropzone" id="my-awesome-dropzone"></form>
+                </div>
+              </div>
+            </div> -->
+            <div class="grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body" style="resize: both; overflow:auto">
+                  <div>
+                    <textarea id="editor" name="editor"></textarea>
+                  </div>
+                </div>
+
+                <br>
+                <!-- <div style="float: right;"> -->
+                <center>
+                  <button type="button" class="btn btn-light btn-sm" id="canclepost">Cancel</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="blogsave">Draft</button>
+                  <button type="button" class="btn btn-primary btn-sm" id="blogpost">Post</button>
+                </center>
+                <!-- </div> -->
+                <br>
+              </div>
+
+            </div>
+            <div class="grid-margin stretch-card">
+              <div class="card box-shadow">
+                <div class="card-body">
+                  <div id="blogcontent"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- container-scroller -->
+    <script src="jquery.js">
+    </script>
+    <script src="../../js/sidebar.js"></script>
+    <script src="../../js/navbar.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        setlogindata();
+        sidebar();
+        navbar();
+        checknotification();
+
+        CKEDITOR.replace('editor');
+        $.ajax({
+          url: "../../api/blogop.php",
+          type: "POST",
+          data: JSON.stringify({ fkey: 'blog_cat_lan' }),
+          dataType: "JSON",
+          async: false,
+          success: (data) => {
+            console.log(data);
+            $("#categorybox").html("<option>Select category</option>");
+            for (i = 0; i < data.categorydata.length; i++) {
+              $("#categorybox").append("<option value='" + data.categorydata[i].bcid + "'>" + data.categorydata[i].bcname + "</option>");
+            }
+            $("#languagebox").html("<option>Select language</option>");
+            for (i = 0; i < data.languagesdata.length; i++)
+              $("#languagebox").append("<option value='" + data.languagesdata[i].lcode + "'>" + data.languagesdata[i].lname + "</option>");
+          }
+        })
+        var imageuplode = false;
+        $("#coverphoto").on("click", () => {
+          console.log($("#coverimage").prop("files")[0]);
+          var file = $('#coverimage').prop("files")[0];
+          console.log(file);
+          // alert();
+          if (file == undefined) {
+            showDangerToast('Please Check!', 'Plaese select image');
+          } else {
+            var form = new FormData();
+            form.append("coverimage", file);
+            console.log(form);
+            $.ajax({
+              url: "../../api/upload.php",
+              type: "POST",
+              data: form,
+              contentType: false,
+              processData: false,
+              dataType: 'JSON',
+              success: function (data) {
+                console.log(data)
+                if (data.status == 1) {
+                  showSuccessToast("Success", data.message);
+                  imageuplode = true;
+                } else {
+                  $("#coverimagecontent").removeClass("Error");
+                  $("#coverphoto").removeClass("Error");
+                  showDangerToast('Please Check!', data.message);
+                }
+              },
+              error : (error) =>servererror(error)
+            });
+          }
+        });
+        var updateimage = null;
+        $(document).on("click", "#yesupdate", () => {
+          $(".confirmupdate").hide();
+          $("#droifycontent").show();
+          updateimage = true;
+          showWarningToast("upload!", "Please upload new image");
+        })
+        $(document).on("click", "#noupdate", () => {
+          updateimage = false;
+          $(".confirmupdate").html("");
+          $(".confirmupdate").append(`<div class="dropify-wrapper"><br><br>
+                    <p>Okay..! coverphoto is not update.<p>
+                     <small class="ms-auto align-self-end">
+                    </small>
+                    </div>`);
+
+        })
+        removeerror = () => {
+          $("#blogdetailscontent").removeClass("Error");
+          $("#coverimage").removeClass("Error");
+          $("#blogtitle").removeClass("Error");
+          $("#languageboxcontent").removeClass("Error");
+          $("#categoryboxcontent").removeClass("Error");
+          $("#coverimagecontent").removeClass("Error");
+          $("#coverphoto").removeClass("Error");
+        }
+        $("#blogpost").on("click", () => {
+          if (urlParams.has('key') && urlParams.has('s')) {
+            const key = urlParams.get('key');
+            const blogid = urlParams.get('s');
+            if (key == "update") {
+
+              // alert("update");
+              if ($("#languagebox").val() == "Select language" || $("blogtitle").val() == "" || $("#categorybox").val() == "Select category" || $('#coverimage').prop("files")[0] == undefined || imageuplode == false) {
+                // alert("update");
+
+                removeerror();
+                if ($("#languagebox").val() == "Select language" || $("blogtitle").val() == "" || $("#categorybox").val() == "Select category") {
+                  $("#blogdetailscontent").addClass("Error");
+                  if ($("#blogtitle").val() == "") {
+                    $("#blogtitle").addClass("Error");
+                  }
+                  if ($("#languagebox").val() == "Select language") {
+                    $("#languageboxcontent").addClass("Error");
+                  }
+                  if ($("#categorybox").val() == "Select category") {
+                    $("#categoryboxcontent").addClass("Error");
+                  }
+                  // alert(122)
+                }
+                if (updateimage == null) {
+                  // alert("null")
+                  $("#coverimagecontent").addClass("Error");
+                  showDangerToast('Please Check!', 'All field is required.');
+                } else if (updateimage) {
+                  // alert(111)
+                  if ($('#coverimage').prop("files")[0] == undefined || !(imageuplode)) {
+                    $("#coverimagecontent").addClass("Error");
+                    if ($('#coverimage').prop("files")[0] == undefined) {
+                      $("#coverimagecontent").addClass("Error");
+                    }
+                    if (!imageuplode) {
+                      $("#coverphoto").addClass("Error");
+                    }
+                    showDangerToast('Please Check!', 'All field is required.');
+                  }
+                } else {
+                  // alert(1)
+                  removeerror();
+                  var coverimage = null;
+                  // alert ("beforimage")
+                  //find 1
+                  if (updateimage) {
+                    coverimage = $("#coverimage").prop("files")[0].name;
+                  }
+                  // alert(1)
+                  // alert(coverimage);
+                  $.ajax({
+                    url: "../../api/blogop.php",
+                    type: "PUT",
+                    // data: JSON.stringify({ fkey: 'blog_insert', bcid: $("#categorybox").val(),blog_title : $("#blogtitle").val()}),
+                    data: JSON.stringify({ fkey: 'blog_update', blog_id: blogid, bcid: $("#categorybox").val(), lcode: $("#languagebox").val(), blog_title: $("#blogtitle").val(), blog_cover_photo: coverimage, blog_content: CKEDITOR.instances['editor'].getData(), blog_status: 'posted', tags: $(tags).val() }),
+                    dataType: "JSON",
+                    success: (data) => {
+                      console.log(data);
+                      if (data.status) {
+                        // showSwal('success-message', 'Blog updated', data.message, "See blog");
+                        // $("#blogcontent").append(data.content);
+                        window.location.href = "../blogs/blog.html?s="+blogid;
+                      } else {
+                        showSwal('auto-close', 'Server problem', data.message, null);
+                      }
+                    },
+                    error: (error) => servererror(error)
+                  })
+                }
+
+              }
+              else {
+                // alert(1)
+                removeerror();
+                var coverimage = null;
+                // alert ("beforimage")
+                if (updateimage) {
+                  coverimage = $("#coverimage").prop("files")[0].name;
+                }
+                // alert(1)
+                // alert(coverimage);
+                $.ajax({
+                  url: "../../api/blogop.php",
+                  type: "PUT",
+                  // data: JSON.stringify({ fkey: 'blog_insert', bcid: $("#categorybox").val(),blog_title : $("#blogtitle").val()}),
+                  data: JSON.stringify({ fkey: 'blog_update', blog_id: blogid, bcid: $("#categorybox").val(), lcode: $("#languagebox").val(), blog_title: $("#blogtitle").val(), blog_cover_photo: coverimage, blog_content: CKEDITOR.instances['editor'].getData(), blog_status: 'posted', tags: $(tags).val() }),
+                  dataType: "JSON",
+                  success: (data) => {
+                    console.log(data);
+                    if (data.status) {
+                      window.location.href = "../blogs/blog.html?s="+blogid;
+                      
+                      // showSwal('success-message', 'Blog updated', data.message, "See blog");
+                      // $("#blogcontent").append(data.content);
+                    } else {
+                      showSwal('auto-close', 'Server problem', data.message, null);
+                    }
+                  }, 
+                  error: (error) => servererror(error)
+
+                })
+              }
+            }
+          } else {
+            if ($("#languagebox").val() == "Select language" || $("blogtitle").val() == "" || $("#categorybox").val() == "Select category" || $('#coverimage').prop("files")[0] == undefined || imageuplode == false) {
+              removeerror();
+              if ($("#languagebox").val() == "Select language" || $("blogtitle").val() == "" || $("#categorybox").val() == "Select category") {
+                $("#blogdetailscontent").addClass("Error");
+                if ($("#blogtitle").val() == "") {
+                  $("#blogtitle").addClass("Error");
+                }
+                if ($("#languagebox").val() == "Select language") {
+                  $("#languageboxcontent").addClass("Error");
+                }
+                if ($("#categorybox").val() == "Select category") {
+                  $("#categoryboxcontent").addClass("Error");
+                }
+              }
+              if ($('#coverimage').prop("files")[0] == undefined || !(imageuplode)) {
+                $("#coverimagecontent").addClass("Error");
+                if ($('#coverimage').prop("files")[0] == undefined) {
+                  $("#coverimagecontent").addClass("Error");
+                }
+                if (!imageuplode) {
+                  $("#coverphoto").addClass("Error");
+                }
+              }
+              showDangerToast('Please Check!', 'All field is required.');
+            } else {
+              // alert(1);
+              removeerror();
+              $.ajax({
+                url: "../../api/blogop.php",
+                type: "POST",
+                // data: JSON.stringify({ fkey: 'blog_insert', bcid: $("#categorybox").val(),blog_title : $("#blogtitle").val()}),
+                data: JSON.stringify({ fkey: 'blog_insert', bcid: $("#categorybox").val(), lcode: $("#languagebox").val(), blog_title: $("#blogtitle").val(), blog_cover_photo: $("#coverimage").prop("files")[0].name, blog_content: CKEDITOR.instances['editor'].getData(), blog_status: 'posted', tags: $("#tags").val() }),
+                dataType: "JSON",
+                success: (data) => {
+                  console.log(data);
+                  if (data.status) {
+                    window.location.href = "../blogs/myblogs.html";
+                    // showSwal('success-message', 'Blog posted', data.message, "See blog");
+                    // $("#blogcontent").append(data.content);
+                  } else {
+                    showSwal('auto-close', 'Server problem', data.message, null);
+                  }
+                }
+              })
+            }
+          }
+
+        });
+        $("#canclepost").on("click", () => {
+          window.location.href = "../blogs/home.html";
+        });
+        $("#blogsave").on("click", () => {
+          if ($("#languagebox").val() == "Select language" || $("blogtitle").val() == "" || $("#categorybox").val() == "Select category") {
+            removeerror();
+            if ($("#languagebox").val() == "Select language" || $("blogtitle").val() == "" || $("#categorybox").val() == "Select category") {
+              $("#blogdetailscontent").addClass("Error");
+              if ($("#blogtitle").val() == "") {
+                $("#blogtitle").addClass("Error");
+              }
+              if ($("#languagebox").val() == "Select language") {
+                $("#languageboxcontent").addClass("Error");
+              }
+              if ($("#categorybox").val() == "Select category") {
+                $("#categoryboxcontent").addClass("Error");
+              }
+            }
+            showDangerToast('Please Check!', 'All field is required.');
+          } else {
+            // alert(1);
+            coverimage = null;
+            if (imageuplode) {
+              coverimage = $("#coverimage").prop("files")[0].name;
+            }
+            removeerror();
+            if (urlParams.has('key') && urlParams.has('s')) {
+              const key = urlParams.get('key');
+              const blogid = urlParams.get('s');
+              if (key == "update") {
+                // alert(1)
+                $.ajax({
+                  url: "../../api/blogop.php",
+                  type: "POST",
+                  // data: JSON.stringify({ fkey: 'blog_insert', bcid: $("#categorybox").val(),blog_title : $("#blogtitle").val()}),
+                  data: JSON.stringify({ fkey: 'blog_update', blog_id: blogid, bcid: $("#categorybox").val(), lcode: $("#languagebox").val(), blog_title: $("#blogtitle").val(), blog_cover_photo: coverimage, blog_content: CKEDITOR.instances['editor'].getData(), blog_status: 'drafted', tags: $("#tags").val() }),
+                  dataType: "JSON",
+                  success: (data) => {
+                    // alert("s")
+                    console.log(data);
+                    if (data.status) {
+                      window.location.href = "../blogs/myblogs.html";
+                      // showSwal('success-message', 'Blog drafted', data.message, "See blog");
+                      // $("#blogcontent").append(data.content);
+                    } else {
+                      showSwal('auto-close', 'Server problem', data.message, null);
+                    }
+                  },
+                    error: (error) => servererror(error)
+                })
+              }
+              // alert(2)
+            } else {
+              $.ajax({
+                url: "../../api/blogop.php",
+                type: "POST",
+                // data: JSON.stringify({ fkey: 'blog_i`nsert', bcid: $("#categorybox").val(),blog_title : $("#blogtitle").val()}),
+                data: JSON.stringify({ fkey: 'blog_insert', bcid: $("#categorybox").val(), lcode: $("#languagebox").val(), blog_title: $("#blogtitle").val(), blog_cover_photo: coverimage, blog_content: CKEDITOR.instances['editor'].getData(), blog_status: 'drafted', tags: $("#tags").val() }),
+                dataType: "JSON",
+                success: (data) => {
+                  console.log(data);
+                  if (data.status) {
+                    window.location.href = "../blogs/myblogs.html";
+                    // showSwal('success-message', 'Blog drafted', data.message, "See blog");
+                    // $("#blogcontent").append(data.content);
+                  } else {
+                    showSwal('auto-close', 'Server problem', data.message, null);
+                  }
+                },
+                error: (error) => servererror(error)
+              })
+            }
+
+          }
+          // alert($("#languagebox").val());
+
+        });
+        const urlParams = new URLSearchParams(window.location.search);
+        if (!checkguest() && !checkuser()) {
+          if (urlParams.has('key') && urlParams.has('s')) {
+            const key = urlParams.get('key');
+            const blogid = urlParams.get('s');
+            // alert(key+blogid);
+            $.ajax({
+              url: "../../api/blogop.php",
+              type: "POST",
+              data: JSON.stringify({ fkey: 'blog_read_one', 'blog_id': blogid }),
+              dataType: "JSON",
+              async: false,
+              success: (data) => {
+                console.log(data);
+                if (data.readblogdata.length <= 0) {
+                  pagenotfound();
+                } else {
+                  if (data.userdata[0].username == data.readblogdata[0].username && data.userdata[0].user_type == "blogger") {
+                    // alert(1);""
+                    $("#blogpost").text("Update");
+                    $("#blogsave").text("Update to draft");
+                    $("#languagebox").val(data.readblogdata[0].lcode);
+                    // $('#languagebox[value=').attr('selected', 'true');
+                    $("#blogtitle").val(data.readblogdata[0].blog_title);
+                    $("#categorybox").val(data.readblogdata[0].bcid);
+                    // alert(data.readblogdata[0].bcid);
+                    $("#tags").val(data.readblogdata[0].tags);
+                    jQuery("#tags").importTags(data.readblogdata[0].tags);
+                    if (data.readblogdata[0].blog_cover_photo == null || data.readblogdata[0].blog_cover_photo == "") {
+                      updateimage = true;
+                    } else {
+                      $("#droifycontent").hide();
+                      $("#imagecontent").append(`<div class='text-center confirmupdate'>
+                            <div class="dropify-wrapper"><br><br>
+                              <p>Are you want to update image?</p>  
+                              <small class="ms-auto align-self-end">
+                              </small>
+                              <button type="button" class="btn btn-danger btn-sm" id="noupdate">No</button>
+                              <button type="button" class="btn btn-secondary btn-sm updateconfirm" id="yesupdate">Yes</button>
+                              </div>
+                              </div>`);
+                    }
+                    $("#editor").html(data.readblogdata[0].blog_content);
+                    $("#loader").hide()
+                    $(".body-content").show();
+                  } else {
+                    pagenotfound();
+                  }
+                }
+              },
+              error: (error) => servererror(error)
+            });
+          } else {
+            $("#loader").hide();
+            $(".body-content").show();
+          }
+        }
+      });
+
+
+    </script>
+    <!-- <script type="text/javascript" src="ck9/ckeditor.js"></script> -->
+    <!-- <script type="text/javascript" src="cktry1/ckeditor.js"></script> -->
+    <!-- <script type="text/javascript" src="ckfinder/ckfinder.js"></script> -->
+    <!-- <script type="text/javascript" src="ckeditor/ckeditor.js"></script> -->
+    <!-- plugins:js -->
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <script src="../../js/allfilefunction.js"></script>
+
+    <!-- Plugin js for this page -->
+    <script src="vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+    <script src="vendors/progressbar.js/progressbar.min.js"></script>
+    <!-- <script src="../../vendors/moment/moment.min.js"></script> -->
+    <!-- <script src="../../vendors/x-editable/bootstrap-editable.min.js"></script> -->
+
+    <!-- <script src="../../vendors/jquery-file-upload/jquery.uploadfile.min.js"></script> -->
+    <!-- <script src="../../js/jquery-file-upload.js"></script> -->
+    <script src="../../vendors/dropify/dropify.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../js/dropify.js"></script>
+    <script src="../../vendors/dropzone/dropzone.js"></script>
+
+    <script src="main.js"></script>
+    <!-- <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/template.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/todolist.js"></script>
+    endinject -->
+    <!-- Custom js for this page-->
+    <!--    <script src="js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/Chart.roundedBarCharts.js"></script> -->
+    <!-- End custom js for this page-->
+
+    <!-- <script src="../../vendors/js/vendor.bundle.base.js"></script> -->
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../../vendors/chart.js/Chart.min.js"></script>
+    <!-- <script src="../../vendors/bootstrap-d atepicker/bootstrap-datepicker.min.js"></script> -->
+    <link rel="stylesheet" href="../../vendors/jquery-tags-input/jquery.tagsinput.min.js">
+    <!-- End plugin js for this page -->
+    <script src="../../vendors/sweetalert/sweetalert.min.js"></script>
+    <script src="../../vendors/jquery-file-upload/jquery.uploadfile.min.js"></script>
+    <script src="../../vendors/dropzone/dropzone.js"></script>
+
+    <script src="../../vendors/jquery-tags-input/jquery.tagsinput.min.js"></script>
+    <!-- inject:js -->
+    <script src="../../js/off-canvas.js"></script>
+    <script src="../../js/hoverable-collapse.js"></script>
+    <script src="../../js/template.js"></script>
+    <script src="../../js/settings.js"></script>
+    <script src="../../js/inputmask.js"></script>
+    <script src="../../js/todolist.js"></script>
+
+    <script src="../../vendors/jquery-toast-plugin/jquery.toast.min.js"></script>
+    <script src="../../js/toastDemo.js"></script>
+    <script src="../../js/alertp.js"></script>
+
+
+    <script src="../../js/form-addons.js"></script>
+    <script src="../../js/dropzone.js"></script>
+    <script src="../../js/jquery-file-upload.js"></script>
+
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.7/jquery.lazyload.js"></script>
+    <script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("div.lazy").lazyload({
+         effect : "fadeIn"
+     });
+
+  }); -->
+    <!-- </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+      <audio id="audioBox">
+        <source src="../../audio/notify.mp3" type="audio/mpeg" />
+        <source src="../../audio/notify.wav" type="audio/wav" />
+        <source src="../../audio/notify.ogg" type="audio/ogg" />
+      </audio>
+      
+</html>

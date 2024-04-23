@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+      shrink-to-fit=no">
+    <title>TrendStream</title>
+    <link rel="stylesheet" href="../../css/style1.css">
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../vendors/jquery-bar-rating/css-stars.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- <link rel="stylesheet" href="../../vendors/flag-icon-css/css/flag-icon.min.css" /> -->
+    <link rel="stylesheet" href="../../vendors/jsgrid/jsgrid.min.css">
+    <link rel="stylesheet" href="../../vendors/jsgrid/jsgrid-theme.min.css">
+    <link rel="stylesheet" href="../../vendors/font-awesome/css/font-awesome.min.css" />
+
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+    <link rel="stylesheet" href="../../vendors/jquery-toast-plugin/jquery.toast.min.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../../images/favicon.png" />
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/dropzone/dist/dropzone.css" /> -->
+    <link href="../../vendors/cropper/cropper.css" rel="stylesheet" />
+    <!-- <script src="../../js/dropzone.js"></script> -->
+    <script src="../../js/cropper.js"></script>
+    <style>
+        .Error {
+            border: 1px solid red;
+        }
+
+        .image_area {
+            position: relative;
+        }
+
+        .my-custom-animation .modal-content {
+            animation: my-animation 0.5s;
+        }
+
+        @keyframes my-animation {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        /* .preview {
+            overflow: hidden;
+            width: 160px;
+            height: 160px;
+            margin: 10px;
+            border: 1px solid red;
+        } */
+
+        .modal-lg {
+            max-width: 1000px !important;
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+            height: 0;
+            transition: .5s ease;
+            width: 100%;
+        }
+
+        .image_area:hover .overlay {
+            height: 50%;
+            cursor: pointer;
+        }
+
+        .text {
+            color: #333;
+            font-size: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .c-badge {
+            background-color: #35b69f;
+            color: white;
+            height: 20px;
+            font-size: 11px;
+            width: 92px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2px;
+        }
+
+        .comment-text {
+            font-size: 13px;
+        }
+
+        .wish {
+
+            color: #35b69f;
+        }
+
+        .comment-text-box {
+            height: 48px;
+            border-radius: 25px;
+        }
+
+        .user-feed {
+
+            font-size: 14px;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="align-content-center justify-content-center">
+        <div class="col-md-4 col-sm-6 grid-margin stretch-card m-auto pt-5" id="loader">
+            <div class="dot-opacity-loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <div class="body-content" style="display: none;">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row" id="navbar">
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_settings-panel.html -->
+            <div class="theme-setting-wrapper">
+                <div id="settings-trigger"><i class="ti-settings"></i></div>
+                <div id="theme-settings" class="settings-panel">
+                    <i class="settings-close ti-close"></i>
+                    <p class="settings-heading">SIDEBAR SKINS</p>
+                    <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+                        <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+                    </div>
+                    <div class="sidebar-bg-options" id="sidebar-dark-theme">
+                        <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+                    </div>
+                    <p class="settings-heading mt-2">HEADER SKINS</p>
+                    <div class="color-tiles mx-0 px-4">
+                        <div class="tiles success"></div>
+                        <div class="tiles warning"></div>
+                        <div class="tiles danger"></div>
+                        <div class="tiles info"></div>
+                        <div class="tiles dark"></div>
+                        <div class="tiles default"></div>
+                    </div>
+                    <p class="settings-heading mt-2 divnotification">Notification</p>
+                    <div class="mx-0 px-4 divnotification">
+                        <div class="form-check form-check-success">
+                        <div class="d-flex">
+                            <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="notificationstatus">
+                            </label>
+                            <span id="notificationstatustext">Off</span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- partial -->
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            </nav>
+            <!-- <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="grid-margin stretch-card">
+                            <div class="card box-shadow">
+                                <div class="card-body">
+                                    <div id="blogcontent"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="main-panel">
+                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"
+                    id="modal">
+                    <!-- <div class="modal fade" id="exampleModal-4" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="exampleModal-4" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="exampleModal-4" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"> -->
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content" id="modal-content">
+                            <!-- <div class="modal-footer">
+                          <button type="button" class="btn btn-success">Send message</button>
+                          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="content-wrapper" id="main-content">
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer">
+                    <!-- <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a
+                                href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a>
+                            from
+                            BootstrapDash.</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021.
+                            All
+                            rights reserved.</span>
+                    </div> -->
+                </footer>
+                <!-- partial -->
+            </div>
+        </div>
+    </div>
+    <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <script src="../create/main.js"></script>
+    <script src="../../js/sidebar.js"></script>
+    <script src="../../js/navbar.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const userid = urlParams.get('p');
+        function notificationdisplay() {
+            maindata = [];
+            blogid = [];
+            commentlikeid = [];
+            commentreplylikeid = [];
+            $.ajax({
+                url: "../../api/notify.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'display_notifications' }),
+                dataType: "JSON",
+                success: (data) => {
+                    console.log(data);
+                    content = `<div class="d-flex align-items-center">
+                            <h4 class="m-0">Notification</h4>`
+                    if (data.notifications.length > 0) {
+                        content += `<div class="ms-auto">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm clear-notification">
+                                        <i class="mdi mdi-delete"></i><span class="ms-1">Clear Notification</span>
+                                    </button>
+                                </div>`
+                    }
+                    content += `</div>
+                        <div class="home-tab">
+                            <div class="d-sm-flex justify-content-end pt-3">
+                                        <div class="chartjs-legend">
+                                            <ul class="justify-content-end">
+                                                <li><span style="background-color:rgba(226, 158, 9, 0.2)"></span>Unseen comments-commentreplys</li>
+                                                <li><span style="background-color:rgba(81, 177, 225, 0.2)"></span>Unseen Blog-comment likes</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="cards">
+                                <div class="col-md grid-margin p-3 row stretch-card notifications">`;
+                    // rr= -1
+                    if (data.notifications.length > 0) {
+                        console.log(data.notifications);
+                        for (i = 0; i < data.notifications.length; i++) {
+                            // var time = ;
+                            // var currentTime = ;
+                            // var targetTime = ;
+                            if (data.notifications[i].status_of_seen != "deleted") {
+                                var timeDiff = new Date() - new Date(data.notifications[i].time);
+                                var result;
+                                if (timeDiff < 60000) { // Less than 1 minute
+                                    var secondsAgo = Math.floor(timeDiff / 1000);
+                                    result = secondsAgo + " seconds ago";
+                                } else if (timeDiff < 3600000) { // Less than 1 hour
+                                    var minutesAgo = Math.floor(timeDiff / (1000 * 60));
+                                    result = minutesAgo + " minutes ago";
+                                } else if (timeDiff < 86400000) { // Less than 1 day
+                                    var hoursAgo = Math.floor(timeDiff / (1000 * 60 * 60));
+                                    result = hoursAgo + " hours ago";
+                                } else if (timeDiff < 2592000000) { // Less than 1 month
+                                    var daysAgo = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                                    result = daysAgo + " days ago";
+                                } else if (timeDiff < 31536000000) { // Less than 1 year
+                                    var monthsAgo = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30.44));
+                                    result = monthsAgo + " months ago";
+                                } else {
+                                    var yearsAgo = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 365.25));
+                                    result = yearsAgo + " years ago";
+                                }
+                                multiplelike = [];
+                                if (data.notifications[i].notify_type == "like") {
+                                    if (($.inArray(data.notifications[i].blog_id, blogid)) == -1) {
+                                        // console.log($.inArray(data.notifications[i].blog_id, blogid));
+                                        bloglikecount = 0
+                                        for (j = i; j < data.notifications.length; j++) {
+                                            if (data.notifications[j].notify_type == "like") {
+                                                if (data.notifications[i].blog_id == data.notifications[j].blog_id) {
+                                                    bloglikecount++;
+                                                }
+                                            }
+                                        }
+
+                                        // console.log(data.notifications[i]);
+                                        if (bloglikecount > 3) {
+                                            blogid.push(data.notifications[i].blog_id)
+                                            likesdata = [];
+                                            for (j = i; j < data.notifications.length; j++) {
+                                                if (data.notifications[j].notify_type == "like") {
+                                                    if (data.notifications[i].blog_id == data.notifications[j].blog_id) {
+                                                        maindata.push(data.notifications[j])
+                                                        likesdata.push({ 'username': data.notifications[j].e_username, 'photo': data.notifications[j].photo, 'id': data.notifications[j].notification_id })
+                                                    }
+                                                }
+                                            }
+                                            console.log(likesdata);
+                                            if (data.notifications[i].status_of_seen == "unseen" || data.notifications[i].status_of_seen == "new") {
+                                                content += `<div class="card card-inverse-info grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+
+                                            } else {
+                                                content += `<div class="card grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+                                                // console.log(data.notifications[i].status_of_seen);
+                                            }
+                                            // console.log(likesdata);
+                                            // likesdata
+                                            content += `
+                                                                        <div class="card-body pb-0">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <div class="d-flex hover-cursor" data-id="4"><i
+                                                                                        class="fa fa-thumbs-o-up img-sm rounded-10 fa-2x"></i>
+                                                                                    <div class="ms-3">
+                                                                                        <h6 class="mb-1">
+                                                                                            `+ likesdata[0].username + `,` + likesdata[1].username + ` and ` + (likesdata.length - 2) + ` other <span
+                                                                                                class="small-text text-muted mb-4">liked your blog</span>
+                                                                                        </h6>
+                                                                                        <small class="mb-0"><i class="mdi mdi-book-open me-1"></i>`+ data.notifications[i].blog_title + `</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="ms-auto d-flex">
+                                                                                    <img src="../../images/faces/profile/`+ ((likesdata[0].photo == null) ? `default.png` : likesdata[0].photo) + `" class="img-sm rounded-10 ms-2" alt="Profile">
+                                                                                    <img src="../../images/faces/profile/`+ ((likesdata[1].photo == null) ? `default.png` : likesdata[2].photo) + `" class="img-sm rounded-10 ms-1" alt="Profile">
+                                                                                    <img src="../../images/faces/profile/`+ ((likesdata[2].photo == null) ? `default.png` : likesdata[2].photo) + `" class="img-sm rounded-10 ms-1" alt="Profile">
+
+                                                                                    <div class="dropdown">
+                                                                                        <i class="mdi mdi-dots-vertical px-1 py-1 mdi-24px hover-cursor" type="button"
+                                                                                            id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                                                            aria-expanded="false"></i>
+                                                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                                                            <a class="dropdown-item open-blog" data-id="`+ data.notifications[i].blog_id + `">
+                                                                                                <i class="mdi mdi-book-open text-info"></i>
+                                                                                                <span class="ms-2">Open blog</span>
+                                                                                            </a>
+                                                                                            <a class="dropdown-item delete-notification" data-type="allbloglike" data-nid="`+ data.notifications[i].notification_id + `" data-id="` + data.notifications[i].blog_id + `">
+                                                                                                <i class="mdi mdi-delete text-info"></i>
+                                                                                                <span class="ms-2">Delete notification</span>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="ms-5 d-flex pt-2">
+    
+                                                                                <div class="ms-auto">
+                                                                                    <p class="text-muted">
+                                                                                        <i class="ti-time"></i>
+                                                                                        `+ result + `
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>`
+                                        } else {
+                                            if (data.notifications[i].status_of_seen == "unseen" || data.notifications[i].status_of_seen == "new") {
+                                                content += `<div class="card card-inverse-info grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+                                                // console.log(data.notifications[i].status_of_seen);
+                                                // console.log(data.notifications[i].notification_id)
+
+                                            } else {
+                                                content += `<div class="card grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+                                                // console.log(data.notifications[i].status_of_seen);
+                                            }
+                                            content += `
+                                                                        <div class="card-body pb-0">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <div class="d-flex hover-cursor" data-id="4"><i
+                                                                                        class="fa fa-thumbs-o-up img-sm rounded-10 fa-2x"></i>
+                                                                                    <div class="ms-3">
+                                                                                        <h6 class="mb-1">`+ data.notifications[i].e_username + `<span class="small-text text-muted mb-4">
+                                                                                                liked your blog</span></h6>
+                                                                                        <small class="mb-0"><i class="mdi mdi-book-open me-1"></i>`+ data.notifications[i].blog_title + `</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="ms-auto d-flex">
+                                                                                    <img src="../../images/faces/profile/`+ ((data.notifications[i].photo == null) ? `default.png` : data.notifications[i].photo) + `" class="img-sm rounded-10 ms-2" alt="Profile">
+                                                                                    <div class="dropdown">
+                                                                                        <i class="mdi mdi-dots-vertical px-1 py-1 mdi-24px hover-cursor" type="button"
+                                                                                            id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                                                            aria-expanded="false"></i>
+                                                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                                                            <a class="dropdown-item open-blog" data-id="`+ data.notifications[i].blog_id + `">
+                                                                                                <i class="mdi mdi-book-open text-info"></i>
+                                                                                                <span class="ms-2">Open blog</span>
+                                                                                            </a>
+                                                                                            <a class="dropdown-item delete-notification" data-type="onebloglike" data-id="`+ data.notifications[i].notification_id + `">
+                                                                                                <i class="mdi mdi-delete text-info"></i>
+                                                                                                <span class="ms-2">Delete notification</span>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="ms-5 d-flex pt-2">
+    
+                                                                                <div class="ms-auto">
+                                                                                    <p class="text-muted">
+                                                                                        <i class="ti-time"></i>
+                                                                                        `+ result + `
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>`
+                                            maindata.push(data.notifications[i])
+                                        }
+                                    }
+                                    // console.log(blogid);
+                                } else if (data.notifications[i].notify_type == "clike") {
+                                    if (($.inArray(data.notifications[i].liked_comment_id, commentlikeid)) == -1) {
+                                        // console.log($.inArray(data.notifications[i].liked_comment_id, commentlikeid));
+                                        commentlikecount = 0
+                                        for (j = i; j < data.notifications.length; j++) {
+                                            if (data.notifications[j].notify_type == "clike") {
+                                                if (data.notifications[i].liked_comment_id == data.notifications[j].liked_comment_id) {
+                                                    commentlikecount++;
+                                                }
+                                            }
+                                        }
+                                        if (commentlikecount > 3) {
+                                            commentlikeid.push(data.notifications[i].liked_comment_id)
+                                            likesdata = [];
+                                            for (j = i; j < data.notifications.length; j++) {
+                                                if (data.notifications[j].notify_type == "clike") {
+                                                    if (data.notifications[i].liked_comment_id == data.notifications[j].liked_comment_id) {
+                                                        maindata.push(data.notifications[j])
+                                                        likesdata.push({ 'username': data.notifications[j].e_username, 'photo': data.notifications[j].photo, 'id': data.notifications[j].notification_id })
+                                                    }
+                                                }
+                                            }
+                                            // console.log(likesdata)
+                                            if (data.notifications[i].status_of_seen == "unseen" || data.notifications[i].status_of_seen == "new") {
+                                                content += `<div class="card card-inverse-info grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+                                                // console.log(data.notifications[i].status_of_seen);
+                                                // console.log(data.notifications[i])
+
+                                            } else {
+                                                content += `<div class="card grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+                                                // console.log(data.notifications[i].status_of_seen);
+                                            }
+                                            content += `
+                                                                        <div class="card-body pb-0">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <div class="d-flex hover-cursor" data-id="4"><i
+                                                                                        class="fa fa-thumbs-o-up img-sm rounded-10 fa-2x"></i>
+                                                                                    <div class="ms-3">
+                                                                                        <h6 class="mb-1">
+                                                                                            `+ likesdata[0].username + `,` + likesdata[1].username + ` and ` + (likesdata.length - 2) + ` other <span
+                                                                                                class="small-text text-muted mb-4">liked your comment</span>
+                                                                                        </h6>
+                                                                                        <small class="mb-0"><i class="fa fa-comment-o me-1"></i>`+ data.notifications[i].liked_comment + `</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="ms-auto d-flex">
+                                                                                    <img src="../../images/faces/profile/`+ ((likesdata[0].photo == null) ? `default.png` : likesdata[0].photo) + `" class="img-sm rounded-10 ms-2" alt="Profile">
+                                                                                    <img src="../../images/faces/profile/`+ ((likesdata[1].photo == null) ? `default.png` : likesdata[2].photo) + `" class="img-sm rounded-10 ms-1" alt="Profile">
+                                                                                    <img src="../../images/faces/profile/`+ ((likesdata[2].photo == null) ? `default.png` : likesdata[2].photo) + `" class="img-sm rounded-10 ms-1" alt="Profile">
+                                                                                    <!-- <i
+                                                                                                                class="fa fa-comments-o img-sm rounded-10 fa-2x"></i> -->
+                                                                                    <div class="dropdown">
+                                                                                        <i class="mdi mdi-dots-vertical px-1 py-1 mdi-24px hover-cursor" type="button"
+                                                                                            id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                                                            aria-expanded="false"></i>
+                                                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                                                            <a class="dropdown-item open-blog" data-id="`+ data.notifications[i].blog_id + `">
+                                                                                                <i class="mdi mdi-book-open text-info"></i>
+                                                                                                <span class="ms-2">Open blog</span>
+                                                                                            </a>
+                                                                                            <a class="dropdown-item delete-notification" data-type="allcommentlike" data-nid="`+ data.notifications[i].notification_id + `" data-id="` + data.notifications[i].liked_comment_id + `">
+                                                                                                <i class="mdi mdi-delete text-info"></i>
+                                                                                                <span class="ms-2">Delete notification</span>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="ms-5 d-flex pt-2">
+    
+                                                                                <div class="ms-auto">
+                                                                                    <p class="text-muted">
+                                                                                        <i class="ti-time"></i>
+                                                                                        `+ result + `
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>`
+                                        } else {
+                                            maindata.push(data.notifications[i])
+                                            if (data.notifications[i].status_of_seen == "unseen" || data.notifications[i].status_of_seen == "new") {
+                                                content += `<div class="card card-inverse-info grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+                                                // console.log(data.notifications[i].status_of_seen);
+                                                // console.log(data.notifications[i].notification_id)
+
+                                            } else {
+                                                content += `<div class="card grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+                                                // console.log(data.notifications[i].status_of_seen);
+                                            }
+                                            content += `
+                                                                        <div class="card-body pb-0">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <div class="d-flex hover-cursor" data-id="4"><i
+                                                                                        class="fa fa-thumbs-o-up img-sm rounded-10 fa-2x"></i>
+                                                                                    <div class="ms-3">
+                                                                                        <h6 class="mb-1">`+ data.notifications[i].e_username + `<span class="small-text text-muted mb-4">
+                                                                                                liked your Comment</span></h6>
+                                                                                            <small class="mb-0"><i class="fa fa-comment-o me-1"></i>`+ data.notifications[i].liked_comment + `</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="ms-auto d-flex">
+                                                                                    <img src="../../images/faces/profile/`+ ((data.notifications[i].photo == null) ? `default.png` : data.notifications[i].photo) + `" class="img-sm rounded-10 ms-2" alt="Profile">
+                                                                                    <div class="dropdown">
+                                                                                        <i class="mdi mdi-dots-vertical px-1 py-1 mdi-24px hover-cursor" type="button"
+                                                                                            id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                                                            aria-expanded="false"></i>
+                                                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                                                            <a class="dropdown-item open-blog" data-id="`+ data.notifications[i].blog_id + `">
+                                                                                                <i class="mdi mdi-book-open text-info"></i>
+                                                                                                <span class="ms-2">Open blog</span>
+                                                                                            </a>
+                                                                                            <a class="dropdown-item delete-notification" data-type="onecommentlike" data-id="`+ data.notifications[i].notification_id + `">
+                                                                                                <i class="mdi mdi-delete text-info"></i>
+                                                                                                <span class="ms-2">Delete notification</span>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="ms-5 d-flex pt-2">
+    
+                                                                                <div class="ms-auto">
+                                                                                    <p class="text-muted">
+                                                                                        <i class="ti-time"></i>
+                                                                                        `+ result + `
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>`
+                                        }
+                                    }
+                                } else if (data.notifications[i].notify_type == "rlike") {
+                                    if (($.inArray(data.notifications[i].reply_liked_comment_id, commentreplylikeid)) == -1) {
+                                        // console.log($.inArray(data.notifications[i].reply_liked_comment_id, commentreplylikeid));
+                                        commentlikecount = 0
+                                        for (j = i; j < data.notifications.length; j++) {
+                                            if (data.notifications[i].notify_type == "rlike") {
+                                                if (data.notifications[i].reply_liked_comment_id == data.notifications[j].reply_liked_comment_id) {
+                                                    commentlikecount++;
+                                                }
+                                            }
+                                        }
+                                        if (commentlikecount > 3) {
+                                            likesdata = [];
+                                            commentreplylikeid.push(data.notifications[i].reply_liked_comment_id)
+                                            for (j = i; j < data.notifications.length; j++) {
+                                                if (data.notifications[j].notify_type == "rlike") {
+                                                    if (data.notifications[i].reply_liked_comment_id == data.notifications[j].reply_liked_comment_id) {
+                                                        maindata.push(data.notifications[j])
+                                                        likesdata.push({ 'username': data.notifications[j].e_username, 'photo': data.notifications[j].photo, 'id': data.notifications[j].notification_id })
+                                                    }
+                                                }
+                                            }
+                                            if (data.notifications[i].status_of_seen == "unseen" || data.notifications[i].status_of_seen == "new") {
+                                                content += `<div class="card card-inverse-info grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+                                                // console.log(data.notifications[i].status_of_seen);
+                                                // console.log(data.notifications[i])
+
+                                            } else {
+                                                content += `<div class="card grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+                                                // console.log(data.notifications[i].status_of_seen);
+                                            }
+                                            content += `
+                                                                        <div class="card-body pb-0">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <div class="d-flex hover-cursor" data-id="4"><i
+                                                                                        class="fa fa-thumbs-o-up img-sm rounded-10 fa-2x"></i>
+                                                                                    <div class="ms-3">
+                                                                                        <h6 class="mb-1">
+                                                                                            `+ likesdata[0].username + `,` + likesdata[1].username + ` and ` + (likesdata.length - 2) + ` other <span
+                                                                                                class="small-text text-muted mb-4">liked your comment</span>
+                                                                                        </h6>
+                                                                                        <small class="mb-0"><i class="fa fa-comment-o me-1"></i>`+ data.notifications[i].liked_reply_comment + `</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="ms-auto d-flex">
+                                                                                    <img src="../../images/faces/profile/`+ ((likesdata[0].photo == null) ? `default.png` : likesdata[0].photo) + `" class="img-sm rounded-10 ms-2" alt="Profile">
+                                                                                    <img src="../../images/faces/profile/`+ ((likesdata[1].photo == null) ? `default.png` : likesdata[2].photo) + `" class="img-sm rounded-10 ms-1" alt="Profile">
+                                                                                    <img src="../../images/faces/profile/`+ ((likesdata[2].photo == null) ? `default.png` : likesdata[2].photo) + `" class="img-sm rounded-10 ms-1" alt="Profile">
+                                                                                    <!-- <i
+                                                                                                                class="fa fa-comments-o img-sm rounded-10 fa-2x"></i> -->
+                                                                                    <div class="dropdown">
+                                                                                        <i class="mdi mdi-dots-vertical px-1 py-1 mdi-24px hover-cursor" type="button"
+                                                                                            id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                                                            aria-expanded="false"></i>
+                                                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                                                            <a class="dropdown-item open-blog" data-id="`+ data.notifications[i].blog_id + `">
+                                                                                                <i class="mdi mdi-book-open text-info"></i>
+                                                                                                <span class="ms-2">Open blog</span>
+                                                                                            </a>
+                                                                                            <a class="dropdown-item delete-notification" data-type="allreplylike" data-nid="`+ data.notifications[i].notification_id + `" data-id="` + data.notifications[i].reply_liked_comment_id + `">
+                                                                                                <i class="mdi mdi-delete text-info"></i>
+                                                                                                <span class="ms-2">Delete notification</span>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="ms-5 d-flex pt-2">
+    
+                                                                                <div class="ms-auto">
+                                                                                    <p class="text-muted">
+                                                                                        <i class="ti-time"></i>
+                                                                                        `+ result + `
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>`
+                                        } else {
+                                            maindata.push(data.notifications[i])
+                                            if (data.notifications[i].status_of_seen == "unseen" || data.notifications[i].status_of_seen == "new") {
+                                                content += `<div class="card card-inverse-info grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+                                                // console.log(data.notifications[i].status_of_seen);
+                                                // console.log(data.notifications[i].notification_id)
+
+                                            } else {
+                                                content += `<div class="card grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+                                                // console.log(data.notifications[i].status_of_seen);
+                                            }
+                                            content += ` <div class="card-body pb-0">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <div class="d-flex hover-cursor" data-id="4"><i
+                                                                                        class="fa fa-thumbs-o-up img-sm rounded-10 fa-2x"></i>
+                                                                                    <div class="ms-3">
+                                                                                        <h6 class="mb-1">`+ data.notifications[i].e_username + `<span class="small-text text-muted mb-4">
+                                                                                                liked your blog</span></h6>
+                                                                                                <small class="mb-0"><i class="fa fa-comment-o me-1"></i>`+ data.notifications[i].liked_reply_comment + `</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="ms-auto d-flex">
+                                                                                    <img src="../../images/faces/profile/`+ ((data.notifications[i].photo == null) ? `default.png` : data.notifications[i].photo) + `" class="img-sm rounded-10 ms-2" alt="Profile">
+                                                                                   <div class="dropdown">
+                                                                                        <i class="mdi mdi-dots-vertical px-1 py-1 mdi-24px hover-cursor" type="button"
+                                                                                            id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                                                            aria-expanded="false"></i>
+                                                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                                                            <a class="dropdown-item open-blog" data-id="`+ data.notifications[i].blog_id + `">
+                                                                                                <i class="mdi mdi-book-open text-info"></i>
+                                                                                                <span class="ms-2">Open blog</span>
+                                                                                            </a>
+                                                                                            <a class="dropdown-item delete-notification" data-type="onereplylike" data-id="`+ data.notifications[i].notification_id + `">
+                                                                                                <i class="mdi mdi-delete text-info"></i>
+                                                                                                <span class="ms-2">Delete notification</span>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="ms-5 d-flex pt-2">
+    
+                                                                                <div class="ms-auto">
+                                                                                    <p class="text-muted">
+                                                                                        <i class="ti-time"></i>
+                                                                                        `+ result + `
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>`
+                                        }
+                                    }
+                                } else {
+                                    // console.log(data.notifications[i])
+                                    maindata.push(data.notifications[i]);
+                                    if (data.notifications[i].status_of_seen == "unseen" || data.notifications[i].status_of_seen == "new") {
+                                        content += `<div class="card card-inverse-warning grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+                                        // console.log(data.notifications[i].status_of_seen);
+                                        // console.log(data.notifications[i].notification_id)
+
+                                    } else {
+                                        content += `<div class="card grid-margin" id="card-` + data.notifications[i].notification_id + `">`
+                                        // console.log(data.notifications[i].status_of_seen);
+                                    }
+                                    content += `<div class="card-body pb-0">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="d-flex" data-id="4"><i class="fa fa-comment img-sm rounded-10 fa-2x"></i>
+                                                                    <div class="ms-3">
+                                                                        <h6 class="mb-1"><span class="profile  hover-cursor"
+                                                                                data-username="username">`+ data.notifications[i].e_username + `</span>` +
+                                        ((data.notifications[i].notify_type == "comment")
+                                            ? (`<span class="small-text text-muted mb-4"> commented on your blog:"` + data.notifications[i].comments + `"</span>`)
+                                            : (`<span class="small-text text-muted mb-4"> replied on your comment:":"` + data.notifications[i].replycomment + `"</span>`))
+                                        + `
+                                                                                </h6>
+                                                                        <small class="mb-0">
+                                                                            `+
+                                        ((data.notifications[i].notify_type == "comment")
+                                            ? (`<i class="mdi mdi-book-open me-1"></i>` + data.notifications[i].blog_title)
+                                            : (`<i class="fa fa-comment-o me-1"></i>` + data.notifications[i].reply_p_comment)
+                                        ) + `
+                                                                            </small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ms-auto d-flex">
+                                                                    <img src="../../images/faces/profile/`+ ((data.notifications[i].photo == null) ? `default.png` : data.notifications[i].photo) + `" class="img-sm rounded-10 ms-2" alt="Profile">
+                                                                    <!-- <i
+                                                                                                class="fa fa-comments-o img-sm rounded-10 fa-2x"></i> -->
+                                                                    <div class="dropdown">
+                                                                        <i class="mdi mdi-dots-vertical px-1 py-1 mdi-24px hover-cursor" type="button"
+                                                                            id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                                            aria-expanded="false"></i>
+                                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                                            <a class="dropdown-item open-blog" data-id="`+ data.notifications[i].blog_id + `">
+                                                                                <i class="mdi mdi-book-open text-info"></i>
+                                                                                <span class="ms-2">Open blog</span>
+                                                                            </a>
+                                                                            <a class="dropdown-item delete-notification" data-type="comment" data-id="`+ data.notifications[i].notification_id + `">
+                                                                                <i class="mdi mdi-delete text-info"></i>
+                                                                                <span class="ms-2">Delete notification</span>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ms-5 d-flex pt-2">
+                                                                <div>
+                                                                    <span class="wish">
+                                                                        <a class="wish text-decoration-none addcommentlike" id="commentlike-`+ data.notifications[i].notify_type_id + `" data-id="` + data.notifications[i].notify_type_id + `"  data-blogid="` + data.notifications[i].blog_id + `">
+                                                                            <i class="`+ ((data.notifications[i].status_clike == "clike") ? (`fa fa-thumbs-up`) : (`fa fa-thumbs-o-up`)) + `"></i>
+                                                                        </a>
+                                                                    </span>
+                                                                    <a data-bs-toggle="collapse" data-id="comment-`+ data.notifications[i].notify_type_id + `" data-cid="` + data.notifications[i].notify_type_id + `" data-ruid="` + data.notifications[i].e_usid + `" data-username="` + data.notifications[i].e_username + `" id="rcomment-` + data.notifications[i].notify_type_id + `" href="#replay-` + data.notifications[i].notify_type_id + `" aria-expanded="false" aria-controls="replay-` + data.notifications[i].notify_type_id + `" class="collapsed ms-2 ml-3 show-reply">
+                                                                        <span class="ml-3 text-black">
+                                                                            <i class="fa fa-comments-o">&nbsp;Reply</i>
+                                                                        </span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="ms-auto">
+                                                                    <p class="text-muted">
+                                                                        <i class="ti-time"></i>
+                                                                      `+ result + `
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div id="replay-`+ data.notifications[i].notify_type_id + `" class="collapse" role="tabpanel" aria-labelledby="heading-` + data.notifications[i].notify_type_id + `"
+                                                                data-bs-parent="#accordion-2">
+                                                                <span class="ms-5 p-3 text-muted text-medium" id="replyuserdata-`+ data.notifications[i].notify_type_id + `">reply
+                                                                    to username</span>
+                                                                <div class="d-flex p-3 ms-5">
+                                                                    <img class="img-sm rounded-10" src="https://i.imgur.com/zQZSWrt.jpg" width="30">
+                                                                    <div class="ms-3"></div>
+                                                                    <input type="text" class="comment-text-box form-control" data-id="`+ data.notifications[i].notify_type_id + `" id="replyibox-` + data.notifications[i].notify_type_id + `"
+                                                                        placeholder="Enter your comment">
+                                                                    <button class="btn btn-outline-success btn-rounded ms-3 addreply" data-id="`+ data.notifications[i].notify_type_id + `" data-blogid="` + data.notifications[i].blog_id + `"
+                                                                        style="height: 48px;"><i class="mdi mdi-send text-dark"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                            </div>`
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        content += "no notification"
+                    }
+                    content += `</div>
+                            </div>`;
+                    $("#main-content").html(content);
+
+                    console.log(maindata);
+                },
+                error: (error) => servererror(error)
+            })
+        }
+        $(document).ready(() => {
+            setlogindata();
+            sidebar();
+            navbar();
+            checknotification();
+            if (checkguest()) {
+                pagenotfound();
+            } else {
+                notificationdisplay();
+                $("#loader").hide();
+                $(".body-content").show();
+                // setInterval(function () {
+                //     notificationdisplay();
+                // }, 1000);
+            }
+        })
+        $(document).on("click", ".clear-notification", function () {
+            // alert("ee")
+            // clear_notification
+            swal({
+                title: 'Are you sure?',
+                text: "Clear Notification?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3f51b5',
+                cancelButtonColor: '#ff4081',
+                confirmButtonText: 'Great ',
+                buttons: {
+                    cancel: {
+                        text: "Cancel",
+                        value: null,
+                        visible: true,
+                        className: "btn btn-danger btn-sm",
+                        closeModal: true,
+                    },
+                    confirm: {
+                        text: "Clear",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary btn-sm",
+                        closeModal: true
+                    }
+                }
+            }).then((result) => {
+                if (result) {
+                    $.ajax({
+                        url: "../../api/notify.php",
+                        type: "POST",
+                        data: JSON.stringify({ key: 'clear_notification' }),
+                        dataType: "JSON",
+                        success: function (data) {
+                            if (data.status) {
+                                $(".clear-notification").fadeOut(500, () => {
+                                    $(this).remove();
+                                })
+                                $(".card").fadeOut(500, function () {
+                                    $(this).remove();
+                                });
+                                $(".notifications").fadeOut(400, function () {
+                                    $(this).html("no notification").fadeIn(400);
+                                });
+                            } else {
+                                showInfoToast("Clear Notification", data.message)
+                            }
+                        },
+                        error: (error) => servererror(error)
+                    })
+                }
+            })
+        })
+        $(document).on("click", ".delete-notification", function () {
+            type = $(this).data("type")
+            id = $(this).data("id")
+            if (type == "allcommentlike" | type == "allbloglike" || type == "allreplylike") {
+                card = "#card-" + $(this).data("nid");
+            } else {
+                card = "#card-" + id;
+            }
+            if (type != undefined && id != undefined) {
+                // alert(true);
+                $.ajax({
+                    url: "../../api/notify.php",
+                    type: "POST",
+                    data: JSON.stringify({ key: 'delete_notification', id: id, type: type }),
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        if (data.status) {
+                            $(card).toggle(700);
+                        } else {
+                            showInfoToast("Please try again", data.message);
+                        }
+                    },
+                    error: (error) => servererror(error)
+
+                })
+            }
+        })
+        $(document).on("click", ".open-blog", function () {
+            window.location.href = "../blogs/blog.html?s=" + $(this).data("id");
+        })
+        $(document).on("click", ".addreply", function () {
+            id = $(this).data("id");
+            riid = "#replyibox-" + id;
+            var comment = $(riid).val();
+            pid = $(riid).data("id");
+            blogid = $(this).data("blogid");
+            console.log(id + ` ` + pid + ` ` + blogid + ` ` + riid);
+            if (comment != "") {
+                $.ajax({
+                    url: "../../api/comment.php",
+                    type: "POST",
+                    data: JSON.stringify({ key: 'blog_reply', blog_id: blogid, parent_comment_id: pid, comment: comment, mainid: id }),
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.status) {
+                            showSuccessToast("Reply on comment", "Send reply successfully.")
+                            $("#replay-" + id).toggle(700);
+                        } else {
+                            alert("comment not reply some error found")
+                        }
+                    },
+                    error: (error) => servererror(error)
+                })
+            }
+        })
+        $(document).on("click", ".show-reply", function () {
+            ruid = "#replyuserdata-" + $(this).data("cid");
+            $(ruid).text("Reply to " + $(this).data("username"))
+        })
+        $(document).on("click", ".addcommentlike", function (e) {
+            e.preventDefault();
+            id = $(this).data("id");
+            blogid = $(this).data("blogid")
+            // alert(blogid)
+            $.ajax({
+                url: "../../api/comment_like.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'comment_like_insert', blog_id: blogid, blog_comment_id: id }),
+                dataType: "JSON",
+                success: function (data) {
+                    if (data.status == "liked") {
+                        $("#commentlike-" + id).html(`<i class="fa fa-thumbs-up"></i>`);
+                    } else if (data.status == "disliked") {
+                        $("#commentlike-" + id).html(`<i class="fa fa-thumbs-o-up"></i>`);
+                    }
+                    console.log(data);
+                },
+                error: (error) => servererror(error)
+            })
+        })
+
+    </script>
+    <!-- plugins:js -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <!-- <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/template.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/todolist.js"></script>
+    <!- endinject -->
+    <!-- Custom js for this page-->
+    <!--    <script src="js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/Chart.roundedBarCharts.js"></script> -->
+    <!-- End custom js for this page-->
+
+    <!-- plugins:js -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <script src="../../js/allfilefunction.js"></script>
+
+    <!-- Plugin js for this page -->
+    <script src="vendors/chart.js/Chart.min.js"></script>
+    <script src="vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="vendors/progressbar.js/progressbar.min.js"></script>
+
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <!-- <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/template.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!--    <script src="js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/Chart.roundedBarCharts.js"></script> -->
+    <!-- End custom js for this page-->
+
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../../vendors/jquery-bar-rating/jquery.barrating.min.js"></script>
+    <script src="../../vendors/chart.js/Chart.min.js"></script>
+    <script src="../../vendors/sweetalert/sweetalert.min.js"></script>
+
+    <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="../../vendors/jquery-toast-plugin/jquery.toast.min.js"></script>
+
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../js/toastDemo.js"></script>
+
+    <script src="../../js/off-canvas.js"></script>
+    <script src="../../js/hoverable-collapse.js"></script>
+    <script src="../../js/template.js"></script>
+    <script src="../../js/settings.js"></script>
+    <script src="../../js/todolist.js"></script>
+    <script src="../../js/alertp.js"></script>
+    <script src="../../js/profile-demo.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!-- <script src="../../js/chart.js"></script> -->
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.7/jquery.lazyload.js"></script>
+    <script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("div.lazy").lazyload({
+         effect : "fadeIn"
+     });
+
+  }); -->
+    </script>
+    <!-- <script>
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) || (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+    </script> -->
+</body>
+<audio id="audioBox">
+    <source src="../../audio/notify.mp3" type="audio/mpeg" />
+    <source src="../../audio/notify.wav" type="audio/wav" />
+    <source src="../../audio/notify.ogg" type="audio/ogg" />
+  </audio>
+  
+</html>

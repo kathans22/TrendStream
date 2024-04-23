@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+      shrink-to-fit=no">
+  <title>TrendStream</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="../../vendors/jquery-toast-plugin/jquery.toast.min.css">
+  <link rel="shortcut icon" href="../../images/favicon.png" />
+
+  <style>
+    .Error {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- partial:index.partial.html -->
+  <!DOCTYPE html>
+  <html lang="es" dir="ltr">
+
+  <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="align-content-center justify-content-center">
+      <div class="col-md-4 col-sm-6 grid-margin stretch-card m-auto pt-5" id="loader">
+        <div class="dot-opacity-loader">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <div class="body-content" style="display: none;">
+      <div class="main">
+        <div class="container a-container" id="a-container">
+          <form class="form" id="signupform">
+            <h2 class="form_title title">Create Account</h2>
+            <!-- <div class="form__icons"><img class="form__icon"
+              src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSI1MHB4IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48dGl0bGUvPjxkZWZzLz48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIj48ZyBmaWxsPSIjMDAwMDAwIiBpZD0iRmFjZWJvb2siPjxwYXRoIGQ9Ik0yNSw1MCBDMzguODA3MTE5NCw1MCA1MCwzOC44MDcxMTk0IDUwLDI1IEM1MCwxMS4xOTI4ODA2IDM4LjgwNzExOTQsMCAyNSwwIEMxMS4xOTI4ODA2LDAgMCwxMS4xOTI4ODA2IDAsMjUgQzAsMzguODA3MTE5NCAxMS4xOTI4ODA2LDUwIDI1LDUwIFogTTI1LDQ3IEMzNy4xNTAyNjUxLDQ3IDQ3LDM3LjE1MDI2NTEgNDcsMjUgQzQ3LDEyLjg0OTczNDkgMzcuMTUwMjY1MSwzIDI1LDMgQzEyLjg0OTczNDksMyAzLDEyLjg0OTczNDkgMywyNSBDMywzNy4xNTAyNjUxIDEyLjg0OTczNDksNDcgMjUsNDcgWiBNMjYuODE0NTE5NywzNiBMMjYuODE0NTE5NywyNC45OTg3MTIgTDMwLjA2ODc0NDksMjQuOTk4NzEyIEwzMC41LDIxLjIwNzYwNzIgTDI2LjgxNDUxOTcsMjEuMjA3NjA3MiBMMjYuODIwMDQ4NiwxOS4zMTAxMjI3IEMyNi44MjAwNDg2LDE4LjMyMTM0NDIgMjYuOTIwNzIwOSwxNy43OTE1MzQxIDI4LjQ0MjU1MzgsMTcuNzkxNTM0MSBMMzAuNDc2OTYyOSwxNy43OTE1MzQxIEwzMC40NzY5NjI5LDE0IEwyNy4yMjIyNzY5LDE0IEMyMy4zMTI4NzU3LDE0IDIxLjkzNjg2NzgsMTUuODM5MDkzNyAyMS45MzY4Njc4LDE4LjkzMTg3MDkgTDIxLjkzNjg2NzgsMjEuMjA4MDM2NiBMMTkuNSwyMS4yMDgwMzY2IEwxOS41LDI0Ljk5OTE0MTMgTDIxLjkzNjg2NzgsMjQuOTk5MTQxMyBMMjEuOTM2ODY3OCwzNiBMMjYuODE0NTE5NywzNiBaIE0yNi44MTQ1MTk3LDM2IiBpZD0iT3ZhbC0xIi8+PC9nPjwvZz48L3N2Zz4="
+              alt=""><img class="form__icon"
+              src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSI1MHB4IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48dGl0bGUvPjxkZWZzLz48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIj48ZyBmaWxsPSIjMDAwMDAwIiBpZD0iTGlua2VkSW4iPjxwYXRoIGQ9Ik0yNSw1MCBDMzguODA3MTE5NCw1MCA1MCwzOC44MDcxMTk0IDUwLDI1IEM1MCwxMS4xOTI4ODA2IDM4LjgwNzExOTQsMCAyNSwwIEMxMS4xOTI4ODA2LDAgMCwxMS4xOTI4ODA2IDAsMjUgQzAsMzguODA3MTE5NCAxMS4xOTI4ODA2LDUwIDI1LDUwIFogTTI1LDQ3IEMzNy4xNTAyNjUxLDQ3IDQ3LDM3LjE1MDI2NTEgNDcsMjUgQzQ3LDEyLjg0OTczNDkgMzcuMTUwMjY1MSwzIDI1LDMgQzEyLjg0OTczNDksMyAzLDEyLjg0OTczNDkgMywyNSBDMywzNy4xNTAyNjUxIDEyLjg0OTczNDksNDcgMjUsNDcgWiBNMTQsMjAuMTE4MDQ3OSBMMTQsMzQuNjU4MTgzNCBMMTguNzEwMDg1MSwzNC42NTgxODM0IEwxOC43MTAwODUxLDIwLjExODA0NzkgTDE0LDIwLjExODA0NzkgWiBNMTYuNjY0Njk2MiwxMyBDMTUuMDUzNDA1OCwxMyAxNCwxNC4wODU4NjExIDE0LDE1LjUxMTUxMjIgQzE0LDE2LjkwNzYzMzEgMTUuMDIyMjcxMSwxOC4wMjQ3NjE0IDE2LjYwMzU1NTYsMTguMDI0NzYxNCBMMTYuNjMzNjU1NiwxOC4wMjQ3NjE0IEMxOC4yNzU5ODY3LDE4LjAyNDc2MTQgMTkuMjk4ODIyMiwxNi45MDc2MzMxIDE5LjI5ODgyMjIsMTUuNTExNTEyMiBDMTkuMjY4MjUxOSwxNC4wODU4NjExIDE4LjI3NTk4NjcsMTMgMTYuNjY0Njk2MiwxMyBaIE0zMC41NzY5MjEzLDIwLjExODA0NzkgQzI4LjA3NjE3NiwyMC4xMTgwNDc5IDI2Ljk1NjU1MDEsMjEuNTI5MzE5OSAyNi4zMzE0MTA4LDIyLjUxOTM1MjcgTDI2LjMzMTQxMDgsMjAuNDU5ODY0NCBMMjEuNjIwNzYxNCwyMC40NTk4NjQ0IEMyMS42ODI4NDI3LDIxLjgyNDIzNTYgMjEuNjIwNzYxNCwzNSAyMS42MjA3NjE0LDM1IEwyNi4zMzE0MTA4LDM1IEwyNi4zMzE0MTA4LDI2Ljg3OTU4ODcgQzI2LjMzMTQxMDgsMjYuNDQ1MDMyIDI2LjM2MTk4MTIsMjYuMDExNTM2OCAyNi40ODY1MTk5LDI1LjcwMDQwODQgQzI2LjgyNjkzMiwyNC44MzIyNiAyNy42MDIwMDY5LDIzLjkzMzQyMzMgMjguOTAzMjY3NCwyMy45MzM0MjMzIEMzMC42MDgzMzgxLDIzLjkzMzQyMzMgMzEuMjg5OTE0OSwyNS4yNjY3MjAyIDMxLjI4OTkxNDksMjcuMjIwNjMzMyBMMzEuMjg5OTE0OSwzNC45OTk2MTQgTDM1Ljk5OTgxMTksMzQuOTk5NjE0IEwzNiwyNi42NjI3NDQ2IEMzNiwyMi4xOTY2NDM5IDMzLjY3NjM3NDMsMjAuMTE4MDQ3OSAzMC41NzY5MjEzLDIwLjExODA0NzkgWiBNMzAuNTc2OTIxMywyMC4xMTgwNDc5IiBpZD0iT3ZhbC0xIi8+PC9nPjwvZz48L3N2Zz4="><img
+              class="form__icon"
+              src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSI1MHB4IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48dGl0bGUvPjxkZWZzLz48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIj48ZyBmaWxsPSIjMDAwMDAwIiBpZD0iVHdpdHRlciI+PHBhdGggZD0iTTI1LDUwIEMzOC44MDcxMTk0LDUwIDUwLDM4LjgwNzExOTQgNTAsMjUgQzUwLDExLjE5Mjg4MDYgMzguODA3MTE5NCwwIDI1LDAgQzExLjE5Mjg4MDYsMCAwLDExLjE5Mjg4MDYgMCwyNSBDMCwzOC44MDcxMTk0IDExLjE5Mjg4MDYsNTAgMjUsNTAgWiBNMjUsNDcgQzM3LjE1MDI2NTEsNDcgNDcsMzcuMTUwMjY1MSA0NywyNSBDNDcsMTIuODQ5NzM0OSAzNy4xNTAyNjUxLDMgMjUsMyBDMTIuODQ5NzM0OSwzIDMsMTIuODQ5NzM0OSAzLDI1IEMzLDM3LjE1MDI2NTEgMTIuODQ5NzM0OSw0NyAyNSw0NyBaIE0yNC42ODIyNTU0LDIwLjU1NDI5NzUgTDI0LjcyOTk0NCwyMS4zNzYxMDExIEwyMy45MzUxMzMzLDIxLjI3NTQ3MjEgQzIxLjA0MjAyMjUsMjAuODg5NzI3NSAxOC41MTQ1MjQ2LDE5LjU4MTU1MDQgMTYuMzY4NTM1OCwxNy4zODQ0ODM3IEwxNS4zMTkzODU3LDE2LjI5NDMzNjEgTDE1LjA0OTE1MDEsMTcuMDk5MzY4MSBDMTQuNDc2ODg2NCwxOC44OTM5MTg4IDE0Ljg0MjQ5OTMsMjAuNzg5MDk4NSAxNi4wMzQ3MTUzLDIyLjA2MzczMjYgQzE2LjY3MDU2MzgsMjIuNzY4MTM1NyAxNi41Mjc0OTc5LDIyLjg2ODc2NDcgMTUuNDMwNjU5MiwyMi40NDk0NzcyIEMxNS4wNDkxNTAxLDIyLjMxNTMwNTEgMTQuNzE1MzI5NiwyMi4yMTQ2NzYxIDE0LjY4MzUzNzEsMjIuMjY0OTkwNyBDMTQuNTcyMjYzNywyMi4zODIzOTEyIDE0Ljk1Mzc3MjgsMjMuOTA4NTk3OCAxNS4yNTU4MDA4LDI0LjUxMjM3MTkgQzE1LjY2OTEwMjQsMjUuMzUwOTQ3IDE2LjUxMTYwMTcsMjYuMTcyNzUwNSAxNy40MzM1ODIsMjYuNjU5MTI0MSBMMTguMjEyNDk2NSwyNy4wNDQ4Njg2IEwxNy4yOTA1MTYxLDI3LjA2MTY0MDEgQzE2LjQwMDMyODIsMjcuMDYxNjQwMSAxNi4zNjg1MzU4LDI3LjA3ODQxMTYgMTYuNDYzOTEzMSwyNy40MzA2MTMxIEMxNi43ODE4Mzc0LDI4LjUyMDc2MDggMTguMDM3NjM4MiwyOS42Nzc5OTQ0IDE5LjQzNjUwNSwzMC4xODExMzk0IEwyMC40MjIwNzAxLDMwLjUzMzM0MSBMMTkuNTYzNjc0NiwzMS4wNzAwMjkgQzE4LjI5MTk3NzYsMzEuODQxNTE4MSAxNi43OTc3MzM1LDMyLjI3NzU3NzIgMTUuMzAzNDg5NSwzMi4zMTExMjAyIEMxNC41ODgxNTk5LDMyLjMyNzg5MTYgMTQsMzIuMzk0OTc3NiAxNCwzMi40NDUyOTIyIEMxNCwzMi42MTMwMDcxIDE1LjkzOTMzOCwzMy41NTIyMTEzIDE3LjA2Nzk2OTIsMzMuOTIxMTg0MyBDMjAuNDUzODYyNiwzNS4wMTEzMzE5IDI0LjQ3NTYwNDYsMzQuNTQxNzI5OCAyNy40OTU4ODUxLDMyLjY4MDA5MzIgQzI5LjY0MTg3MzksMzEuMzU1MTQ0NSAzMS43ODc4NjI4LDI4LjcyMjAxODggMzIuNzg5MzI0MiwyNi4xNzI3NTA1IEMzMy4zMjk3OTU0LDI0LjgxNDI1ODkgMzMuODcwMjY2NywyMi4zMzIwNzY3IDMzLjg3MDI2NjcsMjEuMTQxMyBDMzMuODcwMjY2NywyMC4zNjk4MTEgMzMuOTE3OTU1MywyMC4yNjkxODIgMzQuODA4MTQzMiwxOS4zNDY3NDk0IEMzNS4zMzI3MTgzLDE4LjgxMDA2MTMgMzUuODI1NTAwOSwxOC4yMjMwNTg4IDM1LjkyMDg3ODIsMTguMDU1MzQzNyBDMzYuMDc5ODQwMywxNy43MzY2ODUyIDM2LjA2Mzk0NDIsMTcuNzM2Njg1MiAzNS4yNTMyMzczLDE4LjAyMTgwMDcgQzMzLjkwMjA1OTEsMTguNTI0OTQ1OCAzMy43MTEzMDQ1LDE4LjQ1Nzg1OTggMzQuMzc4OTQ1NSwxNy43MDMxNDIyIEMzNC44NzE3MjgxLDE3LjE2NjQ1NDEgMzUuNDU5ODg4LDE2LjE5MzcwNzEgMzUuNDU5ODg4LDE1LjkwODU5MTUgQzM1LjQ1OTg4OCwxNS44NTgyNzcgMzUuMjIxNDQ0OCwxNS45NDIxMzQ2IDM0Ljk1MTIwOTIsMTYuMDkzMDc4IEMzNC42NjUwNzczLDE2LjI2MDc5MzEgMzQuMDI5MjI4OCwxNi41MTIzNjU2IDMzLjU1MjM0MjQsMTYuNjYzMzA5MSBMMzIuNjkzOTQ2OSwxNi45NDg0MjQ2IEwzMS45MTUwMzI0LDE2LjM5NDk2NSBDMzEuNDg1ODM0NiwxNi4wOTMwNzggMzAuODgxNzc4NiwxNS43NTc2NDggMzAuNTYzODU0MywxNS42NTcwMTkgQzI5Ljc1MzE0NzQsMTUuNDIyMjE4IDI4LjUxMzI0MjgsMTUuNDU1NzYxIDI3Ljc4MjAxNjksMTUuNzI0MTA1IEMyNS43OTQ5OTAzLDE2LjQ3ODgyMjYgMjQuNTM5MTg5NCwxOC40MjQzMTY4IDI0LjY4MjI1NTQsMjAuNTU0Mjk3NSBDMjQuNjgyMjU1NCwyMC41NTQyOTc1IDI0LjUzOTE4OTQsMTguNDI0MzE2OCAyNC42ODIyNTU0LDIwLjU1NDI5NzUgWiBNMjQuNjgyMjU1NCwyMC41NTQyOTc1IiBpZD0iT3ZhbC0xIi8+PC9nPjwvZz48L3N2Zz4=">
+          </div> -->
+            <!-- <span class="form__span">or use email for registration</span> -->
+            <input class="form__input" type="text" placeholder="Username" id="suname">
+            <input class="form__input" type="text" placeholder="Email" id="suemail">
+            <input class="form__input" type="password" placeholder="Password" id="supassword">
+
+            <input type="button" class="form__button button" id="signup" value="SIGN UP">
+          </form>
+          <form class="form" id="otpform" style="display: none;">
+            <h2 class="form_title title">OTP Verification</h2>
+            <span class="form__span">OTP send on
+              <span style="color: red;" id="regotpsendemail"></span>
+            </span>
+            <!-- <div class="otp">  -->
+            <div class="aligncenter otpinput">
+              <input class="form_otp reg_form_otp" type="number" min="0" max="9" maxlength="1" placeholder="0">
+              <input class="form_otp reg_form_otp" type="number" min="0" max="9" maxlength="1" placeholder="0">
+              <input class="form_otp reg_form_otp" type="number" min="0" max="9" maxlength="1" placeholder="0">
+              <input class="form_otp reg_form_otp" type="number" min="0" max="9" maxlength="1" placeholder="0">
+            </div>
+            <a class="form__link" id="resendregotp">Resend OTP </a>
+            <input type="button" class="form__button button" id="otpverify" value="Verify">
+          </form>
+        </div>
+        <div class="container b-container" id="b-container">
+          <form class="form" id="signinform">
+            <h2 class="form_title title">Sign in to Website</h2>
+            <!-- <div class="form__icons"><img class="form__icon"
+              src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSI1MHB4IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48dGl0bGUvPjxkZWZzLz48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIj48ZyBmaWxsPSIjMDAwMDAwIiBpZD0iRmFjZWJvb2siPjxwYXRoIGQ9Ik0yNSw1MCBDMzguODA3MTE5NCw1MCA1MCwzOC44MDcxMTk0IDUwLDI1IEM1MCwxMS4xOTI4ODA2IDM4LjgwNzExOTQsMCAyNSwwIEMxMS4xOTI4ODA2LDAgMCwxMS4xOTI4ODA2IDAsMjUgQzAsMzguODA3MTE5NCAxMS4xOTI4ODA2LDUwIDI1LDUwIFogTTI1LDQ3IEMzNy4xNTAyNjUxLDQ3IDQ3LDM3LjE1MDI2NTEgNDcsMjUgQzQ3LDEyLjg0OTczNDkgMzcuMTUwMjY1MSwzIDI1LDMgQzEyLjg0OTczNDksMyAzLDEyLjg0OTczNDkgMywyNSBDMywzNy4xNTAyNjUxIDEyLjg0OTczNDksNDcgMjUsNDcgWiBNMjYuODE0NTE5NywzNiBMMjYuODE0NTE5NywyNC45OTg3MTIgTDMwLjA2ODc0NDksMjQuOTk4NzEyIEwzMC41LDIxLjIwNzYwNzIgTDI2LjgxNDUxOTcsMjEuMjA3NjA3MiBMMjYuODIwMDQ4NiwxOS4zMTAxMjI3IEMyNi44MjAwNDg2LDE4LjMyMTM0NDIgMjYuOTIwNzIwOSwxNy43OTE1MzQxIDI4LjQ0MjU1MzgsMTcuNzkxNTM0MSBMMzAuNDc2OTYyOSwxNy43OTE1MzQxIEwzMC40NzY5NjI5LDE0IEwyNy4yMjIyNzY5LDE0IEMyMy4zMTI4NzU3LDE0IDIxLjkzNjg2NzgsMTUuODM5MDkzNyAyMS45MzY4Njc4LDE4LjkzMTg3MDkgTDIxLjkzNjg2NzgsMjEuMjA4MDM2NiBMMTkuNSwyMS4yMDgwMzY2IEwxOS41LDI0Ljk5OTE0MTMgTDIxLjkzNjg2NzgsMjQuOTk5MTQxMyBMMjEuOTM2ODY3OCwzNiBMMjYuODE0NTE5NywzNiBaIE0yNi44MTQ1MTk3LDM2IiBpZD0iT3ZhbC0xIi8+PC9nPjwvZz48L3N2Zz4="
+              alt=""><img class="form__icon"
+              src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSI1MHB4IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48dGl0bGUvPjxkZWZzLz48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIj48ZyBmaWxsPSIjMDAwMDAwIiBpZD0iTGlua2VkSW4iPjxwYXRoIGQ9Ik0yNSw1MCBDMzguODA3MTE5NCw1MCA1MCwzOC44MDcxMTk0IDUwLDI1IEM1MCwxMS4xOTI4ODA2IDM4LjgwNzExOTQsMCAyNSwwIEMxMS4xOTI4ODA2LDAgMCwxMS4xOTI4ODA2IDAsMjUgQzAsMzguODA3MTE5NCAxMS4xOTI4ODA2LDUwIDI1LDUwIFogTTI1LDQ3IEMzNy4xNTAyNjUxLDQ3IDQ3LDM3LjE1MDI2NTEgNDcsMjUgQzQ3LDEyLjg0OTczNDkgMzcuMTUwMjY1MSwzIDI1LDMgQzEyLjg0OTczNDksMyAzLDEyLjg0OTczNDkgMywyNSBDMywzNy4xNTAyNjUxIDEyLjg0OTczNDksNDcgMjUsNDcgWiBNMTQsMjAuMTE4MDQ3OSBMMTQsMzQuNjU4MTgzNCBMMTguNzEwMDg1MSwzNC42NTgxODM0IEwxOC43MTAwODUxLDIwLjExODA0NzkgTDE0LDIwLjExODA0NzkgWiBNMTYuNjY0Njk2MiwxMyBDMTUuMDUzNDA1OCwxMyAxNCwxNC4wODU4NjExIDE0LDE1LjUxMTUxMjIgQzE0LDE2LjkwNzYzMzEgMTUuMDIyMjcxMSwxOC4wMjQ3NjE0IDE2LjYwMzU1NTYsMTguMDI0NzYxNCBMMTYuNjMzNjU1NiwxOC4wMjQ3NjE0IEMxOC4yNzU5ODY3LDE4LjAyNDc2MTQgMTkuMjk4ODIyMiwxNi45MDc2MzMxIDE5LjI5ODgyMjIsMTUuNTExNTEyMiBDMTkuMjY4MjUxOSwxNC4wODU4NjExIDE4LjI3NTk4NjcsMTMgMTYuNjY0Njk2MiwxMyBaIE0zMC41NzY5MjEzLDIwLjExODA0NzkgQzI4LjA3NjE3NiwyMC4xMTgwNDc5IDI2Ljk1NjU1MDEsMjEuNTI5MzE5OSAyNi4zMzE0MTA4LDIyLjUxOTM1MjcgTDI2LjMzMTQxMDgsMjAuNDU5ODY0NCBMMjEuNjIwNzYxNCwyMC40NTk4NjQ0IEMyMS42ODI4NDI3LDIxLjgyNDIzNTYgMjEuNjIwNzYxNCwzNSAyMS42MjA3NjE0LDM1IEwyNi4zMzE0MTA4LDM1IEwyNi4zMzE0MTA4LDI2Ljg3OTU4ODcgQzI2LjMzMTQxMDgsMjYuNDQ1MDMyIDI2LjM2MTk4MTIsMjYuMDExNTM2OCAyNi40ODY1MTk5LDI1LjcwMDQwODQgQzI2LjgyNjkzMiwyNC44MzIyNiAyNy42MDIwMDY5LDIzLjkzMzQyMzMgMjguOTAzMjY3NCwyMy45MzM0MjMzIEMzMC42MDgzMzgxLDIzLjkzMzQyMzMgMzEuMjg5OTE0OSwyNS4yNjY3MjAyIDMxLjI4OTkxNDksMjcuMjIwNjMzMyBMMzEuMjg5OTE0OSwzNC45OTk2MTQgTDM1Ljk5OTgxMTksMzQuOTk5NjE0IEwzNiwyNi42NjI3NDQ2IEMzNiwyMi4xOTY2NDM5IDMzLjY3NjM3NDMsMjAuMTE4MDQ3OSAzMC41NzY5MjEzLDIwLjExODA0NzkgWiBNMzAuNTc2OTIxMywyMC4xMTgwNDc5IiBpZD0iT3ZhbC0xIi8+PC9nPjwvZz48L3N2Zz4="><img
+              class="form__icon"
+              src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSI1MHB4IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48dGl0bGUvPjxkZWZzLz48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIj48ZyBmaWxsPSIjMDAwMDAwIiBpZD0iVHdpdHRlciI+PHBhdGggZD0iTTI1LDUwIEMzOC44MDcxMTk0LDUwIDUwLDM4LjgwNzExOTQgNTAsMjUgQzUwLDExLjE5Mjg4MDYgMzguODA3MTE5NCwwIDI1LDAgQzExLjE5Mjg4MDYsMCAwLDExLjE5Mjg4MDYgMCwyNSBDMCwzOC44MDcxMTk0IDExLjE5Mjg4MDYsNTAgMjUsNTAgWiBNMjUsNDcgQzM3LjE1MDI2NTEsNDcgNDcsMzcuMTUwMjY1MSA0NywyNSBDNDcsMTIuODQ5NzM0OSAzNy4xNTAyNjUxLDMgMjUsMyBDMTIuODQ5NzM0OSwzIDMsMTIuODQ5NzM0OSAzLDI1IEMzLDM3LjE1MDI2NTEgMTIuODQ5NzM0OSw0NyAyNSw0NyBaIE0yNC42ODIyNTU0LDIwLjU1NDI5NzUgTDI0LjcyOTk0NCwyMS4zNzYxMDExIEwyMy45MzUxMzMzLDIxLjI3NTQ3MjEgQzIxLjA0MjAyMjUsMjAuODg5NzI3NSAxOC41MTQ1MjQ2LDE5LjU4MTU1MDQgMTYuMzY4NTM1OCwxNy4zODQ0ODM3IEwxNS4zMTkzODU3LDE2LjI5NDMzNjEgTDE1LjA0OTE1MDEsMTcuMDk5MzY4MSBDMTQuNDc2ODg2NCwxOC44OTM5MTg4IDE0Ljg0MjQ5OTMsMjAuNzg5MDk4NSAxNi4wMzQ3MTUzLDIyLjA2MzczMjYgQzE2LjY3MDU2MzgsMjIuNzY4MTM1NyAxNi41Mjc0OTc5LDIyLjg2ODc2NDcgMTUuNDMwNjU5MiwyMi40NDk0NzcyIEMxNS4wNDkxNTAxLDIyLjMxNTMwNTEgMTQuNzE1MzI5NiwyMi4yMTQ2NzYxIDE0LjY4MzUzNzEsMjIuMjY0OTkwNyBDMTQuNTcyMjYzNywyMi4zODIzOTEyIDE0Ljk1Mzc3MjgsMjMuOTA4NTk3OCAxNS4yNTU4MDA4LDI0LjUxMjM3MTkgQzE1LjY2OTEwMjQsMjUuMzUwOTQ3IDE2LjUxMTYwMTcsMjYuMTcyNzUwNSAxNy40MzM1ODIsMjYuNjU5MTI0MSBMMTguMjEyNDk2NSwyNy4wNDQ4Njg2IEwxNy4yOTA1MTYxLDI3LjA2MTY0MDEgQzE2LjQwMDMyODIsMjcuMDYxNjQwMSAxNi4zNjg1MzU4LDI3LjA3ODQxMTYgMTYuNDYzOTEzMSwyNy40MzA2MTMxIEMxNi43ODE4Mzc0LDI4LjUyMDc2MDggMTguMDM3NjM4MiwyOS42Nzc5OTQ0IDE5LjQzNjUwNSwzMC4xODExMzk0IEwyMC40MjIwNzAxLDMwLjUzMzM0MSBMMTkuNTYzNjc0NiwzMS4wNzAwMjkgQzE4LjI5MTk3NzYsMzEuODQxNTE4MSAxNi43OTc3MzM1LDMyLjI3NzU3NzIgMTUuMzAzNDg5NSwzMi4zMTExMjAyIEMxNC41ODgxNTk5LDMyLjMyNzg5MTYgMTQsMzIuMzk0OTc3NiAxNCwzMi40NDUyOTIyIEMxNCwzMi42MTMwMDcxIDE1LjkzOTMzOCwzMy41NTIyMTEzIDE3LjA2Nzk2OTIsMzMuOTIxMTg0MyBDMjAuNDUzODYyNiwzNS4wMTEzMzE5IDI0LjQ3NTYwNDYsMzQuNTQxNzI5OCAyNy40OTU4ODUxLDMyLjY4MDA5MzIgQzI5LjY0MTg3MzksMzEuMzU1MTQ0NSAzMS43ODc4NjI4LDI4LjcyMjAxODggMzIuNzg5MzI0MiwyNi4xNzI3NTA1IEMzMy4zMjk3OTU0LDI0LjgxNDI1ODkgMzMuODcwMjY2NywyMi4zMzIwNzY3IDMzLjg3MDI2NjcsMjEuMTQxMyBDMzMuODcwMjY2NywyMC4zNjk4MTEgMzMuOTE3OTU1MywyMC4yNjkxODIgMzQuODA4MTQzMiwxOS4zNDY3NDk0IEMzNS4zMzI3MTgzLDE4LjgxMDA2MTMgMzUuODI1NTAwOSwxOC4yMjMwNTg4IDM1LjkyMDg3ODIsMTguMDU1MzQzNyBDMzYuMDc5ODQwMywxNy43MzY2ODUyIDM2LjA2Mzk0NDIsMTcuNzM2Njg1MiAzNS4yNTMyMzczLDE4LjAyMTgwMDcgQzMzLjkwMjA1OTEsMTguNTI0OTQ1OCAzMy43MTEzMDQ1LDE4LjQ1Nzg1OTggMzQuMzc4OTQ1NSwxNy43MDMxNDIyIEMzNC44NzE3MjgxLDE3LjE2NjQ1NDEgMzUuNDU5ODg4LDE2LjE5MzcwNzEgMzUuNDU5ODg4LDE1LjkwODU5MTUgQzM1LjQ1OTg4OCwxNS44NTgyNzcgMzUuMjIxNDQ0OCwxNS45NDIxMzQ2IDM0Ljk1MTIwOTIsMTYuMDkzMDc4IEMzNC42NjUwNzczLDE2LjI2MDc5MzEgMzQuMDI5MjI4OCwxNi41MTIzNjU2IDMzLjU1MjM0MjQsMTYuNjYzMzA5MSBMMzIuNjkzOTQ2OSwxNi45NDg0MjQ2IEwzMS45MTUwMzI0LDE2LjM5NDk2NSBDMzEuNDg1ODM0NiwxNi4wOTMwNzggMzAuODgxNzc4NiwxNS43NTc2NDggMzAuNTYzODU0MywxNS42NTcwMTkgQzI5Ljc1MzE0NzQsMTUuNDIyMjE4IDI4LjUxMzI0MjgsMTUuNDU1NzYxIDI3Ljc4MjAxNjksMTUuNzI0MTA1IEMyNS43OTQ5OTAzLDE2LjQ3ODgyMjYgMjQuNTM5MTg5NCwxOC40MjQzMTY4IDI0LjY4MjI1NTQsMjAuNTU0Mjk3NSBDMjQuNjgyMjU1NCwyMC41NTQyOTc1IDI0LjUzOTE4OTQsMTguNDI0MzE2OCAyNC42ODIyNTU0LDIwLjU1NDI5NzUgWiBNMjQuNjgyMjU1NCwyMC41NTQyOTc1IiBpZD0iT3ZhbC0xIi8+PC9nPjwvZz48L3N2Zz4=">
+          </div><span class="form__span">or use your user account</span> -->
+            <input class="form__input" type="text" placeholder="Username" id="siuname">
+            <input class="form__input" type="password" placeholder="Password" id="sipassword">
+            <a class="form__link" id="forgotpassword">Forgot your password?</a>
+            <button class="form__button button submit" id="signin">SIGN IN</button>
+          </form>
+          <form class="form" id="findaccountform" style="display: none;">
+            <h2 class="form_title title">Find your account</h2>
+            <span class="form__span">Enter your Username or the email linked your account
+            </span>
+            <input class="form__input" type="text" placeholder="Username or Email" id="forgotemail">
+            <!-- <div class="otp">  -->
+            <a class="form__link" id="cancleforgot">Can't reset your password?</a>
+            <input type="button" class="form__button button" id="checkusername" value="Next">
+          </form>
+
+          <form class="form" id="forgototpform" style="display: none;">
+            <h2 class="form_title title">OTP Verification</h2>
+            <span class="form__span">OTP send on
+              <span style="color: red;" id="otpsendemail"></span>
+            </span>
+            <!-- <div class="otp">  -->
+            <div class="aligncenter otpinput">
+              <input class="form_otp for_form_otp" type="number" min="0" max="9" maxlength="1" placeholder="0">
+              <input class="form_otp for_form_otp" type="number" min="0" max="9" maxlength="1" placeholder="0">
+              <input class="form_otp for_form_otp" type="number" min="0" max="9" maxlength="1" placeholder="0">
+              <input class="form_otp for_form_otp" type="number" min="0" max="9" maxlength="1" placeholder="0">
+            </div>
+            <a class="form__link" id="resendforotp">Resend OTP </a>
+            <input type="button" class="form__button button" id="forgototpverify" value="Verify">
+          </form>
+          <form class="form" id="changepasswordform" style="display: none;">
+            <h2 class="form_title title">Create A Strong Password</h2>
+            <span class="form__span">Your password must be at least 8 characters and should include<br>a combination of
+              number,letters and special characters (!$@%).<br>eg : Hello@123 </span>
+            <input class="form__input" type="password" placeholder="New password" id="npassword">
+            <input class="form__input" type="password" placeholder="New password, again" id="nspassword">
+            <!-- <div class="otp">  -->
+            <a class="form__link">Can't reset your password?</a>
+            <input type="button" class="form__button button" id="changepassword" value="Change Password">
+          </form>
+        </div>
+        <div class="switch" id="switch-cnt">
+          <div class="switch__circle"></div>
+          <div class="switch__circle switch__circle--t"></div>
+          <div class="switch__container" id="switch-c1">
+            <!-- <img src="../../images/Home logo.png" style="height: 140px;"> -->
+            <div style="display: flex; flex-direction: column; padding-bottom: 10px; align-items: center; gap: 10px;">
+              <img src="../../images/book.png" class="mx-auto" style="width: fit-content; height: 90px;">
+              <img src="../../images/img2.jpg" class="mx-auto" style="width: auto; height: 25px;">
+            </div>
+            <h2 class="switch__title title">Welcome Back !</h2>
+            <p class="switch__description description">To keep connected with us please login with your personal info
+            </p>
+            <button class="switch__button button switch-btn">SIGN IN</button>
+          </div>
+          <div class="switch__container is-hidden" id="switch-c2">
+            <h2 class="switch__title title">Hello Friend !</h2>
+            <p class="switch__description description">Enter your personal details and start journey with us</p>
+            <button class="switch__button button switch-btn">SIGN UP</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+
+  </html>
+  <!-- partial -->
+  <script src="./script.js"></script>
+  <script src="./jquery.js"></script>
+  <!-- <script src="../../js/consolehide.js"></script> -->
+  <script src="../../vendors/sweetalert/sweetalert.min.js"></script>
+  <script src="../../vendors/jquery-toast-plugin/jquery.toast.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      setlogindata();
+      if (loginuserdata[0].user_type == "user" || loginuserdata[0].user_type == "blogger") {
+        window.location.href = '../blogs/home.html';
+      } else {
+        $("#loader").hide()
+        $(".body-content").show();
+      }
+      // alert("hello");
+      // showSwal('auto-close');
+      // var otpform = $("#otpform");
+      var uname, email, password;
+      $("#signup").on("click", () => {
+        // alert("signup");
+        uname = $("#suname").val();
+        email = $("#suemail").val();
+        password = $("#supassword").val();
+        var emailragex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+        var passwordregex = /^[A-Z]{1}[a-zA-z0-9@#$]{8,}$/;
+        function removeerrorclass() {
+          $("#suname").removeClass("Error");
+          $("#suemail").removeClass("Error");
+          $("#supassword").removeClass("Error");
+        }
+        // alert(uname+password);
+        if (uname == "" && email == "" && password == "") {
+          removeerrorclass();
+          $("#suname").addClass("Error");
+          $("#suemail").addClass("Error");
+          $("#supassword").addClass("Error");
+          showDangerToast("Please Check!", "All field is required.");
+        }
+        else if (uname == "" || uname.length < 8) {
+          removeerrorclass();
+          $("#suname").addClass("Error");
+          showDangerToast("Please Check!", "Username should be more than 8 letters.");
+        }
+        else if (email == "" || (emailragex.test(email) == false)) {
+          removeerrorclass();
+          $("#suemail").addClass("Error");
+          showDangerToast("Please Check!", "Enter valid Email.");
+        }
+        else if (password == "" || (passwordregex.test(password) == false)) {
+          removeerrorclass();
+          $("#supassword").addClass("Error");
+          showDangerToast("Please Check!", "password must contain:<br>one special character<br>one uppercase character<br>one number and overall password length must be greater than 7<br><br>eg :- Hello@123");
+        }
+        else {
+          // alert(1)
+          $.ajax({
+            url: "../../api/login.php",
+            type: "POST",
+            data: JSON.stringify({ fkey: 'checkuser', suname: uname }),
+            dataType: "JSON",
+            success: function (data) {
+              console.log(data)
+              if (data.status) {
+                removeerrorclass();
+                $("#signupform").hide();
+                $("#otpform").show();
+                $("#regotpsendemail").append(email);
+                $.ajax({
+                  url: "../../api/login.php",
+                  type: "POST",
+                  data: JSON.stringify({ fkey: 'sendotp', suemail: email }),
+                  dataType: "JSON",
+                  success: (data) => {
+                    console.log(data);
+                    showSuccessToast("Please Check email!", "Otp send Successfully.")
+                  },
+                  error: (error) => servererror(error)
+                })
+              }
+              else {
+                removeerrorclass();
+                $("#suname").addClass("Error");
+                showDangerToast("Please Check!", data.message);
+              }
+            },
+            error: (error) => servererror(error)
+          });
+
+        }
+      })
+      $("#resendregotp").on("click", () => {
+        $.ajax({
+          url: "../../api/login.php",
+          type: "POST",
+          data: JSON.stringify({ fkey: 'sendotp', suemail: email }),
+          dataType: "JSON",
+          success: (data) => {
+            console.log(data);
+            showSuccessToast("Please Check email!", "Otp resend Successfully.")
+          },
+          error: (error) => servererror(error)
+        })
+        // alert(1);
+      })
+      // $("#otpverify").on("click", () => {
+      //   alert("otp");
+      // })
+      $("#signin").on("click", () => {
+        // alert(11);
+        var fkey = "signin";
+        var uname = $("#siuname").val();
+        var password = $("#sipassword").val();
+        function removeerrorclass() {
+          $("#siuname").removeClass("Error");
+          $("#sipassword").removeClass("Error");
+        }
+        if (uname == "" && password == "") {
+          removeerrorclass();
+          $("#siuname").addClass("Error");
+          $("#sipassword").addClass("Error");
+          showDangerToast("Please Check!", "All field is required.");
+        }
+        else if (uname == "") {
+          removeerrorclass();
+          $("#siuname").addClass("Error");
+          showDangerToast("Please Check!", "Enter your username.");
+        }
+        else if (password == "") {
+          removeerrorclass();
+          $("#sipassword").addClass("Error");
+          showDangerToast("Please Check!", "Enter your password.");
+        }
+        else {
+          $.ajax({
+            url: "../../api/login.php",
+            type: "POST",
+            data: JSON.stringify({ fkey: fkey, suname: uname, supassword: password }),
+            dataType: "JSON",
+            success: function (data) {
+              if (data.status == 0) {
+                removeerrorclass();
+                $("#siuname").addClass("Error");
+                showDangerToast("Please Check!", data.message);
+              }
+              else if (data.status == 1) {
+                removeerrorclass();
+                $("#sipassword").addClass("Error");
+                showDangerToast("Please Check!", data.message);
+              }
+              else {
+                removeerrorclass();
+                $("#signinform").trigger("reset");
+                showSuccessToast("Congratulation", data.message);
+                console.log(data.message);
+                window.location.href = "../blogs/home.html";
+                localStorage.setItem("shownotificationstatus", true);
+              }
+              console.log(data);
+            },
+            error: (error) => servererror(error)
+          });
+        }
+      });
+      $('.reg_form_otp').keypress(function (event) {
+        if (event.which < 48 || event.which > 57) {
+          event.preventDefault();
+        }
+      });
+      $('.reg_form_otp:nth-child(1)').focus();
+      // Prevent focusing on any other input field until the first input field is filled
+      $('.reg_form_otp').not(':nth-child(1)').on('focus', function () {
+        if ($('.reg_form_otp:nth-child(1)').val() == '') {
+          $(this).blur();
+          $('.reg_form_otp:nth-child(1)').focus();
+        }
+      });
+      $('.reg_form_otp').keyup(function (event) {
+        if ($(this).val().length == $(this).attr('maxlength')) {
+          $(this).next('.reg_form_otp').focus();
+        } else if (event.keyCode == 8 && $(this).val().length == 0) {
+          $(this).prev('.reg_form_otp').focus();
+        }
+      });
+      $('.reg_form_otp').on('input', function () {
+        var val = this.value;
+        var regex = /^\d{1}$/;
+        if (!regex.test(val)) {
+          this.value = "";
+        }
+      });
+      $('.for_form_otp').keypress(function (event) {
+        if (event.which < 48 || event.which > 57) {
+          event.preventDefault();
+        }
+      });
+      $('.for_form_otp:nth-child(1)').focus();
+      // Prevent focusing on any other input field until the first input field is filled
+      $('.for_form_otp').not(':nth-child(1)').on('focus', function () {
+        if ($('.for_form_otp:nth-child(1)').val() == '') {
+          $(this).blur();
+          $('.for_form_otp:nth-child(1)').focus();
+        }
+      });
+      $('.for_form_otp').keyup(function (event) {
+        if ($(this).val().length == $(this).attr('maxlength')) {
+          $(this).next('.for_form_otp').focus();
+        } else if (event.keyCode == 8 && $(this).val().length == 0) {
+          $(this).prev('.for_form_otp').focus();
+        }
+      });
+      $('.for_form_otp').on('input', function () {
+        var val = this.value;
+        var regex = /^\d{1}$/;
+        if (!regex.test(val)) {
+          this.value = "";
+        }
+      });
+      $("#otpverify").on("click", () => {
+        // alert(1);
+        // var otpinput = $(".otpinput");
+        // var ek = $('.reg_form_otp').map((_, el) => el.value).get()
+        // console.log(ek)
+        var otp = "";
+        if ($('.reg_form_otp').filter(function () {
+          // alert(this.value);
+          if (!this.value) {
+            // this.addClass("Error");
+            this.classList.add("Error");
+            // alert("please eneter");
+          } else {
+            this.classList.remove("Error");
+            otp += this.value;
+          }
+        }).length > 0) {
+          alert('Please fill in all fields.');
+          // return false;
+        }
+        if (otp.length < 4) {
+          showDangerToast("Please Check!", "please Enter OTP.");
+          // alert(otp.length);
+        } else {
+          var fkey = "signup";
+          $.ajax({
+            url: "../../api/login.php",
+            type: "POST",
+            data: JSON.stringify({ fkey: 'checkotp', otp: otp }),
+            dataType: "JSON",
+            success: (data) => {
+              if (data.status) {
+                $.ajax({
+                  url: "../../api/login.php",
+                  type: "POST",
+                  data: JSON.stringify({ fkey: fkey, suname: uname, suemail: email, supassword: password }),
+                  dataType: "JSON",
+                  success: function (data) {
+                    if (data.status == 1) {
+                      showDangerToast("Please Check!", data.message);
+                    }
+                    else {
+                      $("#signupform").trigger("reset");
+                      showSuccessToast("Congratulation", data.message);
+                      console.log(data.message);
+                      changeForm();
+                    }
+                  },
+                  error: (error) => servererror(error)
+                })
+              } else {
+                showDangerToast("Please Check Email!", data.message);
+              }
+              console.log(data);
+            },
+            error: (error) => servererror(error)
+          })
+          // $.ajax({
+          //   url: "../../api/login.php",
+          //   type: "POST",
+          //   data: JSON.stringify({ fkey: 'checkotp', otp: otp}),
+          //   dataType: "JSON",
+          //   success:(data)=>{
+          //     console.log(data);
+          //   },
+          //   error:()=>{
+          //     alert("error"); 
+          //   }
+          // })
+          // alert(otp);
+        }
+        // alert(otpinput.length)
+        // for (var i = 0; i < otpinput.length; i++) 
+        // { alert($(otpinput[i]).val()); }
+      })
+      $("#forgotpassword").on("click", () => {
+        // alert(1);
+        $("#signinform").hide();
+        $("#findaccountform").show();
+        // $("#b-container").html("");
+        // $("#b-container").append(``);
+      })
+      $(document).on("click", "#checkusername", () => {
+        // alert("123");
+        var value = $("#forgotemail").val();
+        if (value != "") {
+          $.ajax({
+            url: "../../api/login.php",
+            type: "POST",
+            data: JSON.stringify({ fkey: 'checkuser', suname: value }),
+            dataType: "JSON",
+            success: function (data) {
+              console.log(data)
+              if (data.status) {
+                $("#forgotemail").addClass("Error");
+                showDangerToast("Please Check!", "No user found");
+              }
+              else {
+                // $("#forgototpform").show();
+                // $("#b-container").html("");
+                // $("#b-container").append(``);
+                email = data.userdata.email;
+                $("#otpsendemail").html(email);
+                $("#findaccountform").hide();
+                $("#forgototpform").show();
+                $.ajax({
+                  url: "../../api/login.php",
+                  type: "POST",
+                  data: JSON.stringify({ fkey: 'sendotp', suemail: email }),
+                  dataType: "JSON",
+                  success: (data) => {
+                    showSuccessToast("Please Check email!", "Otp resend Successfully.");
+
+                    // console.log(data);
+                  },
+                  error: (error) => servererror(error)
+
+                })
+                // alert(email)
+              }
+            },
+            error: (error) => servererror(error)
+          });
+        } else {
+          $("#forgotemail").addClass("Error");
+          showDangerToast("Please Check!", "Enter your email or username");
+        }
+        // alert(value);
+      })
+      var confirmotp = false;
+      $("#forgototpverify").on("click", () => {
+        var otp = "";
+        if ($('.for_form_otp').filter(function () {
+          // alert(this.value);
+          if (!this.value) {
+            // this.addClass("Error");
+            this.classList.add("Error");
+            // alert("please eneter");
+          } else {
+            this.classList.remove("Error");
+            otp += this.value;
+          }
+        }).length > 0) {
+          showDangerToast("Please Check!", "Please fill in all fields.");
+          // alert('.');
+          // return false;
+        }
+        if (otp.length < 4) {
+          showDangerToast("Please Check!", "please Enter OTP.");
+          // alert(otp.length);
+        } else {
+          var fkey = "signup";
+          $.ajax({
+            url: "../../api/login.php",
+            type: "POST",
+            data: JSON.stringify({ fkey: 'checkotp', otp: otp }),
+            dataType: "JSON",
+            success: (data) => {
+              if (data.status) {
+                $("#forgototpform").hide();
+                $("#changepasswordform").show();
+                confirmotp = true;
+                // changepasswordform
+                // $.ajax({
+                //   url: "../../api/login.php",
+                //   type: "POST",
+                //   data: JSON.stringify({ fkey: fkey, suname: uname, suemail: email, supassword: password }),
+                //   dataType: "JSON",
+                //   success: function (data) {
+                //     if (data.status == 1) {
+                //       showDangerToast("Please Check!", data.message);
+                //     }
+                //     else {
+                //       $("#signupform").trigger("reset");
+                //       showSuccessToast("Congratulation", data.message);
+                //       console.log(data.message);
+                //       changeForm();
+                //     }
+                //   }
+                // })
+                // alert("success");
+              } else {
+                showDangerToast("Please Check Email!", data.message);
+              }
+              console.log(data);
+            },
+            error: (error) => servererror(error)
+          })
+          // $.ajax({
+          //   url: "../../api/login.php",
+          //   type: "POST",
+          //   data: JSON.stringify({ fkey: 'checkotp', otp: otp}),
+          //   dataType: "JSON",
+          //   success:(data)=>{
+          //     console.log(data);
+          //   },
+          //   error:()=>{
+          //     alert("error"); 
+          //   }
+          // })
+          // alert(otp);
+        }
+      })
+      $("#changepassword").on("click", () => {
+        if (confirmotp) {
+          password = $("#npassword").val();
+          nspassword = $("#nspassword").val();
+          var passwordregex = /^[A-Z]{1}[a-zA-z0-9@#$]{8,}$/;
+          if (password == "" || nspassword == "") {
+            if (password == "")
+              $("#npassword").addClass("Error");
+            if (nspassword == "")
+              $("#nspassword").addClass("Error");
+            showDangerToast("Please Check!", "All field is required.");
+          } else if (password != nspassword) {
+            showDangerToast("Please Check!", "Both password are not same.");
+            // alert("not match");
+          } else if ((passwordregex.test(password) == false)) {
+            // removeerrorclass();
+            $("#npassword").addClass("Error");
+            $("#nspassword").addClass("Error");
+            showDangerToast("Please Check!", "password must contain:<br>one special character<br>one uppercase character<br>one number and overall password length must be greater than 7<br><br>eg :- Hello@123");
+          } else {
+            $("#npassword").removeClass("Error");
+            $("#nspassword").removeClass("Error");
+            $.ajax({
+              url: "../../api/login.php",
+              type: "POST",
+              data: JSON.stringify({ fkey: 'changepassword', password: password }),
+              dataType: "JSON",
+              success: (data) => {
+                if (data.status) {
+                  showSuccessToast("Congratulation", data.message);
+                  $("#changepasswordform").hide();
+                  $("#signinform").show();
+
+                } else {
+                  showDangerToast("Try again", data.status);
+                }
+              },
+              error: (error) => servererror(error)
+            });
+          }
+        } else {
+          $("#forgototpform").show();
+          $("#changepasswordform").hide();
+          showDangerToast("Please Check Email!", "Enter OTP.");
+        }
+      })
+      $("#cancleforgot").on("click", () => {
+        $("#signinform").show();
+        $("#findaccountform").hide();
+      })
+      $("#resendforotp").on("click", () => {
+        showDangerToast("Please Check!", "Enter your username.");
+        $("#findaccountform").show();
+        $("#forgototpform").hide();
+        // alert(1);
+        // $.ajax({
+        //   url: "../../api/login.php",
+        //   type: "POST",
+        //   data: JSON.stringify({ fkey: 'sendotp', suemail: email }),
+        //   dataType: "JSON",
+        //   success: (data) => {
+        //     console.log(data);
+        //   },
+        //   error: () => {
+        //     alert("otp send in error");
+        //   }
+        // })
+      })
+    })
+
+  </script>
+
+  <script src="../../js/toastDemo.js"></script>
+  <script src="../../js/desktop-notification.js"></script>
+  <script src="../../js/alerts.js"></script>
+  <script src="../../js/allfilefunction.js"></script>
+
+</body>
+
+</html>

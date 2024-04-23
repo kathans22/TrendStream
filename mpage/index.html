@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrendStream</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../css/vertical-layout-light/style.css">
+    <link rel="shortcut icon" href="../images/favicon.png" />
+
+</head>
+
+<body>
+    <div class="align-content-center justify-content-center">
+        <div class="col-md-4 col-sm-6 grid-margin stretch-card m-auto pt-5" id="loader">
+            <div class="dot-opacity-loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <div class="body-content" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="align-items-center">
+                    <div class="col-lg-3 mx-auto">
+                        <div class="d-flex align-items-center" style="flex-direction: column; padding-bottom: 10px;">
+                            <img src="../images/book.png" class="mx-auto" style="width: auto; height: 50px;">
+                            <img src="../images/img2.jpg" class="mx-auto" style="width: auto; height: 20px;">
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title mx-auto">Sign in to Admin</h4>
+                        </div>
+                        <div class="panel border bg-white">
+                            <div class="panel-body p-3">
+                                <form action="login_script.php" method="POST">
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <div class="input-field">
+                                            <input type="text" placeholder="" required id="muname">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+
+                                        <div class="input-field">
+                                            <input type="password" placeholder="" required id="mpass">
+                                            <button class="btn bg-white text-muted">
+                                                <span class="far fa-eye-slash"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="btn btn-primary " id="login">Login</div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./pages/main.js"></script>
+<!-- <script src="../js/consolehide.js"></script> -->
+
+
+<!-- <script src="./pages/script.js"></script> -->
+<script>
+    servererror = (error) => {
+        console.log(error);
+        content = ` <div class="container-fluid page-body-wrapper full-page-wrapper">
+                  <div class="content-wrapper d-flex align-items-center text-center error-page bg-info">
+                    <div class="row flex-grow">
+                      <div class="col-lg-7 mx-auto text-white">
+                        <div class="row align-items-center d-flex flex-row">
+                          <div class="col-lg-6 text-lg-right pr-lg-4">
+                            <h1 class="display-1 mb-0">500</h1>
+                          </div>
+                          <div class="col-lg-6 error-page-divider text-lg-left pl-lg-4">
+                            <h2>SORRY!</h2>
+                            <h3 class="fw-light">Internal server error!</h3>
+                          </div>
+                        </div>
+                        <div class="row mt-5">
+                          <div class="col-12 text-center mt-xl-2">
+                            <a class="text-white font-weight-medium" href="../blogs/home.html">Back to home</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>`
+        $(".body-content").html(content);
+        $("#loader").hide()
+        $(".body-content").show();
+    }
+    $(document).ready(() => {
+        // alert(1)
+        // checkmlogin
+        $.ajax({
+            url: "../api/masteradmin/login.php",
+            type: "POST",
+            data: JSON.stringify({ key: 'checkmlogin' }),
+            dataType: "JSON",
+            success: function (data) {
+                console.log(data);
+                if (data.status) {
+                    window.location.href = "./pages/dashboard.html";
+                } else {
+                    $("#loader").hide()
+                    $(".body-content").show();
+                }
+            },
+            error: (error) => servererror(error)
+        })
+        // $.ajax({
+        //     url: "../api/masteradmin/login.php",
+        //     type: "POST",
+        //     data: JSON.stringify({ key: 'mlogout' }),
+        //     dataType: "JSON",
+        //     success: function (data) {
+        //         console.log(data);
+        //         if (data.status) {
+        //             window.location.href = "./index.html";
+        //         }
+        //     }
+        // })
+
+    })
+    $(document).on("click", "#login", function () {
+
+        uname = $("#muname").val();
+        pass = $("#mpass").val();
+        if (uname == "" && pass == "") {
+            alert("please enter username and password.");
+        } else {
+            if (uname == "") {
+                alert("please enter username.");
+            } else if (pass == "") {
+                alert("please enter password");
+            } else {
+                $.ajax({
+                    url: "../api/masteradmin/login.php",
+                    type: "POST",
+                    data: JSON.stringify({ key: 'mlogin', muname: uname, mpass: pass }),
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        if (!data.status) {
+                            alert(data.message)
+                        } else {
+                            window.location.href = "./pages/dashboard.html";
+                        }
+                    }
+                })
+            }
+        }
+
+    })
+</script>
+
+</html>

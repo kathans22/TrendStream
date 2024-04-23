@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+      shrink-to-fit=no">
+    <title>TrendStream</title>
+    <link rel="stylesheet" href="../../css/style1.css">
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../vendors/jquery-bar-rating/css-stars.css">
+
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- <link rel="stylesheet" href="../../vendors/flag-icon-css/css/flag-icon.min.css" /> -->
+    <link rel="stylesheet" href="../../vendors/jsgrid/jsgrid.min.css">
+    <link rel="stylesheet" href="../../vendors/jsgrid/jsgrid-theme.min.css">
+    <link rel="stylesheet" href="../../vendors/font-awesome/css/font-awesome.min.css" />
+
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+    <link rel="stylesheet" href="../../vendors/jquery-toast-plugin/jquery.toast.min.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../../images/favicon.png" />
+    <script src="../create/main.js"></script>
+    <script>
+
+
+        // alert("cd")
+        // if (data == 1) {
+        //     window.location.href = "../login/index.html";
+        // }
+        // $.ajax({
+        //     url: "../../api/login.php",
+        //     type: "POST",
+        //     data: JSON.stringify({ fkey: 'checklogin' }),
+        //     dataType: "JSON",
+        //     success: (data) => {
+        //         // console.log(data);
+        //         // console.log(data.userdata[0].email);
+        //         if (data.status == 0) {
+        //             window.location.href = "../login/index.html";
+        //         } else {
+        //             alert(1);
+        //             // $("#useremail").html(data.userdata[0].email);
+        //             // $("#useruname").html(data.userdata[0].username);
+        //             // if (data.userdata[0].user_type == "user") {
+        //             //     $("#myblogs").hide();
+        //             // }
+        //         }
+        //     }
+        // });
+    </script>
+    <style>
+        .Error {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="align-content-center justify-content-center">
+        <div class="col-md-4 col-sm-6 grid-margin stretch-card m-auto pt-5" id="loader">
+            <div class="dot-opacity-loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <div class="body-content" style="display: none;">
+        <div class="container-scroller">
+            <!-- partial:partials/_navbar.html -->
+            <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row"
+                id="navbar">
+            </nav>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:partials/_settings-panel.html -->
+                <div class="theme-setting-wrapper">
+                    <div id="settings-trigger"><i class="ti-settings"></i></div>
+                    <div id="theme-settings" class="settings-panel">
+                        <i class="settings-close ti-close"></i>
+                        <p class="settings-heading">SIDEBAR SKINS</p>
+                        <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+                            <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+                        </div>
+                        <div class="sidebar-bg-options" id="sidebar-dark-theme">
+                            <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+                        </div>
+                        <p class="settings-heading mt-2">HEADER SKINS</p>
+                        <div class="color-tiles mx-0 px-4">
+                            <div class="tiles success"></div>
+                            <div class="tiles warning"></div>
+                            <div class="tiles danger"></div>
+                            <div class="tiles info"></div>
+                            <div class="tiles dark"></div>
+                            <div class="tiles default"></div>
+                        </div>
+                        <p class="settings-heading mt-2 divnotification">Notification</p>
+          <div class="mx-0 px-4 divnotification">
+            <div class="form-check form-check-success">
+              <div class="d-flex">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" id="notificationstatus">
+                </label>
+                <span id="notificationstatustext">Off</span>
+              </div>
+            </div>
+          </div>
+                    </div>
+                </div>
+                <!-- partial -->
+                <!-- partial:partials/_sidebar.html -->
+                <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                </nav>
+
+                <div class="main-panel" id="main-panel">
+                </div>
+            </div>
+            <!-- main-panel ends -->
+        </div>
+    </div>
+    <!-- page-body-wrapper ends -->
+    <!-- container-scroller -->
+    <script src="../../js/sidebar.js"></script>
+    <script src="../../js/navbar.js"></script>
+    <script>
+        // document.onreadystatechange = function () {
+        //     $.ajax({
+        //         url: "../../api/login.php",
+        //         type: "POST",
+        //         data: JSON.stringify({ fkey: 'checklogin' }),
+        //         dataType: "JSON",
+        //         async: false,
+        //         success: (data) => {
+        //             if (data.status == 0) {
+        //                 window.location.href = "../blogs/home.html";
+        //             }
+        //         }
+        //     });
+        //     if (document.readyState !== "complete") {
+        //         document.querySelector("body").style.visibility = "hidden";
+        //         document.querySelector("#loader").style.visibility = "visible";
+        //         // alert(1);
+        //     } else {
+        //         document.querySelector("#loader").style.display = "none";
+        //         document.querySelector("body").style.visibility = "visible";
+        //     }
+        // };
+        $(document).ready(() => {
+            setlogindata();
+            sidebar();
+            navbar();
+            checknotification();
+            if (!checkguest()) {
+                $.ajax({
+                    url: "../../api/historysave.php",
+                    type: "POST",
+                    data: JSON.stringify({ key: 'display_readlist' }),
+                    dataType: "JSON",
+                    success: (data) => {
+                        console.log(data);
+                        if (data.status) {
+    
+                            console.log(data.likedblogs[0].totalblogs);
+                            console.log(data.listcontent.length)
+                            content = `
+                        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" id="modal">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content" id="modal-content">
+                                            <div class="card">
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <div class="d-flex align-items-center align-content-center">
+                                  <h4 class="card-title card-title-dash">
+                                    Edit readlist title
+                                  </h4>
+                                  <button type="button" class="badge badge-pill btn-outline-behance ms-auto"
+                                    data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="card-body pb-0">
+                                                <!-- <h4 class="card-title">Read list</h4> -->
+                                                <!-- <div class="d-flex align-items-center"> -->
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputName1">Name</label>
+                                                        <input type="text" class="form-control" id="readlistname"
+                                                            placeholder="Enter Readlist Name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleSelectGender">Priavcy</label>
+                                                        <select class="form-control" id="readlistprivacy">
+                                                            <option>Private</option>
+                                                            <option>Public</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <button type="button"
+                                                            class="button btn btn-primary ms-auto btn-rounded btn-sm"
+                                                            id="createnewreadlist"><span>Create</span></button>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                        <div class="content-wrapper">
+                            <div class="d-flex align-items-center">
+                            <h4 class="mb-0">Read list</h4>
+                            <button type="button" class="btn btn-info ms-auto btn-rounded btn-sm fw-bold"
+                                data-bs-toggle="modal" data-bs-target="#modal" data-whatever="Create">
+                                <i class="mdi mdi-plus-circle ms-auto "></i><span class="ms-2">Create readlist</span>
+                                <!-- <a class="dropdown-item savereadlist" ><i class="mdi mdi-playlist-plus fw-bold text-info"></i><span class="ms-2">Save to Readlist</span></a> -->
+                            </button>
+                        </div>`;
+                            content += `
+                        <div class="cards">
+                            <div class="col-md grid-margin p-3 row stretch-card" id="content-cardc">
+                                <div class="card grid-margin" id="card-2">
+                                    <div class="card-body pb-0">
+                                        <div class="d-flex align-items-center bookmarkedblog">
+                                            <div class="d-flex hover-cursor" >
+                                                <i class="mdi mdi-clock-alert img-sm rounded-10 mdi-36px"></i>
+                                                <div class="ms-3">
+                                                    <h6 class="mb-1">Bookmarked blogs</h6>
+                                                    <small class="text-muted mb-0"><i class="mdi mdi-format-list-bulleted me-1"></i>`+ data.bookmarkedblogs[0].totalblogs + `
+                                                        Blogs</small>
+                                                </div>
+                                            </div><div class="ms-auto d-flex">
+                                                <div class="dropdown">
+                                                    <i class="mdi mdi-dots-vertical px-1 py-1 mdi-24px hover-cursor" type="button" id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                        <a class="dropdown-item bookmarkedblog"><i class="mdi mdi-book-open text-info"></i><span class="ms-2">Open</span></a></div>
+                                                </div>
+                                            </div></div>
+                                    </div>
+                                </div>
+                                <div class="card grid-margin" id="card-2"><div class="card-body pb-0">
+                                        <div class="d-flex align-items-center">
+                                            <div class="d-flex hover-cursor likedblog">
+                                                <i class=" px-2 fa fa-thumbs-up img-sm rounded-10 fa-2x"></i>
+                                                <div class="ms-3">
+                                                    <h6 class="mb-1">Liked blogs</h6>
+                                                    <small class="text-muted mb-0"><i class="mdi mdi-format-list-bulleted me-1"></i>`+ data.likedblogs[0].totalblogs + ` blogs</small>
+                                                </div>
+                                            </div><div class="ms-auto d-flex">  <div class="dropdown">
+                                                    <i class="mdi mdi-dots-vertical px-1 py-1 mdi-24px hover-cursor" type="button" id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                        <a class="dropdown-item likedblog"><i class="mdi mdi-book-open text-info"></i><span class="ms-2">Open</span></a></div>
+                                                </div>
+                                            </div></div>
+                                    </div>
+                                </div>`;
+    
+                            for (i = 1; i < data.listcontent.length; i++) {
+                                if (data.userdata[0].usid == data.listcontent[i].usid && i != 1) {
+                                    if (data.listcontent[i].list_status == "private") {
+                                        content += `<div class="card card-inverse-info grid-margin" id="card-` + data.listcontent[i].list_id + `">`;
+                                    } else {
+                                        content += `<div class="card card-inverse-success grid-margin"  id="card-` + data.listcontent[i].list_id + `">`;
+                                    }
+                                } else {
+                                    content += `<div class="card grid-margin" id="card-` + data.listcontent[i].list_id + `">`;
+                                }
+                                // content += `   <div class="card card-inverse-info grid-margin">`;
+                                content += `<div class="card-body pb-0">
+                                        <!-- <h4 class="card-title">Read list</h4> -->
+                                        <div class="d-flex align-items-center">
+                                            <div class="d-flex read-list hover-cursor" data-id="`+ data.listcontent[i].list_id + `">`
+                                if (i == 1) {
+                                    content += `<i class="mdi mdi-clock-alert img-sm rounded-10 mdi-36px"></i>`;
+                                } else {
+                                    content += `<i class="mdi mdi-format-list-bulleted img-sm rounded-10 mdi-36px"></i>`;
+    
+                                }
+                                content += `<div class="ms-3">
+                                                    <h6 class="mb-1">`+ data.listcontent[i].list_title + `</h6>
+                                                    <small class="text-muted mb-0"><i
+                                                            class="mdi mdi-format-list-bulleted me-1"></i>`+ data.listcontent[i].totalblog + `
+                                                        Blogs</small>
+                                                </div>
+                                            </div>`;
+                                if (data.userdata[0].usid == data.listcontent[i].usid) {
+                                    content += `<div class="ms-auto d-flex">`;
+                                    if (i != 1) {
+                                        if (data.listcontent[i].list_status == "private") {
+                                            content += `<i class="mdi mdi-eye fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor read-list-status" data-id="` + data.listcontent[i].list_id + `"></i>`;
+                                        } else {
+                                            content += `<i class="mdi mdi-eye-off fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor read-list-status" data-id="` + data.listcontent[i].list_id + `"></i>`;
+                                        }
+                                    }
+                                    content += `  <div class="dropdown">
+                                                    <i class="mdi mdi-dots-vertical px-1 py-1 mdi-24px hover-cursor"
+                                                        type="button" id="dropdownMenuSizeButton3" data-bs-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false"></i>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                        <a class="dropdown-item read-list" data-id="` + data.listcontent[i].list_id + `"><i class="mdi mdi-book-open text-info"></i><span class="ms-2">Open</span></a>`;
+                                    if (i != 1)
+                                        content += `<a class="dropdown-item deletelist" data-id="` + data.listcontent[i].list_id + `"><i class="mdi mdi-delete text-info"></i><span class="ms-2">Delete</span></a>`;
+                                    content += `</div>
+                                                </div>
+                                            </div>`;
+                                    // if (data.listcontent[i].list_status == "private") {
+                                    //     content += `<div class="card card-inverse-success grid-margin">`;
+                                    // } else {
+                                    //     content += `<div class="card card-inverse-info grid-margin">`;
+                                    // }
+                                }
+                                content += `</div>
+                                    </div>
+                                </div>`;
+                            }
+                            content += `</div>
+                                        </div>
+                                        </div>`
+                            $("#main-panel").html(content);
+                            $("#loader").hide()
+                            $(".body-content").show();
+                        }
+                    },
+                    error: (error) => servererror(error)
+                })
+            }
+        })
+        $(document).on("click", ".likedblog", function () {
+            window.location.href = "./liked.html";
+            // alert(1)
+        })
+        $(document).on("click", ".bookmarkedblog", function () {
+            window.location.href = "./bookmarked.html";
+            // alert(2)
+        })
+        $(document).on("click", ".deletelist", function () {
+            list_id = $(this).data("id")
+            // alert($(this).data("id"));
+            swal({
+                title: 'Are you sure?',
+                text: "Clear watch history?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3f51b5',
+                cancelButtonColor: '#ff4081',
+                confirmButtonText: 'Great ',
+                buttons: {
+                    cancel: {
+                        text: "Cancel",
+                        value: null,
+                        visible: true,
+                        className: "btn btn-danger btn-sm",
+                        closeModal: true,
+                    },
+                    confirm: {
+                        text: "Remove",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary btn-sm",
+                        closeModal: true
+                    }
+                }
+            }).then((result) => {
+                if (result) {
+                    $.ajax({
+                        url: "../../api/historysave.php",
+                        type: "POST",
+                        data: JSON.stringify({ key: 'delete_readlist', list_id: list_id }),
+                        dataType: "JSON",
+                        success: (data) => {
+                            if (data.status) {
+                                showSuccessToast("Remove", "Removed readlist");
+                                $("#card-" + list_id).remove();
+                            }
+                            console.log(data);
+                        },
+                        error: (error) => servererror(error)
+                    })
+                }
+            })
+        })
+
+        $(document).on("click", "#createnewreadlist", function () {
+            // alert(1);
+            name = $("#readlistname").val();
+            if (name == "") {
+                $("#readlistname").addClass('Error');
+                showDangerToast("Please Check all field", "Enter readlist name");
+            } else {
+                // alert($("#readlistname").val())
+                $("#readlistname").removeClass('Error');
+                // showSuccessToast("create", name + " readlist Created.");
+                // $("#createreadlist").addClass('collapsing');
+                $("#createreadlist").removeClass('show');
+                $("#readlistname").val("")
+                // alert($("#readlistprivacy").prop('selectedIndex'));
+                if ($("#readlistprivacy").prop('selectedIndex') == 0) {
+                    list_status = "private";
+                } else {
+                    list_status = "public";
+                }
+                // create_readlist
+                $.ajax({
+                    url: "../../api/historysave.php",
+                    type: "POST",
+                    data: JSON.stringify({ key: 'create_readlist', list_title: name, list_status: list_status }),
+                    dataType: "JSON",
+                    success: (data) => {
+                        $("#readlistname").val("");
+                        $('#readlistcontent').modal('hide');
+                        // console.log(data);
+                        showSuccessToast("Create", name + " added.");
+                        // if (data.userdata[0].usid == data.listcontent[i].usid) {
+                        if (data.listcontent[0].list_status == "private") {
+                            content = `<div class="card card-inverse-info grid-margin">`;
+                        } else {
+                            content = `<div class="card card-inverse-success grid-margin">`;
+                        }
+                        // content += `   <div class="card card-inverse-info grid-margin">`;
+                        content += `<div class="card-body pb-0">
+                                    <!-- <h4 class="card-title">Read list</h4> -->
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex read-list hover-cursor" data-id="`+ data.listcontent[0].list_id + `">`
+                        // if (i == 1) {
+                        //     content += `<i class="mdi mdi-clock-alert img-sm rounded-10 mdi-36px"></i>`;
+                        // } else {
+                        content += `<i class="mdi mdi-format-list-bulleted img-sm rounded-10 mdi-36px"></i>`;
+
+                        // }
+                        content += `<div class="ms-3">
+                                                <h6 class="mb-1">`+ data.listcontent[0].list_title + `</h6>
+                                                <small class="text-muted mb-0"><i
+                                                        class="mdi mdi-format-list-bulleted me-1"></i>`+ data.listcontent[0].totalblog + `
+                                                    Blogs</small>
+                                            </div>
+                                        </div>`;
+                        // if (data.userdata[0].usid == data.listcontent[0].usid) {
+                        content += `<div class="ms-auto d-flex">`;
+                        if (data.listcontent[0].list_status == "private") {
+                            content += `<i class="mdi mdi-eye fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor read-list-status" data-id="` + data.listcontent[0].list_id + `"></i>`;
+                        } else {
+                            content += `<i class="mdi mdi-eye-off fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor read-list-status" data-id="` + data.listcontent[0].list_id + `"></i>`;
+                        }
+                        content += `  <div class="dropdown">
+                                                <i class="mdi mdi-dots-vertical px-1 py-1 mdi-24px hover-cursor"
+                                                    type="button" id="dropdownMenuSizeButton3" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"></i>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                    <a class="dropdown-item read-list" data-id="` + data.listcontent[0].list_id + `"><i class="mdi mdi-book-open text-info"></i><span class="ms-2">Open</span></a>
+                                                    <a class="dropdown-item deletelist" data-id="` + data.listcontent[0].list_id + `"><i class="mdi mdi-delete text-info"></i><span class="ms-2">Delete</span></a>
+                                                </div>
+                                            </div>
+                                        </div>`;
+                        // if (data.listcontent[i].list_status == "private") {
+                        //     content += `<div class="card card-inverse-success grid-margin">`;
+                        // } else {
+                        //     content += `<div class="card card-inverse-info grid-margin">`;
+                        // }
+                        // }
+                        content += `</div>
+                                </div>
+                            </div>`;
+                        $("#content-cardc").append(content);
+                    },
+                    error: (error) => servererror(error)
+
+                })
+
+            }
+        })
+        $(document).on("click", ".read-list-status", function () {
+            // update_readlist_status
+            list_id = $(this).data("id");
+            // alert();
+            $.ajax({
+                url: "../../api/historysave.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'update_readlist_status', list_id: list_id }),
+                dataType: "JSON",
+                success: (data) => {
+                    if (data.status) {
+                        // showSuccessToast("Remove", "Removed readlist");
+                        // $("#card-"+list_id).
+                        if (data.pstatus == "private") {
+                            $(this).removeClass("mdi-eye")
+                            $(this).addClass("mdi-eye-off")
+                            $("#card-" + list_id).removeClass("card-inverse-info");
+                            $("#card-" + list_id).addClass("card-inverse-success");
+                        } else {
+                            $(this).removeClass("mdi-eye-off")
+                            $(this).addClass("mdi-eye")
+                            $("#card-" + list_id).removeClass("card-inverse-success");
+                            $("#card-" + list_id).addClass("card-inverse-info");
+                        }
+                    }
+                    // console.log(data);
+                },
+                error: (error) => servererror(error)
+            })
+        });
+        $(document).on("click", ".read-list", function () {
+            // alert($(this).data("id"));
+            window.location = "../readlist/readlistblog.html?r=" + $(this).data("id");
+        })
+    </script>
+    <!-- plugins:js -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <script src="../../js/allfilefunction.js"></script>
+    <!-- Plugin js for this page -->
+
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <!-- <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/template.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!--    <script src="js/jquery.cookie.js" type="text/javascript"></script>
+        <script src="js/dashboard.js"></script>
+        <script src="js/Chart.roundedBarCharts.js"></script> -->
+    <!-- End custom js for this page-->
+
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../../js/tabs.js"></script>
+    <script src="../../vendors/jquery-bar-rating/jquery.barrating.min.js"></script>
+    <script src="../../vendors/chart.js/Chart.min.js"></script>
+    <script src="../../vendors/sweetalert/sweetalert.min.js"></script>
+
+    <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="../../vendors/jquery-toast-plugin/jquery.toast.min.js"></script>
+    <!-- End plugin js for this page -->
+    <script src="../../js/tooltips.js"></script>
+    <!-- inject:js -->
+    <script src="../../js/off-canvas.js"></script>
+    <script src="../../js/hoverable-collapse.js"></script>
+    <script src="../../js/template.js"></script>
+    <script src="../../js/settings.js"></script>
+    <script src="../../js/todolist.js"></script>
+    <script src="../../js/profile-demo.js"></script>
+    <script src="../../js/js-grid.js"></script>
+    <script src="../../js/alertp.js"></script>
+
+    <script src="../../js/toastDemo.js"></script>
+
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!-- <script src="../../js/chart.js"></script> -->
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.7/jquery.lazyload.js"></script>
+    <script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("div.lazy").lazyload({
+         effect : "fadeIn"
+     });
+
+  }); -->
+    </script>
+</body>
+<audio id="audioBox">
+    <source src="../../audio/notify.mp3" type="audio/mpeg" />
+    <source src="../../audio/notify.wav" type="audio/wav" />
+    <source src="../../audio/notify.ogg" type="audio/ogg" />
+  </audio>
+  
+</html>

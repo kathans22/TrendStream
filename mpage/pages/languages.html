@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+      shrink-to-fit=no">
+    <title>TrendStream</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../css/style1.css">
+    <link rel="stylesheet" href="../../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="../../js/select.dataTables.min.css">
+
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="stylesheet" href="../../vendors/jquery-toast-plugin/jquery.toast.min.css">
+
+    <link rel="shortcut icon" href="../../images/favicon.png" />
+    <style>
+        .Error {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="align-content-center justify-content-center">
+        <div class="col-md-4 col-sm-6 grid-margin stretch-card m-auto pt-5" id="loader">
+            <div class="dot-opacity-loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <div class="body-content" style="display: none;">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row" id="navbar">
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_settings-panel.html -->
+            <div class="theme-setting-wrapper">
+                <div id="settings-trigger"><i class="ti-settings"></i></div>
+                <div id="theme-settings" class="settings-panel">
+                    <i class="settings-close ti-close"></i>
+                    <p class="settings-heading">SIDEBAR SKINS</p>
+                    <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+                        <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+                    </div>
+                    <div class="sidebar-bg-options" id="sidebar-dark-theme">
+                        <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+                    </div>
+                    <p class="settings-heading mt-2">HEADER SKINS</p>
+                    <div class="color-tiles mx-0 px-4">
+                        <div class="tiles success"></div>
+                        <div class="tiles warning"></div>
+                        <div class="tiles danger"></div>
+                        <div class="tiles info"></div>
+                        <div class="tiles dark"></div>
+                        <div class="tiles default"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="right-sidebar" class="settings-panel">
+                <i class="settings-close ti-close"></i>
+                <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab"
+                            aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab"
+                            aria-controls="chats-section">CHATS</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="setting-content">
+                    <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+                        aria-labelledby="todo-section">
+                        <div class="add-items d-flex px-3 mb-0">
+                            <form class="form w-100">
+                                <div class="form-group d-flex">
+                                    <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                                    <button type="submit" class="add btn btn-primary
+                      todo-list-add-btn" id="add-task">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="list-wrapper px-3">
+                            <ul class="d-flex flex-column-reverse todo-list">
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox">
+                                            Team review meeting at 3.00 PM
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox">
+                                            Prepare for presentation
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox">
+                                            Resolve all the low priority tickets due today
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li class="completed">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox" checked>
+                                            Schedule meeting for next week
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li class="completed">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox" checked>
+                                            Project review
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <h4 class="px-3 text-muted mt-5 fw-light mb-0">Events</h4>
+                        <div class="events pt-4 px-3">
+                            <div class="wrapper d-flex mb-2">
+                                <i class="ti-control-record text-primary me-2"></i>
+                                <span>Feb 11 2018</span>
+                            </div>
+                            <p class="mb-0 font-weight-thin text-gray">Creating component
+                                page build a js</p>
+                            <p class="text-gray mb-0">The total number of sessions</p>
+                        </div>
+                        <div class="events pt-4 px-3">
+                            <div class="wrapper d-flex mb-2">
+                                <i class="ti-control-record text-primary me-2"></i>
+                                <span>Feb 7 2018</span>
+                            </div>
+                            <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
+                            <p class="text-gray mb-0 ">Call Sarah Graves</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- partial -->
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            </nav>
+            <div class="main-panel" id="main-panel">
+                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"
+                    id="inputlanguagecontent">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="card card-rounded">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="d-flex align-items-center align-content-center">
+                                                <h4 class="card-title card-title-dash">
+                                                    Add language
+                                                </h4>
+                                                <button type="button"
+                                                    class="badge badge-pill btn-outline-behance ms-auto"
+                                                    data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <p class="card-text pt-1">
+                                                Language add in your database
+                                                <span class="text-small text-muted">fill the form..!</span>
+                                            </p>
+                                            <div class="mt-2">
+                                                <div class="card bg-transparent">
+                                                    <div class="card-body">
+                                                        <div class="d-flex align-content-center">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Enter language code" title="Code"
+                                                                id="input-lcode">
+                                                        </div>
+                                                        <div class="d-flex align-content-center pt-4">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Enter language name" title="Name"
+                                                                id="input-lname">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="ms-auto">
+                                                        <button type="button"
+                                                            class="btn btn-outline-success btn-sm btn-rounded addlanguage">
+                                                            <i class="mdi mdi-plus" title="Add"></i>
+                                                            Add
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-outline-light btn-sm btn-rounded "
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dot-opacity-loader first-table-loader">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <!-- <div class="containerc"></div> -->
+            <!-- main-panel ends -->
+        </div>
+        <!-- <h1>aa</h1>
+    <img src="../../images/uploadimage/Screenshot (2).png"> -->
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <script src="./main.js"></script>
+    <script src="../../js/msidebar.js"></script>
+    <script src="../../js/mnavbar.js"></script>
+    <script src="./script.js"> </script>
+
+    <script>
+        //             var targetDiv = document.getElementById('content-cardc');
+        // var content = '<div class="card"><div align=center>                <i class="mdi mdi-dots-horizontal"></i>              </div>              <div class="card-top">                <img src="download.jpg" alt="Blog Name">              </div>              <div class="card-bottom flex-row">                <span class="cspaan date">Monday, Jan 20, 2021</span>                <p class="cp"><img class="profile-pic" src="images/faces/face1.jpg"> Blogger name</p>              </div>              <div class="card-info">                <h2 class="btitle">JavaScript Quote Generator</h2>              </div>              <div class="card-bottom flex-row">                <button type="button" class="btn btn-outline-primary btn-sm">blog c.</button>                <p class="nav">                  <i class="lcv mdi mdi-heart"></i>&nbsp;12                  <i class="lcv mdi mdi-comment"></i>&nbsp;20                  <i class="lcv mdi mdi-eye"></i>&nbsp;200                </p>              </div>            </div>';
+        // targetDiv.appendChild(content);
+        //             var targetDiv = document.getElementById('content-cardc');
+        //             // for(var i = 0 ; i<10 ;i++){
+        // targetDiv.innerHTML('');
+        // }
+        searchvalue = null;
+        tableindex = 0;
+        function timeconvert(value) {
+            const postdate = value.split(" ")[0].split("-");
+            const sdate = new Date(postdate[0], postdate[1] - 1, postdate[2]);
+            const date = sdate.toString().split(" ");
+            var strdate = date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
+            return strdate;
+        }
+        $(document).ready(function () {
+            checklogin();
+            navbar();
+            // showSwal('auto-close', "Not suport in your account", "Please convert bloger account.");
+            sidebar();
+
+            $.ajax({
+                url: "../../api/masteradmin/languages.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'display_language', index: tableindex, searchvalue: searchvalue }),
+                dataType: "JSON",
+                success: function (data) {
+                    $(".first-table-loader").remove();
+                    console.log(data);
+                    if (data.status) {
+                        content = `
+                                    <div class="content-wrapper">
+                                        <div class="d-flex align-items-center mb-4">
+                                            <h4 class="m-0">Blog Languages</h4>
+                                            <div class="ms-auto">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="collapse" id="searchinput">
+                                                        <div class="d-flex align-items-center">
+                                                            <input type="search" class="form-control" placeholder="Search Here"
+                                                                title="Search here" id="input-search">
+                                                            <button type="button" class="btn btn-outline-secondary btn-sm ms-2"
+                                                                id="search-value" title="Search value">
+                                                                <i class="icon-search"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-outline-danger btn-sm ms-2"
+                                                                id="cancle-search" title="Cancle search">
+                                                                <i class="mdi mdi-close"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-outline-secondary btn-sm ms-2"
+                                                    id="searchinputcontrol">
+                                                    <i class="icon-search" title="Search"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-secondary btn-sm ms-2" id="add-language">
+                                                        <i class="mdi mdi-plus" title="Search"></i>Add language
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 grid-margin">
+                                                <div class="card">
+                                                    <div class="card-body">`;
+                        if (data.languages.length > 0) {
+                            content += `
+                                                            <div class="row">
+                                                                <div class="table-sorter-wrapper col-lg-12 table-responsive">
+                                                                    <table id="sortable-table-1" class="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Id</th>
+                                                                                <th>lcode</th>
+                                                                                <th>Name</th>
+                                                                                <th>Total blogs</th>
+                                                                                <th>Delete/Update</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                    <div class="dot-opacity-loader table-top-loader collapse">
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                    </div>
+                                                                        <tbody id="tbody">`
+                            for (i = 0; i < data.languages.length; i++) {
+                                content += `
+                                                                                <tr id="row`+ data.languages[i].lcode + `">
+                                                                                    <td>`+ (i + 1) + `</td>
+                                                                                    <td>`+ data.languages[i].lcode + `</td>
+                                                                                    <td>`+ data.languages[i].lname + `</td>
+                                                                                    <td>`+ data.languages[i].totalblogs + `</td>
+                                                                                    <td>
+                                                                                        <button class="btn btn-outline-info btn-sm updaterow" data-languageid="`+ data.languages[i].lcode + `" title="Update language">
+                                                                                            <i class="mdi mdi-pencil"></i>
+                                                                                        </button>
+                                                                                        <button class="btn btn-outline-danger btn-sm deleterow" data-languageid="`+ data.languages[i].lcode + `" title="Delete language">
+                                                                                            <i class="mdi mdi-delete"></i>
+                                                                                        </button>
+                                                                                    </td>
+                                                                                </tr>`
+                            }
+                            content += `
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <div class="dot-opacity-loader table-loader collapse">
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex align-items-center pt-2">
+                                                                    <div class="btn-wrapper ms-auto">
+                                                                        <button class="btn btn-outline-info btn-sm" id="view-more">View more</button>
+                                                                        <span class='text-muted text-small collapse' id="no-more-data">No more lamguage<span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>`;
+                        }
+                        else {
+
+                        }
+                        content += `
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                    } else {
+
+                    }
+                    $("#main-panel").append(content)
+                }, error: (error) => console.log(error)
+            })
+            // showSwal('custom-html', "Not suport in your account", "Please convert bloger account.");
+        })
+
+        //----------------blog content ----------------//
+
+        //------------search-------------------//
+        $(document).on("click", "#searchinputcontrol", function (e) {
+            $(this).toggle(600);
+            $("#searchinput").toggle(600);
+        })
+        $(document).on("click", "#cancle-search", function (e) {
+            $("#searchinputcontrol").toggle(600);
+            $("#searchinput").toggle(600);
+            index = 0;
+            searchvalue = null;
+            tabledata(tableindex, searchvalue)
+        })
+        // tableindex = 1;
+        //---------------view more--------------//
+        $(document).on("click", "#view-more", function () {
+            // console.log(11);
+            $(this).hide();
+            tableindex++;
+            console.log(tableindex);
+            $(".table-loader").toggle();
+            $.ajax({
+                url: "../../api/masteradmin/languages.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'display_language', index: tableindex, searchvalue: searchvalue }),
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data);
+                    if (data.status) {
+                        content = ``;
+                        if (data.languages.length > 0) {
+                            for (i = 0; i < data.languages.length; i++) {
+                                content += `
+                                                                                <tr id="row`+ data.languages[i].lcode + `">
+                                                                                    <td>`+ ((tableindex * 10) + (i + 1)) + `</td>
+                                                                                    <td>`+ data.languages[i].lcode + `</td>
+                                                                                    <td>`+ data.languages[i].lname + `</td>
+                                                                                    <td>`+ data.languages[i].totalblogs + `</td>
+                                                                                    <td>
+                                                                                        <button class="btn btn-outline-info btn-sm updaterow" data-languageid="`+ data.languages[i].lcode + `" title="Update language">
+                                                                                            <i class="mdi mdi-pencil"></i>
+                                                                                        </button>
+                                                                                        <button class="btn btn-outline-danger btn-sm deleterow" data-languageid="`+ data.languages[i].lcode + `" title="Delete language">
+                                                                                            <i class="mdi mdi-delete"></i>
+                                                                                        </button>
+                                                                                    </td>
+                                                                                </tr>`
+                            }
+                        }
+                    } else {
+
+                    }
+                    if (data.languages.length < 10) {
+                        $("#view-more").hide(600);
+                        $("#no-more-data").show(600);
+                    } else {
+                        $("#view-more").show(600);
+                        $("#no-more-data").hide(600);
+                    }
+                    $("#tbody").append(content);
+                    $(".table-loader").toggle();
+                    // $("#tbody").append(content);
+                }
+            });
+        })
+        function tabledata(tableindex, searchvalue) {
+            $.ajax({
+                url: "../../api/masteradmin/languages.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'display_language', index: tableindex, searchvalue: searchvalue }),
+                // data: JSON.stringify({ key: 'display_deleted', index: tableindex, category: selectedcategory, language: selectedlanguage }),
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data);
+                    if (data.status) {
+                        content = ``;
+                        console.log(data.languages.length);
+                        if (data.languages.length > 0) {
+                            for (i = 0; i < data.languages.length; i++) {
+                                content += `
+                                                                                <tr id="row`+ data.languages[i].lcode + `">
+                                                                                    <td>`+ ((tableindex * 10) + (i + 1)) + `</td>
+                                                                                    <td>`+ data.languages[i].lcode + `</td>
+                                                                                    <td>`+ data.languages[i].lname + `</td>
+                                                                                    <td>`+ data.languages[i].totalblogs + `</td>
+                                                                                    <td>
+                                                                                        <button class="btn btn-outline-info btn-sm updaterow" data-languageid="`+ data.languages[i].lcode + `" title="Update language">
+                                                                                            <i class="mdi mdi-pencil"></i>
+                                                                                        </button>
+                                                                                        <button class="btn btn-outline-danger btn-sm deleterow" data-languageid="`+ data.languages[i].lcode + `" title="Delete language">
+                                                                                            <i class="mdi mdi-delete"></i>
+                                                                                        </button>
+                                                                                    </td>
+                                                                                </tr>`
+                            }
+                        }
+                        else {
+                            content += `
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            No data found
+                                                                                        </td>
+                                                                                    </tr>
+                                `
+                        }
+                    } else {
+                    }
+                    if (data.languages.length < 10) {
+                        $("#view-more").hide(600);
+                        $("#no-more-data").show(600);
+                    } else {
+                        $("#view-more").show(600);
+                        $("#no-more-data").hide(600);
+                    }
+                    $("#tbody").html(content);
+                    // $(".table-top-loader").hide();
+                    $("#tbody").show(100);
+                    $(".table-loader").hide();
+                    // $("#tbody").append(content);
+                }, error: (error) => console.log(error)
+            })
+        }
+        $(document).on("click", "#search-value", function () {
+            // alert($("#input-search").val())
+            $(".table-loader").show();
+            $("#tbody").hide(100);
+            tableindex = 0;
+            searchvalue = $("#input-search").val();
+            tabledata(tableindex, searchvalue);
+        })
+        //--------------------add language ------------//
+        $(document).on("click", "#add-language", function () {
+            content = `
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="card card-rounded">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="d-flex align-items-center align-content-center">
+                                                <h4 class="card-title card-title-dash">
+                                                    Add language
+                                                </h4>
+                                                <button type="button"
+                                                    class="badge badge-pill btn-outline-behance ms-auto"
+                                                    data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <p class="card-text pt-1">
+                                                Language add in your database
+                                                <span class="text-small text-muted">fill the form..!</span>
+                                            </p>
+                                            <div class="mt-2">
+                                                <div class="card bg-transparent">
+                                                    <div class="card-body">
+                                                        <div class="d-flex align-content-center">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Enter language code" title="Code"
+                                                                id="input-lcode">
+                                                        </div>
+                                                        <div class="d-flex align-content-center pt-4">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Enter language name" title="Name"
+                                                                id="input-lname">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="ms-auto">
+                                                        <button type="button"
+                                                            class="btn btn-outline-success btn-sm btn-rounded addlanguage">
+                                                            <i class="mdi mdi-plus" title="Add"></i>
+                                                            Add
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-outline-light btn-sm btn-rounded "
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+            $("#inputlanguagecontent").html(content);
+            $("#inputlanguagecontent").modal("show");
+        })
+        $(document).on("click", ".addlanguage", function () {
+            // alert(1)
+            var lcode = $("#input-lcode").val();
+            var lname = $("#input-lname").val();
+            if ((lname == null || lname == "") && (lcode == null || lcode == "")) {
+                showInfoToast("Adding language!", "Please fill the all field.");
+                $("#input-lcode").focus();
+            } else {
+                if (lname == null || lname == "") {
+                    showInfoToast("Adding language!", "Please Enter language name.");
+                    $("#input-lname").focus();
+                } else if (lcode == null || lcode == "") {
+                    showInfoToast("Adding language!", "Please Enter language code.");
+                    $("#input-lcode").focus();
+                } else {
+                    $.ajax({
+                        url: "../../api/masteradmin/languages.php",
+                        type: "POST",
+                        data: JSON.stringify({ key: 'add_language', lcode: lcode, lname: lname }),
+                        // data: JSON.stringify({ key: 'display_deleted', index: tableindex, category: selectedcategory, language: selectedlanguage }),
+                        dataType: "JSON",
+                        success: function (data) {
+                            console.log(data);
+                            if (data.status) {
+                                showSuccessToast("Adding language!", lname + " is added successfully.");
+                                $("#inputlanguagecontent").modal("hide");
+                                $("#inputlanguagecontent").html("");
+                                tabledata(tableindex, searchvalue);
+                            } else {
+                                if (data.error == "lcode") {
+                                    showDangerToast("Adding language!", "Please Enter new language code.<br>" + lcode + " is already in database.")
+                                } else {
+                                    showDangerToast("Adding language!", "Please try again sometime later.! server error!")
+                                }
+                            }
+                        }, error: (error) => console.log(error)
+                    })
+                }
+            }
+        })
+
+        //-------------update row ------------------//
+        $(document).on("click", ".updaterow", function () {
+            lcode = $(this).data("languageid");
+            // lcode = "aa-44";
+            $.ajax({
+                url: "../../api/masteradmin/languages.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'single_fetch_language', lcode: lcode }),
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data);
+                    content = `
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="card card-rounded">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="d-flex align-items-center align-content-center">
+                                                            <h4 class="card-title card-title-dash">
+                                                                `+ data.language[0].lname + ` language Edit
+                                                            </h4>
+                                                            <button type="button"
+                                                                class="badge badge-pill btn-outline-behance ms-auto"
+                                                                data-bs-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <p class="card-text pt-1">
+                                                            Language add in your database
+                                                            <span class="text-small text-muted">fill the form..!</span>
+                                                        </p>
+                                                        <div class="mt-2">
+                                                            <div class="card bg-transparent">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-content-center pt-4">
+                                                                        <input type="text" class="form-control" value="`+ data.language[0].lname + `"
+                                                                            placeholder="Enter language name" title="Name"
+                                                                            id="input-lname">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="ms-auto">
+                                                                    <button type="button"
+                                                                        class="btn btn-outline-success btn-sm btn-rounded updatelanguage">
+                                                                        <i class="mdi mdi-pencil" title="Add"></i>
+                                                                        Update
+                                                                    </button>
+                                                                    <button type="button"
+                                                                        class="btn btn-outline-light btn-sm btn-rounded "
+                                                                        data-bs-dismiss="modal">
+                                                                        <i class="mdi mdi-close" title="Add"></i>
+                                                                        Cancel
+                                                                        </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`
+                    $("#inputlanguagecontent").html(content);
+                    $("#inputlanguagecontent").modal("show");
+                }, error: (error) => console.log(error)
+            })
+        })
+        $(document).on("click", ".updatelanguage", function () {
+            var lname = $("#input-lname").val();
+            console.log(lname + " " + lcode);
+            if (lname == null || lname == "") {
+                showInfoToast("Update name.!", "Please enter language name..!");
+            } else {
+                $.ajax({
+                    url: "../../api/masteradmin/languages.php",
+                    type: "POST",
+                    data: JSON.stringify({ key: 'update_language', lcode: lcode, lname: lname }),
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.status) {
+                            showSuccessToast("Update name.!", lname + " language name updated successfully.");
+                            $("#row" + lcode + " td:nth-child(3)").text(lname);
+                            $("#inputlanguagecontent").modal("hide");
+                            $("#inputlanguagecontent").html("");
+                        }
+                    }, error: (error) => console.log(error)
+                })
+            }
+        })
+        //---------------delete row--------------//
+        $(document).on("click", ".deleterow", function () {
+            lcode = $(this).data("languageid");
+            $(this).prop("disabled", true);
+            $.ajax({
+                url: "../../api/masteradmin/languages.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'delete_language', lcode: lcode }),
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data);
+                    if (data.status) {
+                        showSuccessToast("Delete language.!", $("#row" + lcode + " td:nth-child(3)").text() + " language deleted successfully.");
+                        $("#row" + lcode).fadeOut(600, function () {
+                            $(this).remove();
+                        });
+                    } else {
+                        showInfoToast("Delete language.!", $("#row" + lcode + " td:nth-child(3)").text() + " is not deleted. <br>please try agian after sometime.");
+                    }
+                }, error: (error) => console.log(error)
+            })
+        })
+    </script>
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <!-- plugins:js -->
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="../../vendors/sweetalert/sweetalert.min.js"></script>
+    <script src="../../vendors/jquery-toast-plugin/jquery.toast.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../js/off-canvas.js"></script>
+    <script src="../../js/jq.tablesort.js"></script>
+
+
+    <script src="../../js/hoverable-collapse.js"></script>
+    <script src="../../js/template.js"></script>
+    <script src="../../js/settings.js"></script>
+    <script src="../../js/todolist.js"></script>
+    <!-- endinject -->
+    <script src="../../js/toastDemo.js"></script>
+    <script src="../../js/popover.js"></script>
+    <script src="../../js/tooltips.js"></script>
+    <!-- Custom js for this page-->
+    <script src="../../js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="../../js/dashboard.js"></script>
+    <script src="../../js/Chart.roundedBarCharts.js"></script>
+    <script src="../../js/alertp.js"></script>
+    <script src="../../js/modal-demo.js"></script>
+    <script src="../../js/tablesorter.js"></script>
+
+
+    <!-- End custom js for this page-->
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.7/jquery.lazyload.js"></script>
+      <script type="text/javascript" charset="utf-8">
+  $(function() {
+    $("div.lazy").lazyload({
+      effect : "fadeIn"
+     });
+
+  }); -->
+    </script>
+</body>
+
+</html>

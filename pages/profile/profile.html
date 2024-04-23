@@ -1,0 +1,2497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+      shrink-to-fit=no">
+    <title>TrendStream</title>
+    <link rel="stylesheet" href="../../css/style1.css">
+    <link rel="stylesheet" href="../../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="../../js/select.dataTables.min.css">
+
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="stylesheet" href="../../vendors/jquery-toast-plugin/jquery.toast.min.css">
+
+    <link rel="shortcut icon" href="../../images/favicon.png" />
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/dropzone/dist/dropzone.css" /> -->
+    <link href="../../vendors/cropper/cropper.css" rel="stylesheet" />
+    <!-- <script src="../../js/dropzone.js"></script> -->
+    <script src="../../js/cropper.js"></script>
+    <style>
+        .Error {
+            border: 1px solid red;
+        }
+
+        .image_area {
+            position: relative;
+        }
+
+        .my-custom-animation .modal-content {
+            animation: my-animation 0.5s;
+        }
+
+        @keyframes my-animation {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .preview {
+            overflow: hidden;
+            width: 160px;
+            height: 160px;
+            margin: 10px;
+            border: 1px solid red;
+        }
+
+        .modal-lg {
+            max-width: 1000px !important;
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 3px;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.571);
+            overflow: hidden;
+            height: 0;
+            transition: .5s ease;
+            width: 100%;
+        }
+
+        .image_area:hover .overlay {
+            height: 50%;
+            cursor: pointer;
+        }
+
+        /* .text {
+            color: #333;
+            font-size: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="align-content-center justify-content-center">
+        <div class="col-md-4 col-sm-6 grid-margin stretch-card m-auto pt-5" id="loader">
+            <div class="dot-opacity-loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <div class="body-content" style="display: none;">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row" id="navbar">
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_settings-panel.html -->
+            <div class="theme-setting-wrapper">
+                <div id="settings-trigger"><i class="ti-settings"></i></div>
+                <div id="theme-settings" class="settings-panel">
+                    <i class="settings-close ti-close"></i>
+                    <p class="settings-heading">SIDEBAR SKINS</p>
+                    <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+                        <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+                    </div>
+                    <div class="sidebar-bg-options" id="sidebar-dark-theme">
+                        <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+                    </div>
+                    <p class="settings-heading mt-2">HEADER SKINS</p>
+                    <div class="color-tiles mx-0 px-4">
+                        <div class="tiles success"></div>
+                        <div class="tiles warning"></div>
+                        <div class="tiles danger"></div>
+                        <div class="tiles info"></div>
+                        <div class="tiles dark"></div>
+                        <div class="tiles default"></div>
+                    </div>
+                    <p class="settings-heading mt-2 divnotification">Notification</p>
+                    <div class="mx-0 px-4 divnotification">
+                        <div class="form-check form-check-success">
+                        <div class="d-flex">
+                            <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="notificationstatus">
+                            </label>
+                            <span id="notificationstatustext">Off</span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- partial -->
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            </nav>
+            <div class="main-panel" id="main-content">
+                <!-- image update -->
+                <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="card card-rounded">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="d-flex align-items-center align-content-center">
+                                                <h4 class="card-title card-title-dash">
+                                                    Crop image before upload
+                                                </h4>
+                                                <button type="button"
+                                                    class="badge badge-pill btn-outline-behance ms-auto"
+                                                    data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <p class="card-text pt-1">
+                                                Why are you reporting this blog?
+                                                <span class="text-small text-muted">Select any one reason..!</span>
+                                            </p>
+                                            <div class="mt-3">
+                                                <div class="img-container">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <img src="" id="sample_image" />
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="preview"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center pt-4">
+                                                    <div class="ms-auto">
+                                                        <button type="button"
+                                                            class="button btn btn-outline-primary btn-rounded btn-sm"
+                                                            id="crop"><i class="mdi mdi-content-save"></i><span
+                                                                class="ms-1">Save</span></button>
+                                                        <button type="button"
+                                                            class="button btn btn-outline-danger btn-rounded btn-sm close"
+                                                            data-bs-dismiss="modal" aria-label="Close"><i
+                                                                class="mdi mdi-close-circle-outline"></i><span
+                                                                class="ms-1">Cancel</span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"
+                    id="modal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content" id="modal-content">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- partial -->
+            </div>
+        </div>
+    </div>
+    <script src="../create/main.js"></script>
+    <script src="../../js/sidebar.js"></script>
+    <script src="../../js/navbar.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const userid = urlParams.get('p');
+        $(document).ready(() => {
+            setlogindata();
+            sidebar();
+            navbar();
+            checknotification();
+
+            // showSuccessToast("hhh", "dd");
+            // showstar = () => {
+            //     alert(1);
+
+            // }
+            // showstar();
+            $('#modal').on('show.bs.modal', function () {
+                $(this).find('.modal-dialog').addClass('my-custom-animation');
+            });
+            $('#modal').on('hidden.bs.modal', function () {
+                // isModalOpen = false;
+                // alert("hide")
+                $(this).find('.modal-dialog').addClass('my-custom-animation');
+                utype = otptype = email = number = "";
+                checknumber = checknumber = false;
+            });
+
+            $.ajax({
+                url: "../../api/profile.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'profile_display', usid: userid }),
+                dataType: "JSON",
+                success: (data) => {
+                    console.log(data);
+                    if (data.status) {
+                        console.log();
+                        maincontent = `<div class="content-wrapper">`
+                        if (data.profiledata.length == 0) {
+                            maincontent += ` <div class="align-items-center text-center m-5">
+                                             <span>This profile has not available</span>
+                                             </div>`;
+                        } else {
+                            if (data.loginudata.length == 0) {
+                                maincontent += `  <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-lg-8 d-flex flex-column">
+                                                    <div class="d-flex flex-column">
+                                                        <div class="row flex-grow">
+                                                            <div class="col-lg-6 col-md-6 grid-margin stretch-card">
+                                                                <div class="card">
+                                                                    <div class="card-body text-center">
+                                                        <div>`
+                                if (data.profiledata[0].photo == null) {
+                                    maincontent += `<img src="../../images/faces/profile/default.png"
+                                                                                id="uploaded_image"
+                                                                                class="img-lg rounded-circle mb-2" />`
+                                } else {
+                                    maincontent += `<img src="../../images/faces/profile/` + data.profiledata[0].photo + `"
+                                                                                id="uploaded_image"
+                                                                                class="img-lg rounded-circle mb-2" />`
+                                }
+                                maincontent += `<h4>` + data.profiledata[0].username + `<h4>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-center">
+                                                                <select id="profile-rating" name="rating"
+                                                                    autocomplete="off">
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-info btn-sm mt-3 show-profile-photo" data-bs-toggle="modal" data-bs-target="#modal">Show picture</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 grid-margin stretch-card">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title  card-title-dash">Profile info
+                                                        </h4>
+                                                        <div class="list align-items-center border-bottom py-2">
+                                                            <div class="wrapper w-100">
+                                                                <p class="mb-2 font-weight-medium">
+                                                                    Name
+                                                                </p>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i class="mdi mdi-account text-muted me-1"></i>
+                                                                        <p class="mb-0 text-small text-muted">`
+                                if (data.profiledata[0].ufname == null && data.profiledata[0].ulname == null) {
+                                    maincontent += '--------';
+                                } else {
+                                    if (data.profiledata[0].ufname == null)
+                                        maincontent += data.profiledata[0].ulname;
+                                    else if (data.profiledata[0].ulname == null)
+                                        maincontent += data.profiledata[0].ufname;
+                                    else
+                                        maincontent += data.profiledata[0].ufname + ` ` + data.profiledata[0].ulname;
+                                }
+                                maincontent += `</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="list align-items-center border-bottom py-2">
+                                                            <div class="wrapper w-100">
+                                                                <p class="mb-2 font-weight-medium">
+                                                                    Gender
+                                                                </p>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i
+                                                                            class="mdi mdi-gender-female text-muted me-1"></i>
+                                                                            <p class="mb-0 text-small text-muted">`
+                                if (data.profiledata[0].gender == "" || data.profiledata[0].gender == null) {
+                                    maincontent += '--------';
+                                } else {
+                                    maincontent += data.profiledata[0].gender;
+                                }
+                                maincontent += `</p>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="list align-items-center border-bottom py-2">
+                                                            <div class="wrapper w-100">
+                                                                <p class="mb-2 font-weight-medium">
+                                                                    Password
+                                                                </p>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i
+                                                                            class="mdi mdi-account-key text-muted me-1"></i>
+                                                                        <p class="mb-0 text-small text-muted">
+                                                                            xxxx</p>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row flex-grow">
+                                            <div class="col-12 grid-margin stretch-card">
+                                                <div class="card card-rounded" >
+                                                    <div class="card-body">
+                                                        <!-- <h5 class="card-title card-title-dash">Blogs info
+                                                        </h5> -->
+                                                        <div class="text-center">
+                                                            <div class="pt-4 mb-3">
+                                                                <div class="row">
+                                                                   <div class="col-4">
+                                                                    <h6>`+ data.totalblog[0].totalblogs + `</h6>
+                                                                        <p>Blogs</p>
+                                                                    </div>
+                                                                   <div class="col-4">
+                                                                    <h6>`+ data.totalcomment[0].totalcomments + `</h6>
+                                                                    
+                                                                        <p>Comments</p>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <h6>`+ data.totallike[0].totallikes + `</h6>
+                                                                        <p>Likes</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-lg-4 d-flex flex-column">
+                                    <div class="row flex-grow">
+                                        <div class="col-12 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="card-title  card-title-dash">Contact info
+                                                    </h4>
+
+                                                    <div class="list align-items-center border-bottom py-2">
+                                                        <div class="wrapper w-100">
+                                                            <p class="mb-2 font-weight-medium">
+                                                                Email
+                                                            </p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i class="mdi mdi-email text-muted me-1"></i>
+                                                                    <p class="mb-0 text-small text-muted">`
+                                if (data.profiledata[0].email == null) {
+                                    maincontent += '--------';
+                                } else {
+                                    maincontent += data.profiledata[0].email;
+                                }
+                                maincontent += `</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list align-items-center border-bottom py-2">
+                                                        <div class="wrapper w-100">
+                                                            <p class="mb-2 font-weight-medium">
+                                                                Contact no.
+                                                            </p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i class="mdi mdi-phone text-muted me-1"></i>
+                                                                    <p class="mb-0 text-small text-muted">`
+                                if (data.profiledata[0].mbno == null) {
+                                    maincontent += '--------';
+                                } else {
+                                    maincontent += data.profiledata[0].mbno;
+                                }
+                                maincontent += `</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row flex-grow">
+                                        <div class="col-12 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="card-title  card-title-dash">Other info
+                                                    </h4>
+
+                                                    <div class="list align-items-center border-bottom py-2">
+                                                        <div class="wrapper w-100">
+                                                            <p class="mb-2 font-weight-medium">
+                                                                User type
+                                                            </p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i
+                                                                        class="mdi mdi-account-multiple-outline text-muted me-1"></i>
+                                                                        <p class="mb-0 text-small text-muted">`
+                                if (data.profiledata[0].user_type == null) {
+                                    maincontent += '--------';
+                                } else {
+                                    maincontent += data.profiledata[0].user_type;
+                                }
+                                maincontent += `</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list align-items-center border-bottom py-2">
+                                                        <div class="wrapper w-100">
+                                                            <p class="mb-2 font-weight-medium">
+                                                                Date joined
+                                                            </p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i
+                                                                        class="mdi mdi-calendar-plus text-muted me-1"></i>
+                                                                        <p class="mb-0 text-small text-muted">`
+                                if (data.profiledata[0].joindate == null) {
+                                    maincontent += '--------';
+                                } else {
+                                    const joindata = data.profiledata[0].joindate.split(" ")[0].split("-");
+                                    const sdate = new Date(joindata[0], joindata[1] - 1, joindata[2]);
+                                    const date = sdate.toString().split(" ");
+                                    var strdate = date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
+                                    maincontent += strdate;
+                                }
+                                maincontent += `</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        </div>
+                                    </div>
+                                    <div>
+                                    <div class="home-tab">
+                                        <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                                            <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link ps-0 active" id="home-tab" data-bs-toggle="tab"
+                                                href="#Blogs" role="tab" aria-controls="Blogs"
+                                                aria-selected="true">Blogs</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="read-list" data-bs-toggle="tab" href="#audiences"
+                                                role="tab" aria-selected="false">Read list</a>
+                                        </li>
+                                    </ul>
+                                    </div>
+                                    
+                                    <div class="tab-content tab-content-basic">
+                                        <div class="tab-pane fade active show" id="Blogs" role="tabpanel"
+                                        aria-labelledby="home-tab">
+                                        <div class="cards grid-row">`
+                                console.log(data.blogdata.length)
+                                for (var i = 0; i < data.blogdata.length; i++) {
+                                    if (data.blogdata[i].blog_status != "deleted") {
+                                        const postdate = data.blogdata[i].blog_post_time.split(" ")[0].split("-");
+                                        const sdate = new Date(postdate[0], postdate[1] - 1, postdate[2]);
+                                        const date = sdate.toString().split(" ");
+                                        var strdate = date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
+                                        maincontent += `<div class="card blog hover" id="card-` + data.blogdata[i].blog_id + `" data-id="` + data.blogdata[i].blog_id + `">
+                                                    <div class="dropdown" align= center>
+                                                    <i class="mdi mdi-dots-horizontal" type="button" id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                              <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                <a class="dropdown-item savereadlater"  data-id="` + data.blogdata[i].blog_id + `"><i class="mdi mdi-clock text-info"></i><span class="ms-2">Save to Read later</span></a>
+                                                     <a class="dropdown-item savereadlist"  data-id="`+ data.blogdata[i].blog_id + `" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="Add blog in read-list"><i class="mdi mdi-playlist-plus fw-bold text-info"></i><span class="ms-2">Save to Readlist</span></a>
+                                                </div>
+                                                </div>
+                                                <div class="card-top blogpreview loding" data-id="`+ data.blogdata[i].blog_id + `">
+                                              <img src="../../images/uploadimage/`+ data.blogdata[i].blog_cover_photo + `" alt="Blog Name">
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <span class="cspaan date">`+ strdate + `</span>
+                                              <p class="cp hover-cursor show-profile" data-id=`+ data.blogdata[i].usid + `>`
+                                        if (data.blogdata[i].photo == null) {
+                                            maincontent += `  <img class="profile-pic" src="../../images/faces/profile/default.png">`
+                                        } else {
+                                            maincontent += `  <img class="profile-pic" src="../../images/faces/profile/` + data.blogdata[i].photo + `">`
+                                        }
+
+                                        maincontent += data.blogdata[i].username + `</p>
+                                            </div> 
+                                            <div class="card-info">
+                                              <h2 class="btitle">`+ data.blogdata[i].blog_title + `</h2>
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <a class="btn btn-outline-primary btn-sm hover" href="../blogs/blog.html?s=`+ data.blogdata[i].blog_id + `">Read
+                                              </a>
+                                              <p class="nav">
+                                              <i class="lcv mdi mdi-heart"></i>&nbsp;`+ data.blogdata[i].likes + `
+                                              <i class="lcv mdi mdi-comment"></i>&nbsp;`+ data.blogdata[i].comments + `
+                                              <i class="lcv mdi mdi-eye "></i>&nbsp;`+ data.blogdata[i].blog_view + `
+                                              </p>                            
+                                              </div> 
+                                              </div>`;
+                                    }
+                                }
+                                maincontent += `</div>
+                                    </div>
+                                    <div class="tab-pane fade" id="audiences" role="tabpanel"
+                                        aria-labelledby="read-list">
+                                        <div class="cards">
+                                            <div class="col-md grid-margin p-3 row stretch-card">`
+                                for (i = 0; i < data.readlistdata.length; i++) {
+
+                                    maincontent += `<div class="card grid-margin" id="card-` + data.readlistdata[i].list_id + `">
+                                    <div class="card-body pb-0">
+                                        <div class="d-flex read-list hover-cursor" data-id="`+ data.readlistdata[i].list_id + `">
+                                        <i class="mdi mdi-format-list-bulleted img-sm rounded-10 mdi-36px"></i>
+                                            <div class="ms-3">
+                                                    <h6 class="mb-1">`+ data.readlistdata[i].list_title + `</h6>
+                                                    <small class="text-muted mb-0"><i
+                                                            class="mdi mdi-format-list-bulleted me-1"></i>`+ data.readlistdata[i].totalblog + `
+                                                        Blogs</small>
+                                                 </div>
+                                             </div>
+                                        </div>
+                                    </div>`;
+                                }
+                                maincontent += `</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            } else {
+                                if (data.profiledata[0].usid == data.loginudata[0].usid) {
+                                    maincontent += `  <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row">
+                                            <div class="col-lg-8 d-flex flex-column">
+                                                <div class="d-flex flex-column">
+                                                    <div class="row flex-grow">
+                                                        <div class="col-lg-6 col-md-6 grid-margin stretch-card">
+                                                            <div class="card">
+                                                                <div class="card-body text-center">
+                                                                    <div>
+                                                                        <div class="image_area">
+                                                                            <form method="post">
+                                                                                <label for="upload_image">`
+                                    if (data.profiledata[0].photo == null) {
+                                        maincontent += `<img src="../../images/faces/profile/default.png"
+                                                                                id="uploaded_image"
+                                                                                class="img-lg rounded-circle mb-2" />`
+                                    } else {
+                                        maincontent += `<img src="../../images/faces/profile/` + data.profiledata[0].photo + `"
+                                                                                id="uploaded_image"
+                                                                                class="img-lg rounded-circle mb-2" />`
+                                    }
+                                    maincontent += `<div class="overlay">
+                                                                            <div class="text text-small">
+                                                                                    Click to Change
+                                                                                    <br>Profile Image
+                                                                            </div>
+                                                                        </div>
+                                                                        <input type="file" name="image" class="image"
+                                                                            id="upload_image" style="display:none" />
+                                                                    </label>
+                                                                </form>
+                                                            </div>`
+
+                                    maincontent += `<p class='text-small text-muted fade active show hover-cursor remove-image' `
+                                    if (data.profiledata[0].photo == null)
+                                        maincontent += `style="display:none;"`
+                                    maincontent +=
+                                        `>Remove Image<p>`
+                                    maincontent += `<h4 id="username">` + data.profiledata[0].username + ` <div class="badge badge-pill btn-outline-info edit-info ms-1"
+                                                                        data-utype="username">
+                                                                        <i class="mdi mdi-lead-pencil"></i>
+                                                                    </div></h4>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-center">
+                                                                <select id="profile-rating" name="rating"
+                                                                    autocomplete="off">
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-info btn-sm mt-3 show-profile-photo" data-bs-toggle="modal" data-bs-target="#modal">Show picture</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 grid-margin stretch-card">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title  card-title-dash">Profile info
+                                                        </h4>
+                                                        <div class="list align-items-center border-bottom py-2">
+                                                            <div class="wrapper w-100">
+                                                                <p class="mb-2 font-weight-medium">
+                                                                    Name
+                                                                </p>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i class="mdi mdi-account text-muted me-1"></i>
+                                                                        <p class="mb-0 text-small text-muted">`
+                                    if (data.profiledata[0].ufname == null && data.profiledata[0].ulname == null) {
+                                        maincontent += '--------';
+                                    } else {
+                                        if (data.profiledata[0].ufname == null)
+                                            maincontent += data.profiledata[0].ulname;
+                                        else if (data.profiledata[0].ulname == null)
+                                            maincontent += data.profiledata[0].ufname;
+                                        else
+                                            maincontent += data.profiledata[0].ufname + ` ` + data.profiledata[0].ulname;
+                                    }
+                                    maincontent += `</p>
+                                                                    </div>
+                                                                    <div class="badge badge-pill btn-outline-info edit-info"
+                                                                        data-utype="name">
+                                                                        <i class="mdi mdi-lead-pencil"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="list align-items-center border-bottom py-2">
+                                                            <div class="wrapper w-100">
+                                                                <p class="mb-2 font-weight-medium">
+                                                                    Gender
+                                                                </p>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i
+                                                                            class="mdi mdi-gender-female text-muted me-1"></i>
+                                                                            <p class="mb-0 text-small text-muted">`
+                                    if (data.profiledata[0].gender == null) {
+                                        maincontent += '--------';
+                                    } else {
+                                        maincontent += data.profiledata[0].gender;
+                                    }
+                                    maincontent += `</p>
+                                                                    </div>
+                                                                    <div class="badge badge-pill btn-outline-info edit-info"
+                                                                        data-utype="gender">
+                                                                        <i class="mdi mdi-lead-pencil"></i>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="list align-items-center border-bottom py-2">
+                                                            <div class="wrapper w-100">
+                                                                <p class="mb-2 font-weight-medium">
+                                                                    Password
+                                                                </p>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i
+                                                                            class="mdi mdi-account-key text-muted me-1"></i>
+                                                                        <p class="mb-0 text-small text-muted">
+                                                                            xxxx</p>
+                                                                    </div>
+                                                                    <div class="badge badge-pill btn-outline-info edit-info"
+                                                                        data-utype="password">
+                                                                        <i class="mdi mdi-lead-pencil"></i>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row flex-grow">
+                                            <div class="col-12 grid-margin stretch-card">
+                                                <div class="card card-rounded">
+                                                    <div class="card-body">
+                                                        <!-- <h5 class="card-title card-title-dash">Blogs info
+                                                        </h5> -->
+                                                        <div class="text-center">
+                                                            <div class="pt-4 mb-3">
+                                                                <div class="row">
+                                                                    <div class="col-4">
+                                                                    <h6>`+ data.totalblog[0].totalblogs + `</h6>
+                                                                        
+                                                                        <p>Blogs</p>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                    <h6>`+ data.totalcomment[0].totalcomments + `</h6>
+                                                                        <p>Comments</p>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                    <h6>`+ data.totallike[0].totallikes + `</h6>
+                                                                        
+                                                                        <p>Likes</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-lg-4 d-flex flex-column">
+                                    <div class="row flex-grow">
+                                        <div class="col-12 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="card-title  card-title-dash">Contact info
+                                                    </h4>
+
+                                                    <div class="list align-items-center border-bottom py-2">
+                                                        <div class="wrapper w-100">
+                                                            <p class="mb-2 font-weight-medium">
+                                                                Email
+                                                            </p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i class="mdi mdi-email text-muted me-1"></i>
+                                                                    <p class="mb-0 text-small text-muted">`
+                                    if (data.profiledata[0].email == null) {
+                                        maincontent += '--------';
+                                    } else {
+                                        maincontent += data.profiledata[0].email;
+                                    }
+                                    maincontent += `</p>
+                                                                </div>
+                                                                <div class="badge badge-pill btn-outline-info edit-info"
+                                                                    data-utype="email">
+                                                                    <i class="mdi mdi-lead-pencil"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list align-items-center border-bottom py-2">
+                                                        <div class="wrapper w-100">
+                                                            <p class="mb-2 font-weight-medium">
+                                                                Contact no.
+                                                            </p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i class="mdi mdi-phone text-muted me-1"></i>
+                                                                    <p class="mb-0 text-small text-muted">`
+                                    if (data.profiledata[0].mbno == null) {
+                                        maincontent += '--------';
+                                    } else {
+                                        maincontent += data.profiledata[0].mbno;
+                                    }
+                                    maincontent += `</p>
+                                                                </div>
+                                                                <div class="badge badge-pill btn-outline-info edit-info"
+                                                                    data-utype="number">
+                                                                    <i class="mdi mdi-lead-pencil"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row flex-grow">
+                                        <div class="col-12 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="card-title  card-title-dash">Other info
+                                                    </h4>
+
+                                                    <div class="list align-items-center border-bottom py-2">
+                                                        <div class="wrapper w-100">
+                                                            <p class="mb-2 font-weight-medium">
+                                                                User type
+                                                            </p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i
+                                                                        class="mdi mdi-account-multiple-outline text-muted me-1"></i>
+                                                                        <p class="mb-0 text-small text-muted">`
+                                    if (data.profiledata[0].user_type == null) {
+                                        maincontent += '--------';
+                                    } else {
+                                        maincontent += data.profiledata[0].user_type;
+                                    }
+                                    maincontent += `</p>
+                                                                </div>
+                                                                <div class="badge badge-pill btn-outline-info edit-info"
+                                                                    data-utype="usertype">
+                                                                    <i class="mdi mdi-lead-pencil"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list align-items-center border-bottom py-2">
+                                                        <div class="wrapper w-100">
+                                                            <p class="mb-2 font-weight-medium">
+                                                                Date joined
+                                                            </p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i
+                                                                        class="mdi mdi-calendar-plus text-muted me-1"></i>
+                                                                        <p class="mb-0 text-small text-muted">`
+                                    if (data.profiledata[0].joindate == null) {
+                                        maincontent += '--------';
+                                    } else {
+                                        const joindata = data.profiledata[0].joindate.split(" ")[0].split("-");
+                                        const sdate = new Date(joindata[0], joindata[1] - 1, joindata[2]);
+                                        const date = sdate.toString().split(" ");
+                                        var strdate = date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
+                                        maincontent += strdate;
+                                    }
+                                    maincontent += `</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    </div>
+                                    </div>
+                                    <div class="home-tab">
+                                        <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link ps-0 active" id="home-tab" data-bs-toggle="tab"
+                                                    href="#Blogs" role="tab" aria-controls="Blogs"
+                                                    aria-selected="true">Blogs</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="read-list" data-bs-toggle="tab" href="#audiences"
+                                                    role="tab" aria-selected="false">Read list</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-content tab-content-basic">
+                                    <div class="tab-pane fade active show" id="Blogs" role="tabpanel"
+                                        aria-labelledby="home-tab">
+                                        <div class="cards grid-row">`
+                                    console.log(data.blogdata.length)
+                                    for (var i = 0; i < data.blogdata.length; i++) {
+                                        if (data.blogdata[i].blog_status != "deleted") {
+                                            const postdate = data.blogdata[i].blog_post_time.split(" ")[0].split("-");
+                                            const sdate = new Date(postdate[0], postdate[1] - 1, postdate[2]);
+                                            const date = sdate.toString().split(" ");
+                                            var strdate = date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
+                                            //  const spdate = sdate.split(" ");
+                                            // console.log(strdate);
+                                            if (data.blogdata[i].blog_status == 'posted') {
+                                                maincontent += `<div class="card card-inverse-success blog hover" id="card-` + data.blogdata[i].blog_id + `" data-id="` + data.blogdata[i].blog_id + `">`
+                                            } else if (data.blogdata[i].blog_status == 'drafted') {
+                                                // card-inverse-primary
+                                                maincontent += `<div class="card card-inverse-info blog hover" id="card-` + data.blogdata[i].blog_id + `" data-id="` + data.blogdata[i].blog_id + `">`
+                                            }
+                                            maincontent += `<div class="dropdown" align= center>
+                                                    <i class="mdi mdi-dots-horizontal" type="button" id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                              <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">`;
+                                            if (data.loginudata[0].username == data.blogdata[i].username && data.loginudata[0].user_type == "blogger") {
+                                                maincontent += `<a class="dropdown-item updateblog" href="../create/create.html?key=update&s=` + data.blogdata[i].blog_id + `"><i class="mdi mdi-pencil text-info"></i><span class="ms-2">Update</span></a>
+                                                        <a class="dropdown-item deleteblog" data-id="`+ data.blogdata[i].blog_id + `"><i class="mdi mdi-delete text-info"></i><span class="ms-2">Delete</span></a>`;
+                                            }
+                                            // mdi mdi-pencil
+                                            maincontent += `<a class="dropdown-item savereadlater"  data-id="` + data.blogdata[i].blog_id + `"><i class="mdi mdi-clock text-info"></i><span class="ms-2">Save to Read later</span></a>
+                                                     <a class="dropdown-item savereadlist"  data-id="`+ data.blogdata[i].blog_id + `" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="Add blog in read-list"><i class="mdi mdi-playlist-plus fw-bold text-info"></i><span class="ms-2">Save to Readlist</span></a>
+                                                </div>
+                                                </div>
+                                                <div class="card-top blogpreview loding" data-id="`+ data.blogdata[i].blog_id + `">
+                                              <img src="../../images/uploadimage/`+ data.blogdata[i].blog_cover_photo + `" alt="Blog Name">
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <span class="cspaan date">`+ strdate + `</span>
+                                              <p class="cp hover-cursor show-profile" data-id=`+ data.blogdata[i].usid + `>`
+                                            if (data.blogdata[i].photo == null) {
+                                                maincontent += `  <img class="profile-pic" src="../../images/faces/profile/default.png">`
+                                            } else {
+                                                maincontent += `  <img class="profile-pic" src="../../images/faces/profile/` + data.blogdata[i].photo + `">`
+                                            }
+
+                                            maincontent += data.blogdata[i].username + `</p>
+                                            </div> 
+                                            <div class="card-info">
+                                              <h2 class="btitle">`+ data.blogdata[i].blog_title + `</h2>
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <a class="btn btn-outline-primary btn-sm hover" href="../blogs/blog.html?s=`+ data.blogdata[i].blog_id + `">Read
+                                              </a>
+                                              <p class="nav">
+                                              <i class="lcv mdi mdi-heart"></i>&nbsp;`+ data.blogdata[i].likes + `
+                                              <i class="lcv mdi mdi-comment"></i>&nbsp;`+ data.blogdata[i].comments + `
+                                              <i class="lcv mdi mdi-eye "></i>&nbsp;`+ data.blogdata[i].blog_view + `
+                                              </p>                            
+                                              </div> 
+                                              </div>`;
+                                        }
+                                    }
+                                    maincontent += `</div>
+                                    </div>
+                                    <div class="tab-pane fade" id="audiences" role="tabpanel"
+                                        aria-labelledby="read-list">
+                                        <div class="cards">
+                                            <div class="col-md grid-margin p-3 row stretch-card">`
+                                    for (i = 1; i < data.readlistdata.length; i++) {
+                                        if (data.loginudata[0].usid == data.readlistdata[i].usid && i != 1) {
+                                            if (data.readlistdata[i].list_status == "private") {
+                                                maincontent += `<div class="card card-inverse-info grid-margin" id="card-` + data.readlistdata[i].list_id + `">`;
+                                            } else {
+                                                maincontent += `<div class="card card-inverse-success grid-margin"  id="card-` + data.readlistdata[i].list_id + `">`;
+                                            }
+                                        } else {
+                                            maincontent += `<div class="card grid-margin" id="card-` + data.readlistdata[i].list_id + `">`;
+                                        }
+                                        // maincontent += `   <div class="card card-inverse-info grid-margin">`;
+                                        maincontent += `<div class="card-body pb-0">
+                                    <!-- <h4 class="card-title">Read list</h4> -->
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex read-list hover-cursor" data-id="`+ data.readlistdata[i].list_id + `">`
+                                        if (i == 1) {
+                                            maincontent += `<i class="mdi mdi-clock-alert img-sm rounded-10 mdi-36px"></i>`;
+                                        } else {
+                                            maincontent += `<i class="mdi mdi-format-list-bulleted img-sm rounded-10 mdi-36px"></i>`;
+
+                                        }
+                                        maincontent += `<div class="ms-3">
+                                                <h6 class="mb-1">`+ data.readlistdata[i].list_title + `</h6>
+                                                <small class="text-muted mb-0"><i
+                                                        class="mdi mdi-format-list-bulleted me-1"></i>`+ data.readlistdata[i].totalblog + `
+                                                    Blogs</small>
+                                            </div>
+                                        </div>`;
+                                        if (data.loginudata[0].usid == data.readlistdata[i].usid) {
+                                            maincontent += `<div class="ms-auto d-flex">`;
+                                            if (i != 1) {
+                                                if (data.readlistdata[i].list_status == "private") {
+                                                    maincontent += `<i class="mdi mdi-eye fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor read-list-status" data-id="` + data.readlistdata[i].list_id + `"></i>`;
+                                                } else {
+                                                    maincontent += `<i class="mdi mdi-eye-off fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor read-list-status" data-id="` + data.readlistdata[i].list_id + `"></i>`;
+                                                }
+                                            }
+                                            maincontent += `  <div class="dropdown">
+                                                <i class="mdi mdi-dots-vertical px-1 py-1 mdi-24px hover-cursor"
+                                                    type="button" id="dropdownMenuSizeButton3" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"></i>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                    <a class="dropdown-item read-list" data-id="` + data.readlistdata[i].list_id + `"><i class="mdi mdi-book-open text-info"></i><span class="ms-2">Open</span></a>`;
+                                            if (i != 1)
+                                                maincontent += `<a class="dropdown-item deletelist" data-id="` + data.readlistdata[i].list_id + `"><i class="mdi mdi-delete text-info"></i><span class="ms-2">Delete</span></a>`;
+                                            maincontent += `</div>
+                                            </div>
+                                        </div>`;
+                                            // if (data.listcontent[i].list_status == "private") {
+                                            //     maincontent += `<div class="card card-inverse-success grid-margin">`;
+                                            // } else {
+                                            //     maincontent += `<div class="card card-inverse-info grid-margin">`;
+                                            // }
+                                        }
+                                        maincontent += `</div>
+                                            </div>
+                                        </div>`;
+                                    }
+                                    maincontent += `</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                      </div>`;
+                                } else {
+                                    maincontent += `  <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-lg-8 d-flex flex-column">
+                                                    <div class="d-flex flex-column">
+                                                        <div class="row flex-grow">
+                                                            <div class="col-lg-6 col-md-6 grid-margin stretch-card">
+                                                                <div class="card">
+                                                                    <div class="card-body text-center">
+                                                        <div>`
+                                    if (data.profiledata[0].photo == null) {
+                                        maincontent += `<img src="../../images/faces/profile/default.png"
+                                                                                id="uploaded_image"
+                                                                                class="img-lg rounded-circle mb-2" />`
+                                    } else {
+                                        maincontent += `<img src="../../images/faces/profile/` + data.profiledata[0].photo + `"
+                                                                                id="uploaded_image"
+                                                                                class="img-lg rounded-circle mb-2" />`
+                                    }
+                                    maincontent += `<h4>` + data.profiledata[0].username + `</h4>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-center">
+                                                                <select id="profile-rating" name="rating"
+                                                                    autocomplete="off">
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-info btn-sm mt-3 show-profile-photo" data-bs-toggle="modal" data-bs-target="#modal">Show picture</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 grid-margin stretch-card">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title  card-title-dash">Profile info
+                                                        </h4>
+                                                        <div class="list align-items-center border-bottom py-2">
+                                                            <div class="wrapper w-100">
+                                                                <p class="mb-2 font-weight-medium">
+                                                                    Name
+                                                                </p>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i class="mdi mdi-account text-muted me-1"></i>
+                                                                        <p class="mb-0 text-small text-muted">`
+                                    if (data.profiledata[0].ufname == null && data.profiledata[0].ulname == null) {
+                                        maincontent += '--------';
+                                    } else {
+                                        if (data.profiledata[0].ufname == null)
+                                            maincontent += data.profiledata[0].ulname;
+                                        else if (data.profiledata[0].ulname == null)
+                                            maincontent += data.profiledata[0].ufname;
+                                        else
+                                            maincontent += data.profiledata[0].ufname + ` ` + data.profiledata[0].ulname;
+                                    }
+                                    maincontent += `</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="list align-items-center border-bottom py-2">
+                                                            <div class="wrapper w-100">
+                                                                <p class="mb-2 font-weight-medium">
+                                                                    Gender
+                                                                </p>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i
+                                                                            class="mdi mdi-gender-female text-muted me-1"></i>
+                                                                            <p class="mb-0 text-small text-muted">`
+                                    if (data.profiledata[0].gender == "" || data.profiledata[0].gender == null) {
+                                        maincontent += '--------';
+                                    } else {
+                                        maincontent += data.profiledata[0].gender;
+                                    }
+                                    maincontent += `</p>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="list align-items-center border-bottom py-2">
+                                                            <div class="wrapper w-100">
+                                                                <p class="mb-2 font-weight-medium">
+                                                                    Password
+                                                                </p>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i
+                                                                            class="mdi mdi-account-key text-muted me-1"></i>
+                                                                        <p class="mb-0 text-small text-muted">
+                                                                            xxxx</p>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row flex-grow">
+                                            <div class="col-12 grid-margin stretch-card">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <!-- <h5 class="card-title card-title-dash">Blogs info
+                                                        </h5> -->
+                                                        <div class="text-center">
+                                                            <div class="pt-4 mb-3">
+                                                                <div class="row">
+                                                                    <div class="col-4">
+                                                                    <h6>`+ data.totalblog[0].totalblogs + `</h6>
+
+                                                                        <p>Blogs</p>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                    <h6>`+ data.totalcomment[0].totalcomments + `</h6>
+                                                                        
+                                                                        <p>Comments</p>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <h6>`+ data.totallike[0].totallikes + `</h6>
+                                                                        
+                                                                        <p>Likes</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-lg-4 d-flex flex-column">
+                                    <div class="row flex-grow">
+                                        <div class="col-12 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="card-title  card-title-dash">Contact info
+                                                    </h4>
+
+                                                    <div class="list align-items-center border-bottom py-2">
+                                                        <div class="wrapper w-100">
+                                                            <p class="mb-2 font-weight-medium">
+                                                                Email
+                                                            </p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i class="mdi mdi-email text-muted me-1"></i>
+                                                                    <p class="mb-0 text-small text-muted">`
+                                    if (data.profiledata[0].email == null) {
+                                        maincontent += '--------';
+                                    } else {
+                                        maincontent += data.profiledata[0].email;
+                                    }
+                                    maincontent += `</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list align-items-center border-bottom py-2">
+                                                        <div class="wrapper w-100">
+                                                            <p class="mb-2 font-weight-medium">
+                                                                Contact no.
+                                                            </p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i class="mdi mdi-phone text-muted me-1"></i>
+                                                                    <p class="mb-0 text-small text-muted">`
+                                    if (data.profiledata[0].mbno == null) {
+                                        maincontent += '--------';
+                                    } else {
+                                        maincontent += data.profiledata[0].mbno;
+                                    }
+                                    maincontent += `</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row flex-grow">
+                                        <div class="col-12 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="card-title  card-title-dash">Other info
+                                                    </h4>
+
+                                                    <div class="list align-items-center border-bottom py-2">
+                                                        <div class="wrapper w-100">
+                                                            <p class="mb-2 font-weight-medium">
+                                                                User type
+                                                            </p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i
+                                                                        class="mdi mdi-account-multiple-outline text-muted me-1"></i>
+                                                                        <p class="mb-0 text-small text-muted">`
+                                    if (data.profiledata[0].user_type == null) {
+                                        maincontent += '--------';
+                                    } else {
+                                        maincontent += data.profiledata[0].user_type;
+                                    }
+                                    maincontent += `</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list align-items-center border-bottom py-2">
+                                                        <div class="wrapper w-100">
+                                                            <p class="mb-2 font-weight-medium">
+                                                                Date joined
+                                                            </p>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i
+                                                                        class="mdi mdi-calendar-plus text-muted me-1"></i>
+                                                                        <p class="mb-0 text-small text-muted">`
+                                    if (data.profiledata[0].joindate == null) {
+                                        maincontent += '--------';
+                                    } else {
+                                        const joindata = data.profiledata[0].joindate.split(" ")[0].split("-");
+                                        const sdate = new Date(joindata[0], joindata[1] - 1, joindata[2]);
+                                        const date = sdate.toString().split(" ");
+                                        var strdate = date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
+                                        maincontent += strdate;
+                                    }
+                                    maincontent += `</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        </div>
+                                    </div>
+                                    <div>
+                                    <div class="home-tab">
+                                        <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                                            <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link ps-0 active" id="home-tab" data-bs-toggle="tab"
+                                                href="#Blogs" role="tab" aria-controls="Blogs"
+                                                aria-selected="true">Blogs</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="read-list" data-bs-toggle="tab" href="#audiences"
+                                                role="tab" aria-selected="false">Read list</a>
+                                        </li>
+                                    </ul>
+                                    </div>
+                                    
+                                    <div class="tab-content tab-content-basic">
+                                        <div class="tab-pane fade active show" id="Blogs" role="tabpanel"
+                                        aria-labelledby="home-tab">
+                                        <div class="cards grid-row">`
+                                    console.log(data.blogdata.length)
+                                    for (var i = 0; i < data.blogdata.length; i++) {
+                                        if (data.blogdata[i].blog_status != "deleted") {
+                                            const postdate = data.blogdata[i].blog_post_time.split(" ")[0].split("-");
+                                            const sdate = new Date(postdate[0], postdate[1] - 1, postdate[2]);
+                                            const date = sdate.toString().split(" ");
+                                            var strdate = date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
+                                            maincontent += `<div class="card blog hover" id="card-` + data.blogdata[i].blog_id + `" data-id="` + data.blogdata[i].blog_id + `">
+                                                    <div class="dropdown" align= center>
+                                                    <i class="mdi mdi-dots-horizontal" type="button" id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                              <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
+                                                <a class="dropdown-item savereadlater"  data-id="` + data.blogdata[i].blog_id + `"><i class="mdi mdi-clock text-info"></i><span class="ms-2">Save to Read later</span></a>
+                                                     <a class="dropdown-item savereadlist"  data-id="`+ data.blogdata[i].blog_id + `" data-bs-toggle="modal" data-bs-target="#readlistcontent" data-whatever="Add blog in read-list"><i class="mdi mdi-playlist-plus fw-bold text-info"></i><span class="ms-2">Save to Readlist</span></a>
+                                                </div>
+                                                </div>
+                                                <div class="card-top blogpreview loding" data-id="`+ data.blogdata[i].blog_id + `">
+                                              <img src="../../images/uploadimage/`+ data.blogdata[i].blog_cover_photo + `" alt="Blog Name">
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <span class="cspaan date">`+ strdate + `</span>
+                                              <p class="cp hover-cursor show-profile" data-id=`+ data.blogdata[i].usid + `>`
+                                            if (data.blogdata[i].photo == null) {
+                                                maincontent += `  <img class="profile-pic" src="../../images/faces/profile/default.png">`
+                                            } else {
+                                                maincontent += `  <img class="profile-pic" src="../../images/faces/profile/` + data.blogdata[i].photo + `">`
+                                            }
+
+                                            maincontent += data.blogdata[i].username + `</p>
+                                            </div> 
+                                            <div class="card-info">
+                                              <h2 class="btitle">`+ data.blogdata[i].blog_title + `</h2>
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <a class="btn btn-outline-primary btn-sm hover" href="../blogs/blog.html?s=`+ data.blogdata[i].blog_id + `">Read
+                                              </a>
+                                              <p class="nav">
+                                              <i class="lcv mdi mdi-heart"></i>&nbsp;`+ data.blogdata[i].likes + `
+                                              <i class="lcv mdi mdi-comment"></i>&nbsp;`+ data.blogdata[i].comments + `
+                                              <i class="lcv mdi mdi-eye "></i>&nbsp;`+ data.blogdata[i].blog_view + `
+                                              </p>                            
+                                              </div> 
+                                              </div>`;
+                                        }
+                                    }
+                                    maincontent += `</div>
+                                    </div>
+                                    <div class="tab-pane fade" id="audiences" role="tabpanel"
+                                        aria-labelledby="read-list">
+                                        <div class="cards">
+                                            <div class="col-md grid-margin p-3 row stretch-card">`
+                                    for (i = 0; i < data.readlistdata.length; i++) {
+
+                                        maincontent += `<div class="card grid-margin" id="card-` + data.readlistdata[i].list_id + `">
+                                    <div class="card-body pb-0">
+                                        <div class="d-flex read-list hover-cursor" data-id="`+ data.readlistdata[i].list_id + `">
+                                        <i class="mdi mdi-format-list-bulleted img-sm rounded-10 mdi-36px"></i>
+                                            <div class="ms-3">
+                                                    <h6 class="mb-1">`+ data.readlistdata[i].list_title + `</h6>
+                                                    <small class="text-muted mb-0"><i
+                                                            class="mdi mdi-format-list-bulleted me-1"></i>`+ data.readlistdata[i].totalblog + `
+                                                        Blogs</small>
+                                                 </div>
+                                             </div>
+                                        </div>
+                                    </div>`;
+                                    }
+                                    maincontent += `
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                                }
+                            }
+
+                        }
+                        maincontent += `</div>`;
+                    }
+                    $("#main-content").append(maincontent);
+                    $("#loader").hide()
+                    $(".body-content").show();
+                    $('#profile-rating').barrating({
+                        theme: 'css-stars',
+                        showSelectedRating: false
+                    });
+                },
+                error: (error) => servererror(error)
+            })
+
+
+            $("#signout").on("click", () => {
+                $.ajax({
+                    url: "http://localhost/mycode/template/star1/api/logout.php",
+                    type: "GET",
+                    dataType: "JSON",
+                    success: (data) => {
+                        if (data.status == 1) {
+                            window.location.href = "../login/index.html";
+                        }
+                    }
+                });
+            })
+            $('#modal').on('hidden.bs.modal', function () {
+                // isModalOpen = false;
+                // alert("hide")
+                $(this).find('.modal-dialog').addClass('my-custom-animation');
+
+                utype = otptype = email = number = "";
+                checknumber = checknumber = false;
+            });
+
+            var $modal = $('#modal1');
+            var image = document.getElementById('sample_image');
+            var cropper;
+            $(document).on("change", "#upload_image", function (event) {
+                // alert(1)
+                var files = event.target.files;
+                console.log(files);
+                var done = function (url) {
+                    // console.log($modal.text());
+                    image.src = url;
+                    $modal.modal('show');
+                };
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            })
+            // $('#upload_image').change(function (event) {
+
+            // });
+            $modal.on('shown.bs.modal', function () {
+                cropper = new Cropper(image, {
+                    aspectRatio: 1,
+                    viewMode: 3,
+                    preview: '.preview'
+                });
+            }).on('hidden.bs.modal', function () {
+                cropper.destroy();
+                cropper = null;
+            });
+            $('#crop').click(function () {
+                canvas = cropper.getCroppedCanvas({
+                    width: 400,
+                    height: 400
+                });
+
+                canvas.toBlob(function (blob) {
+                    url = URL.createObjectURL(blob);
+                    var reader = new FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function () {
+                        var base64data = reader.result;
+                        $.ajax({
+                            url: '../../api/profileupload.php',
+                            method: 'POST',
+                            data: { image: base64data },
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.status) {
+                                    $modal.modal('hide');
+                                    showSuccessToast("Profile update!", data.message);
+                                    $('#uploaded_image').attr('src', "../../images/faces/profile/" + data.profilepic);
+                                    $(".remove-image").fadeIn(700);
+                                }
+                            }
+                        });
+                    };
+                });
+            });
+        })
+        // window.addEventListener('devtoolschange', event => {
+        //     if (event.detail.isOpen) {
+        //         alert('Developer tools are open!');
+        //         // You could also redirect the user to another page, or take some other action here
+        //     }
+        // });
+
+        prevPtag = null;
+        $(document).on("click", ".edit-info", function () {
+            utype = $(this).data("utype");
+            // alert(utype)
+            prevPtag = $(this).prev().find('p');
+            $.ajax({
+                url: "../../api/profile.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'profile_data' }),
+                dataType: "JSON",
+                success: (data) => {
+
+                    console.log(data);
+                    if (utype == "profilepic") {
+                        alert("profile");
+                        var files = event.target.files;
+                        var done = function (url) {
+                            image.src = url;
+                            $modal.modal('show');
+                        };
+                        if (files && files.length > 0) {
+                            reader = new FileReader();
+                            reader.onload = function (event) {
+                                done(reader.result);
+                            };
+                            reader.readAsDataURL(files[0]);
+                        }
+                    } else {
+
+                        modalcontent = `
+                        <div class="card card-rounded">
+                            <div class="card-body">
+                                <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="d-flex align-items-center align-content-center">
+                                    <h4 class="card-title card-title-dash">
+                                        Edit `+ utype + `
+                                    </h4>
+                                    <button type="button" class="badge badge-pill btn-outline-behance ms-auto"
+                                        data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body container-scroller" id="bodycontent">`;
+                        if (utype == "name" || utype == "gender" || utype == "usertype" || utype == "username") {
+                            if (utype == "name") {
+                                modalcontent += `<div class="form-group">
+                                   <label>First Name</label>
+                                   <input type="text" class="form-control" id="fname"
+                                   placeholder="Enter first name" value="`+ ((data.profiledata[0].ufname == null) ? "" : data.profiledata[0].ufname) + `">
+                                 </div>
+                                 <div class="form-group">
+                                   <label>Last Name</label>
+                                   <input type="text" class="form-control" id="lname"
+                                   placeholder="Enter last name" value="`+ ((data.profiledata[0].ulname == null) ? "" : data.profiledata[0].ulname) + `">
+                                 </div>`
+                            } else if (utype == "username") {
+                                modalcontent += `<div class="form-group">
+                                   <label>Userame</label>
+                                   <input type="text" class="form-control" id="uname"
+                                   placeholder="Enter first name" value="`+ data.profiledata[0].username + `">
+                                 </div>`
+                            }
+                            else if (utype == "gender") {
+                                modalcontent += `<div class="form-group">
+                                   <label>Gender</label>
+                                   <select class="form-control" id="languagebox">
+                                     <option value=""`+ ((data.profiledata[0].gender == "" || data.profiledata[0].gender == null) ? "selected" : "") + `>Select your gender</option>
+                                     <option value="Male"`+ ((data.profiledata[0].gender == "male") ? "selected" : "") + `>Male</option>
+                                     <option value="Female"`+ ((data.profiledata[0].gender == "female") ? "selected" : "") + `>Female</option>
+                                     <option value="Other"`+ ((data.profiledata[0].gender == "other") ? "selected" : "") + `>Other</option>
+                                   </select> 
+                                 </div>`
+                            } else if (utype == "usertype") {
+                                modalcontent += `<div class="form-group">
+                                   <label>User type</label>
+                                   <select class="form-control" id="usertype">
+                                     <option value="blogger" `+ ((data.profiledata[0].user_type == "blogger") ? "selected" : "") + `>blogger</option>
+                                     <option value="user"  `+ ((data.profiledata[0].user_type == "user") ? "selected" : "") + `>user</option>
+                                   </select> 
+                                 </div>`
+                            }
+                            modalcontent += ` <div class="d-flex align-items-center">
+                                        <div class="ms-auto">
+                                           <button type="button"
+                                           class="button btn btn-outline-danger btn-rounded btn-sm close" data-bs-dismiss="modal" aria-label="Close"><i class="mdi mdi-close-circle-outline"></i><span class="ms-1">Cancel</span></button>
+                                           <button type="button"
+                                           class="button btn btn-outline-primary btn-rounded btn-sm changeinfo"><i class="mdi mdi-content-save"></i><span class="ms-1">Save</span></button>
+                                        </div>
+                                     </div>`
+                        }
+                        else if (utype == "password") {
+                            modalcontent += `<div class="form-group">
+                                   <label>Current password</label>
+                                   <input type="password" class="form-control" id="oldpassword"
+                                   placeholder="Enter current password" value="">
+                                 </div>
+                                 <div class="form-group">
+                                   <label>New password</label>
+                                   <input type="password" class="form-control" id="newpassword"
+                                   placeholder="Enter new password" value="">
+                                 </div>
+                                 <div class="form-group">
+                                   <label>Retype new password</label>
+                                   <input type="password" class="form-control" id="renewpassword"
+                                   placeholder="Retype new password" value="">
+                                 </div>
+                                 <p class="card-description forgotpassword hover-cursor" data-type='password'>
+                                    Forgot password?
+                                </p>
+                                 <div class="d-flex align-items-center">
+                                        <div class="ms-auto">
+                                           <button type="button"
+                                           class="button btn btn-outline-danger btn-rounded btn-sm close" data-bs-dismiss="modal" aria-label="Close"><i class="mdi mdi-close-circle-outline"></i><span class="ms-1">Cancel</span></button>
+                                           <button type="button"
+                                           class="button btn btn-outline-primary btn-rounded btn-sm changeinfo"><i class="mdi mdi-key-change"></i><span class="ms-1">Change password</span></button>
+                                        </div>
+                                     </div>`
+                        }
+                        else if (utype == "email" || utype == "number") {
+                            modalcontent += `<div class="form-group">
+                                   <label>Password</label>
+                                   <input type="password" class="form-control" id="cpassword"
+                                   placeholder="Enter your password" value="">
+                                 </div>`
+                            if (utype == "email") {
+                                modalcontent += `<p class="card-description forgotpassword hover-cursor" data-type='email'>
+                                        Forgot password?
+                                    </p>`
+                            } else {
+                                modalcontent += `<p class="card-description forgotpassword hover-cursor" data-type='number'>
+                                        Forgot password?
+                                    </p>`
+                            }
+                            modalcontent += `   <div class="d-flex align-items-center">
+                                        <div class="ms-auto">
+                                           <button type="button"
+                                           class="button btn btn-outlinr-danger btn-rounded btn-sm close" data-bs-dismiss="modal" aria-label="Close"><i class="mdi mdi-close-circle-outline"></i><span class="ms-1">Cancel</span></button>
+                                           <button type="button"
+                                           class="button btn btn-outline-primary btn-rounded btn-sm changeinfo"><i class="mdi mdi-check-circle-outline"></i><span class="ms-1">Confirm</span></button>
+                                        </div>
+                                     </div>`
+                        }
+                        modalcontent += `
+                    </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>`;
+                        modalcontent += `</div>`;
+                        $("#modal-content").html(modalcontent);
+                        $("#modal").modal("show");
+                    }
+
+                }
+            })
+            // alert(prevPtag.text());
+
+        })
+        $(document).on("click", ".forgotpassword", function () {
+            // console.log();
+            $.ajax({
+                url: "../../api/profile.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'profile_data' }),
+                dataType: "JSON",
+                success: (data) => {
+                    console.log(data);
+                    $.ajax({
+                        url: "../../api/profile.php",
+                        type: "POST",
+                        data: JSON.stringify({ key: 'sendOTP' }),
+                        dataType: "JSON",
+                        success: (data) => {
+                            console.log(data);
+                            if (data.status) {
+                                showSuccessToast("Please Check email!", "Otp send Successfully.")
+                            } else {
+                                showSuccessToast("Please retry", "Otp not send.")
+                            }
+                        },
+                        error: () => showDangerToast("Error", "error in getdata.")
+                    })
+                    modalcontent = ``
+                    modalcontent += `<h4 class="card-title text-center card-title-dash">Email OTP varification</h4>`
+                    modalcontent += `<div class="row">
+                                              <div class="form-group">
+                                    <label>
+                                    OTP send on 
+                                    <span class="link-danger">`+ data.profiledata[0].email + `</span>
+                                    </label>
+                                               <input type="number" class="form-control" id="email" placeholder="Enter otp 4 digit" value="">
+                                              </div>
+                                             <div class="d-flex align-items-center">
+                                              <div class="ms-auto">
+                                               <button type="button" class="button btn btn-danger btn-rounded btn-sm close" data-bs-dismiss="modal" aria-label="Close"><i class="mdi mdi-close-circle-outline"></i><span class="ms-1">Cancel</span></button>
+                                               <button type="button" class="button btn btn-primary btn-rounded btn-sm checkotp" data-ptype='`+ $(this).data('type') + `'><i class="mdi mdi-check-circle-outline"></i><span class="ms-1">Confirm</span></button>
+                                              </div>
+                                             </div>
+                                            </div>
+                                        </div>`
+
+                    $("#bodycontent").html(modalcontent)
+                },
+                error: () => showDangerToast("Error", "error in getdata.")
+            })
+
+        })
+        $(document).on("click", ".checkotp", function () {
+            inputvalue1 = $("#bodycontent").find('input:eq(0)').val();
+            console.log(inputvalue1);
+            $.ajax({
+                url: "../../api/profile.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'checkOTP', otp: inputvalue1 }),
+                dataType: "JSON",
+                success: (data) => {
+                    console.log(data);
+                    if (data.status) {
+                        modalcontent = `<div class="row">
+                                    <div class="form-group">
+                                   <label>New password</label>
+                                   <input type="password" class="form-control" id="newpassword"
+                                   placeholder="Enter new password" value="">
+                                 </div>
+                                 <div class="form-group">
+                                   <label>Retype new password</label>
+                                   <input type="password" class="form-control" id="renewpassword"
+                                   placeholder="Retype new password" value="">
+                                 </div>
+                                             <div class="d-flex align-items-center">
+                                              <div class="ms-auto">
+                                               <button type="button" class="button btn btn-danger btn-rounded btn-sm close" data-bs-dismiss="modal" aria-label="Close"><i class="mdi mdi-close-circle-outline"></i><span class="ms-1">Cancel</span></button>
+                                               <button type="button" class="button btn btn-primary btn-rounded btn-sm changeinfo" data-ptype='`+ $(this).data('ptype') + `'><i class="mdi mdi-key-change"></i><span class="ms-1">Change password</span></button>
+                                              </div>
+                                             </div>
+                                            </div>
+                                        </div>`
+                        $("#bodycontent").html(modalcontent)
+                        utype = "forgotpassword"
+                    } else {
+                        $("#bodycontent").find('input:eq(0)').addClass('Error')
+                        showDangerToast("Please Check email!", data.message);
+                    }
+                    // if (data.status) {
+                    // } else {
+                    //     showSuccessToast("Please retry", "Otp not send.")
+                    // }
+                },
+                error: () => showDangerToast("Error", "error in getdata.")
+            })
+            // modalcontent = `<div class="card">
+            //                              <div class="card-body">
+            //                                 <div class="row">
+            //     <div class="form-group">
+            //                        <label>New password</label>
+            //                        <input type="password" class="form-control" id="newpassword"
+            //                        placeholder="Enter new password" value="">
+            //                      </div>
+            //                      <div class="form-group">
+            //                        <label>Retype new password</label>
+            //                        <input type="password" class="form-control" id="renewpassword"
+            //                        placeholder="Retype new password" value="">
+            //                      </div>
+            //                                  <div class="d-flex align-items-center">
+            //                                   <div class="ms-auto">
+            //                                    <button type="button" class="button btn btn-danger btn-rounded btn-sm close" data-bs-dismiss="modal" aria-label="Close"><i class="mdi mdi-close-circle-outline"></i><span class="ms-1">Cancel</span></button>
+            //                                    <button type="button" class="button btn btn-primary btn-rounded btn-sm checkotp"><i class="mdi mdi-check-circle-outline"></i><span class="ms-1">Confirm</span></button>
+            //                                   </div>
+            //                                  </div>
+            //                                 </div>
+            //                             </div>`
+            // $("#bodycontent").html(modalcontent)
+        })
+        otptype = email = number = "";
+        $(document).on("click", ".changeinfo", function () {
+            // alert()
+            // otptype = email = number = "" ;
+            // profile_data
+            // $.ajax({
+            //     url: "../../api/profile.php",
+            //     type: "POST",
+            //     data: JSON.stringify({ key: 'profile_data' }),
+            //     dataType: "JSON",
+            //     success: (data) => {
+            //         console.log(data);
+            //     }
+            // })
+            if (otptype == "") {
+                if (utype == "name") {
+                    // alert(1)
+                    inputvalue1 = $("#bodycontent").find('input:eq(0)').val();
+                    inputvalue2 = $("#bodycontent").find('input:eq(1)').val();
+                    var name = [inputvalue1, inputvalue2];
+                    $.ajax({
+                        url: "../../api/profile.php",
+                        type: "POST",
+                        data: JSON.stringify({ key: 'updateprofile', type: 'name', val: name }),
+                        dataType: "JSON",
+                        success: (data) => {
+                            console.log(data);
+                            console.log(inputvalue1 + inputvalue2);
+                            if (data.profiledata.ulname == null && data.profiledata.ufname == null) {
+                                prevPtag.text("--------");
+                            } else {
+                                if (data.profiledata.ufname == null)
+                                    prevPtag.text(data.profiledata.ulname);
+                                else if (data.profiledata.ulname == null)
+                                    prevPtag.text(data.profiledata.ufname);
+                                else
+                                    prevPtag.text(data.profiledata.ufname + " " + data.profiledata.ulname);
+                            }
+                            $("#modal").modal('hide');
+                        },
+                        error: () => showDangerToast("Not Update", "Please retry.")
+                    })
+                }
+                else if (utype == "gender") {
+                    inputindex = $("#bodycontent").find('select:eq(0)').prop("selectedIndex");
+                    if (inputindex == 0) {
+                        gender = "";
+                    } else if (inputindex == 1) {
+                        gender = "male";
+                    } else if (inputindex == 2) {
+                        gender = "female";
+                    } else if (inputindex == 3) {
+                        gender = "other";
+                    }
+                    $.ajax({
+                        url: "../../api/profile.php",
+                        type: "POST",
+                        data: JSON.stringify({ key: 'updateprofile', type: 'gender', val: gender }),
+                        dataType: "JSON",
+                        success: (data) => {
+                            console.log(data);
+                            if (data.status) {
+                                if (data.profiledata.gender == null) {
+                                    prevPtag.text("--------");
+                                } else {
+                                    prevPtag.text(data.profiledata.gender);
+                                }
+                                $("#modal").modal('hide');
+                            } else {
+                                showDangerToast("Error!", "please try again.")
+                            }
+                        },
+                        error: () => showDangerToast("Not Update", "Please retry.")
+                    })
+                    console.log(inputindex);
+                } else if (utype == "forgotpassword") {
+                    ptype = $(this).data('ptype');
+                    inputvalue1 = $("#bodycontent").find('input:eq(0)').val();
+                    inputvalue2 = $("#bodycontent").find('input:eq(1)').val();
+                    var passwordregex = /^[A-Z]{1}[a-zA-z0-9@#$]{8,}$/;
+                    function removeClass() {
+                        $("#bodycontent").find('input:eq(0)').removeClass("Error");
+                        $("#bodycontent").find('input:eq(1)').removeClass("Error");
+
+                    }
+                    if (inputvalue1 == "" || inputvalue2 == "") {
+                        removeClass();
+                        if (inputvalue1 == "") {
+                            $("#bodycontent").find('input:eq(0)').addClass("Error");
+                        }
+                        if (inputvalue2 == "") {
+                            $("#bodycontent").find('input:eq(1)').addClass("Error");
+                        }
+                        showDangerToast("Please Check", "requied all field");
+                    } else {
+                        removeClass();
+                        if (passwordregex.test(inputvalue1) == false) {
+                            showDangerToast("Please Check!", "password must contain:<br>one special character<br>one uppercase character<br>one number and overall password length must be greater than 7<br><br>eg :- Hello@123");
+                            $("#bodycontent").find('input:eq(0)').addClass("Error");
+                            $("#bodycontent").find('input:eq(1)').addClass("Error");
+                        } else {
+                            removeClass();
+                            if (inputvalue1 != inputvalue2) {
+                                showDangerToast("Please Check", "Both password is not same");
+                                $("#bodycontent").find('input:eq(0)').addClass("Error");
+                                $("#bodycontent").find('input:eq(1)').addClass("Error");
+                            } else {
+                                removeClass();
+                                $.ajax({
+                                    url: "../../api/profile.php",
+                                    type: "POST",
+                                    data: JSON.stringify({ key: 'updateprofile', type: 'password', val: inputvalue1 }),
+                                    dataType: "JSON",
+                                    success: (data) => {
+                                        console.log(data);
+                                        if (data.status) {
+                                            showSuccessToast("Password updated.", "Your password change succesfully.");
+                                            if (ptype == "email") {
+                                                modalcontent = `<div class="row"><div class="form-group">
+                                                                        <label>Email</label>
+                                                                        <input type="text" class="form-control" id="email" placeholder="Enter new email" value="">
+                                                                        </div>
+                                                                        <div class="d-flex align-items-center">
+                                                                                <div class="ms-auto">
+                                                                                <button type="button" class="button btn btn-danger btn-rounded btn-sm close" data-bs-dismiss="modal" aria-label="Close"><i class="mdi mdi-close-circle-outline"></i><span class="ms-1">Cancel</span></button>
+                                                                                <button type="button" class="button btn btn-primary btn-rounded btn-sm changeinfo"><i class="mdi mdi-content-save"></i><span class="ms-1">Save</span></button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>`;
+                                                otptype = "changeemail";
+                                                utype = ptype;
+                                                $("#bodycontent").html(modalcontent)
+                                            } else if (ptype == "number") {
+                                                modalcontent = `<div class="card">
+                                                                    <div class="card-body pb-0">
+                                                                        <div class="row"><div class="form-group">
+                                                                <label>Number</label>
+                                                                <input type="text" class="form-control" id="number" placeholder="Enter new number" value="">
+                                                                </div>
+                                                                <div class="d-flex align-items-center">
+                                                                        <div class="ms-auto">
+                                                                        <button type="button" class="button btn btn-danger btn-rounded btn-sm close" data-bs-dismiss="modal" aria-label="Close"><i class="mdi mdi-close-circle-outline"></i><span class="ms-1">Cancel</span></button>
+                                                                        <button type="button" class="button btn btn-primary btn-rounded btn-sm changeinfo"><i class="mdi mdi-content-save"></i><span class="ms-1">Save</span></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </div>`;
+                                                otptype = "changenumber";
+                                                $("#bodycontent").html(modalcontent)
+                                            } else {
+                                                $("#modal").modal('hide');
+                                            }
+                                        } else {
+                                            showDangerToast("Error.", data.message);
+                                        }
+                                    },
+                                    error: () => showDangerToast("Not Update", "Please retry.")
+                                })
+                            }
+                        }
+                    }
+                }
+                else if (utype == "password") {
+                    // alert()
+                    inputvalue1 = $("#bodycontent").find('input:eq(0)').val();
+                    inputvalue2 = $("#bodycontent").find('input:eq(1)').val();
+                    inputvalue3 = $("#bodycontent").find('input:eq(2)').val();
+                    var passwordregex = /^[A-Z]{1}[a-zA-z0-9@#$]{8,}$/;
+                    // if (inputvalue1 == "" || (passwordregex.test(inputvalue1) == false)) {
+                    //     removeerrorclass();
+                    //     showDangerToast("Please Check!", "password must contain:<br>one special character<br>one uppercase character<br>one number and overall password length must be greater than 7<br><br>eg :- Hello@123");
+                    // }
+                    function removeClass() {
+                        $("#bodycontent").find('input:eq(0)').removeClass("Error");
+                        $("#bodycontent").find('input:eq(1)').removeClass("Error");
+                        $("#bodycontent").find('input:eq(2)').removeClass("Error");
+                    }
+                    if (inputvalue1 == "" || inputvalue2 == "" || inputvalue3 == "") {
+                        removeClass();
+                        if (inputvalue1 == "") {
+                            $("#bodycontent").find('input:eq(0)').addClass("Error");
+                        }
+                        if (inputvalue2 == "") {
+                            $("#bodycontent").find('input:eq(1)').addClass("Error");
+                        } if (inputvalue3 == "") {
+                            $("#bodycontent").find('input:eq(2)').addClass("Error");
+                        }
+                        showDangerToast("Please Check", "requied all field");
+                    } else {
+                        removeClass();
+                        if (passwordregex.test(inputvalue2) == false) {
+                            showDangerToast("Please Check!", "password must contain:<br>one special character<br>one uppercase character<br>one number and overall password length must be greater than 7<br><br>eg :- Hello@123");
+                            $("#bodycontent").find('input:eq(1)').addClass("Error");
+                            $("#bodycontent").find('input:eq(2)').addClass("Error");
+                        } else {
+                            removeClass();
+                            if (inputvalue2 != inputvalue3) {
+                                showDangerToast("Please Check", "Both password is not same");
+                                $("#bodycontent").find('input:eq(1)').addClass("Error");
+                                $("#bodycontent").find('input:eq(2)').addClass("Error");
+                            } else {
+                                removeClass();
+                                $.ajax({
+                                    url: "../../api/profile.php",
+                                    type: "POST",
+                                    data: JSON.stringify({ key: 'checkpassword', password: inputvalue1 }),
+                                    dataType: "JSON",
+                                    success: (data) => {
+                                        console.log(data);
+                                        if (data.status) {
+                                            $.ajax({
+                                                url: "../../api/profile.php",
+                                                type: "POST",
+                                                data: JSON.stringify({ key: 'updateprofile', type: 'password', val: inputvalue3 }),
+                                                dataType: "JSON",
+                                                success: (data) => {
+                                                    console.log(data);
+                                                    if (data.status) {
+                                                        showSuccessToast("Password updated.", "Your password change succesfully.");
+                                                        $("#modal").modal('hide');
+                                                    } else {
+                                                        showDangerToast("Error.", data.message);
+                                                    }
+                                                },
+                                                error: () => showDangerToast("Not Update", "Please retry.")
+                                            })
+                                        } else {
+                                            $("#bodycontent").find('input:eq(0)').addClass("Error");
+                                            showDangerToast("Please check!", data.message);
+                                        }
+                                    },
+                                    error: () => showDangerToast("Not Update", "Please retry.")
+                                })
+                            }
+                        }
+                    }
+                    // var password = [inputvalue1, inputvalue2, inputvalue3];
+                    // console.log(password);
+                } else if (utype == "usertype") {
+                    inputindex = $("#bodycontent").find('select:eq(0)').prop("selectedIndex");
+                    if (inputindex == 0) {
+                        val = "blogger";
+                    } else if (inputindex == 1) {
+                        val = "user";
+                    }
+                    $.ajax({
+                        url: "../../api/profile.php",
+                        type: "POST",
+                        data: JSON.stringify({ key: 'updateprofile', type: 'user_type', val: val }),
+                        dataType: "JSON",
+                        success: (data) => {
+                            console.log(data);
+                            if (data.status) {
+                                prevPtag.text(data.profiledata.user_type);
+                                $("#modal").modal('hide');
+                                showSuccessToast("Update", "Account type switched in " + data.profiledata.user_type + ".");
+
+                            } else {
+                                showDangerToast("Error.", data.message);
+                            }
+                        },
+                        error: () => showDangerToast("Not Update", "Please retry.")
+                    })
+                } else if (utype == "username") {
+                    inputvalue1 = $("#bodycontent").find('input:eq(0)').val();
+                    // alert(inputvalue1);
+                    if (inputvalue1 == "" || inputvalue1.length < 8) {
+                        inputvalue1 = $("#bodycontent").find('input:eq(0)').addClass('Error');
+                        showDangerToast("Please Check!", "Username should be more than 8 letters.");
+                    } else {
+                        $.ajax({
+                            url: "../../api/login.php",
+                            type: "POST",
+                            data: JSON.stringify({ fkey: 'checkuser', suname: inputvalue1 }),
+                            dataType: "JSON",
+                            success: function (data) {
+                                if (!data.status) {
+                                    showDangerToast("Please Check!", "Username is already there.<b>Please enter a uniq username. </b>");
+                                } else {
+                                    $.ajax({
+                                        url: "../../api/profile.php",
+                                        type: "POST",
+                                        data: JSON.stringify({ key: 'updateprofile', type: 'username', val: inputvalue1 }),
+                                        dataType: "JSON",
+                                        success: (data) => {
+                                            console.log(data);
+                                            if (data.status) {
+                                                showSuccessToast("Update!", "Changed Username <b>" + inputvalue1 + "<b>.");
+                                                $("#username").html(inputvalue1 + `<div class="badge badge-pill btn-outline-info edit-info ms-1"
+                                                                        data-utype="username">
+                                                                        <i class="mdi mdi-lead-pencil"></i>
+                                                                    </div>`)
+                                            } else {
+                                                showDangerToast("Error.", data.message);
+                                            }
+                                            $("#modal").modal('hide');
+                                        },
+                                        error: () => showDangerToast("Not Update", "Please retry.")
+                                    })
+                                }
+                                console.log(data);
+                            }
+                        })
+                    }
+                }
+                else if (utype == "email") {
+                    inputvalue1 = $("#bodycontent").find('input:eq(0)').val();
+                    if (inputvalue1 == "") {
+                        inputvalue1 = $("#bodycontent").find('input:eq(0)').addClass('Error');
+                        showDangerToast("Please check!", "Enter your password.")
+                    } else {
+                        $.ajax({
+                            url: "../../api/profile.php",
+                            type: "POST",
+                            data: JSON.stringify({ key: 'checkpassword', password: inputvalue1 }),
+                            dataType: "JSON",
+                            success: (data) => {
+                                console.log(data);
+                                if (data.status) {
+                                    modalcontent = `<div class="row"><div class="form-group">
+                                                    <label>Email</label>
+                                                    <input type="text" class="form-control" id="email" placeholder="Enter new email" value="">
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                            <div class="ms-auto">
+                                                            <button type="button" class="button btn btn-danger btn-rounded btn-sm close" data-bs-dismiss="modal" aria-label="Close"><i class="mdi mdi-close-circle-outline"></i><span class="ms-1">Cancel</span></button>
+                                                            <button type="button" class="button btn btn-primary btn-rounded btn-sm changeinfo"><i class="mdi mdi-content-save"></i><span class="ms-1">Save</span></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>`;
+                                    otptype = "changeemail";
+                                    $("#bodycontent").html(modalcontent);
+                                } else {
+                                    $("#bodycontent").find('input:eq(0)').addClass("Error");
+                                    showDangerToast("Please check!", data.message);
+                                }
+                            },
+                            error: () => showDangerToast("Not Update", "Please retry.")
+                        })
+                    }
+
+
+                } else if (utype == "number") {
+                    modalcontent = `<div class="row"><div class="form-group">
+                                       <label>Number</label>
+                                       <input type="text" class="form-control" id="number" placeholder="Enter new number" value="">
+                                     </div>
+                                     <p class="card-description chengeemail hover-cursor">
+                                                        Change number?
+                                                    </p>
+                                     <div class="d-flex align-items-center">
+                                            <div class="ms-auto">
+                                               <button type="button" class="button btn btn-danger btn-rounded btn-sm close" data-bs-dismiss="modal" aria-label="Close"><i class="mdi mdi-close-circle-outline"></i><span class="ms-1">Cancel</span></button>
+                                               <button type="button" class="button btn btn-primary btn-rounded btn-sm changeinfo"><i class="mdi mdi-content-save"></i><span class="ms-1">Save</span></button>
+                                            </div>
+                                         </div>
+                                    </div>
+                              </div>`;
+                    otptype = "changenumber";
+                    $("#bodycontent").html(modalcontent);
+                }
+            } else {
+                changeemail = '';
+                if (otptype == "changeemail" || otptype == "changenumber") {
+                    checkemail = checknumber = false
+                    if (otptype == "changeemail") {
+                        inputvalue1 = $("#bodycontent").find('input:eq(0)').val();
+                        var emailragex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+                        // alert(email)
+                        if (inputvalue1 == "" || (emailragex.test(inputvalue1) == false)) {
+                            $("#bodycontent").find('input:eq(0)').addClass("Error");
+                            showDangerToast("Please Check!", "Enter valid Email.");
+                        } else {
+                            $.ajax({
+                                url: "../../api/profile.php",
+                                type: "POST",
+                                data: JSON.stringify({ key: 'sendOTP', email: inputvalue1 }),
+                                dataType: "JSON",
+                                success: (data) => {
+                                    console.log(data);
+                                    if (data.status) {
+                                        changeemail = inputvalue1;
+                                        showSuccessToast("Please Check email!", "Otp send Successfully.")
+                                    } else {
+                                        showSuccessToast("Please retry", "Otp not send.")
+                                    }
+                                },
+                                error: () => showDangerToast("Error", "error in getdata.")
+                            })
+                            checkemail = true;
+                        }
+                    } else if (otptype == "changenumber") {
+                        number = $("#number").val()
+                        if (number == "") {
+                            $("#number").addClass("Error");
+                            showSuccessToast("hhh", "dd");
+                        } else {
+                            checknumber = true;
+                        }
+                    }
+                    if (checkemail || checknumber) {
+                        checkemail = checknumber = false
+                        modalcontent = ``;
+                        if (otptype == "changeemail")
+                            modalcontent += `<h4 class="card-title text-center card-title-dash">Email OTP varification</h4>`
+                        else if (otptype == "changenumber")
+                            modalcontent += `<h4 class="card-title text-center card-title-dash">Phon OTP varification</h4>`
+                        modalcontent += `<div class="row">
+                                              <div class="form-group">
+                                               <label>OTP</label>
+                                               <input type="text" class="form-control" id="email" placeholder="Enter otp 4 digit" value="">
+                                              </div>
+                                              <p class="card-description chengeemail hover-cursor">
+                                                        Change email?
+                                                    </p>
+                                             <div class="d-flex align-items-center">
+                                              <div class="ms-auto">
+                                               <button type="button" class="button btn btn-danger btn-rounded btn-sm close" data-bs-dismiss="modal" aria-label="Close"><i class="mdi mdi-close-circle-outline"></i><span class="ms-1">Cancel</span></button>
+                                               <button type="button" class="button btn btn-primary btn-rounded btn-sm otpcheck"><i class="mdi mdi-content-save"></i><span class="ms-1">Save</span></button>
+                                              </div>
+                                             </div>
+                                            </div>
+                                        </div>`
+                        utype = "otpconfirm";
+                        otptype = "";
+                        $("#bodycontent").html(modalcontent)
+                    }
+                }
+                $(document).on("click", ".otpcheck", function () {
+                    inputvalue1 = $("#bodycontent").find('input:eq(0)').val();
+                    if (inputvalue1 == "") {
+                        showDangerToast("Please check email!", "enter Otp.");
+                    } else {
+                        if (utype == "otpconfirm") {
+                            // alert(changeemail)
+                            $.ajax({
+                                url: "../../api/profile.php",
+                                type: "POST",
+                                data: JSON.stringify({ key: 'checkOTP', otp: inputvalue1 }),
+                                dataType: "JSON",
+                                success: (data) => {
+                                    if (data.status) {
+                                        $.ajax({
+                                            url: "../../api/profile.php",
+                                            type: "POST",
+                                            data: JSON.stringify({ key: 'updateprofile', type: 'email', val: changeemail }),
+                                            dataType: "JSON",
+                                            success: (data) => {
+                                                console.log(data);
+                                                if (data.status) {
+                                                    prevPtag.text(data.profiledata.email);
+                                                    $("#modal").modal('hide');
+                                                    showSuccessToast("Update!", "Change email " + data.profiledata.email + ".");
+                                                } else {
+                                                    showDangerToast("Error.", data.message);
+                                                }
+                                            },
+                                            error: () => showDangerToast("Not Update", "Please retry.")
+                                        })
+                                    } else {
+                                        $("#bodycontent").find('input:eq(0)').addClass('Error');
+                                        showDangerToast("Please check email!", data.message);
+                                    }
+                                    console.log(data)
+                                }, error: () => showDangerToast("Error!", "getdata")
+                            })
+                        }
+                    }
+                })
+                // else if (otptype == "changenumber") {
+                //     alert("number")
+                //     otptype = "";
+                // }
+            }
+        })
+        $(document).on("click", ".remove-image", function () {
+            // alert(1);
+            $.ajax({
+                url: "../../api/profile.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'remove_photo' }),
+                dataType: "JSON",
+                success: (data) => {
+                    console.log(data);
+                    showSuccessToast("Profile update!", data.message);
+                    $('#uploaded_image').attr('src', "../../images/faces/profile/" + data.profilepic);
+                    // $(".remove-image").fadeIn();
+                    // $(this).hide(1000);
+                    $(".remove-image").fadeOut(1000);
+
+                }
+            })
+        })
+        $(document).on("click", ".read-list-status", function () {
+            // update_readlist_status
+            list_id = $(this).data("id");
+            // alert();
+            $.ajax({
+                url: "http://localhost/mycode/template/star1/api/historysave.php",
+                type: "POST",
+                data: JSON.stringify({ key: 'update_readlist_status', list_id: list_id }),
+                dataType: "JSON",
+                success: (data) => {
+                    if (data.status) {
+                        // showSuccessToast("Remove", "Removed readlist");
+                        // $("#card-"+list_id).
+                        if (data.pstatus == "private") {
+                            $(this).removeClass("mdi-eye")
+                            $(this).addClass("mdi-eye-off")
+                            $("#card-" + list_id).removeClass("card-inverse-info");
+                            $("#card-" + list_id).addClass("card-inverse-success");
+                        } else {
+                            $(this).removeClass("mdi-eye-off")
+                            $(this).addClass("mdi-eye")
+                            $("#card-" + list_id).removeClass("card-inverse-success");
+                            $("#card-" + list_id).addClass("card-inverse-info");
+                        }
+                    }
+                    // console.log(data);
+                }
+            })
+        });
+        $(document).on("click", ".read-list", function () {
+            // alert($(this).data("id"));
+            window.location = "../readlist/readlistblog.html?r=" + $(this).data("id");
+        })
+        $(document).on("click", ".deletelist", function () {
+            list_id = $(this).data("id")
+            // alert($(this).data("id"));
+            swal({
+                title: 'Are you sure?',
+                text: "Clear watch history?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3f51b5',
+                cancelButtonColor: '#ff4081',
+                confirmButtonText: 'Great ',
+                buttons: {
+                    cancel: {
+                        text: "Cancel",
+                        value: null,
+                        visible: true,
+                        className: "btn btn-danger btn-sm",
+                        closeModal: true,
+                    },
+                    confirm: {
+                        text: "Remove",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary btn-sm",
+                        closeModal: true
+                    }
+                }
+            }).then((result) => {
+                if (result) {
+                    $.ajax({
+                        url: "http://localhost/mycode/template/star1/api/historysave.php",
+                        type: "POST",
+                        data: JSON.stringify({ key: 'delete_readlist', list_id: list_id }),
+                        dataType: "JSON",
+                        success: (data) => {
+                            if (data.status) {
+                                showSuccessToast("Remove", "Removed readlist");
+                                $("#card-" + list_id).remove();
+                            }
+                            console.log(data);
+                        }
+                    })
+                }
+            })
+        })
+        // show-profile-photo
+        $(document).on("click", ".show-profile-photo", function () {
+            // alert($('#uploaded_image').attr('src'))
+            // $("#modal").modal("show");
+            content = `
+            <div class="card card-rounded">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="d-flex align-items-center align-content-center">
+                      <h4 class="card-title card-title-dash">
+                        Profile picture
+                      </h4>
+                      <button type="button" class="badge badge-pill btn-outline-behance ms-auto"
+                        data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      </div>
+                    <div class="mt-3">
+                        <div class="justify-content-center">
+                            <div class="col-lg-8 mx-auto" data-id="41">
+                                <img src="`+ $('#uploaded_image').attr('src') + `">
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>`
+            $("#modal-content").html(content);
+        })
+    </script>
+    <!-- plugins:js -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <!-- <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/template.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/todolist.js"></script>
+    <!- endinject -->
+    <!-- Custom js for this page-->
+    <!--    <script src="js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/Chart.roundedBarCharts.js"></script> -->
+    <!-- End custom js for this page-->
+
+    <!-- plugins:js -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <script src="../../js/allfilefunction.js"></script>
+
+    <!-- Plugin js for this page -->
+    <script src="vendors/chart.js/Chart.min.js"></script>
+    <script src="vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="vendors/progressbar.js/progressbar.min.js"></script>
+
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <!-- <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/template.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!--    <script src="js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/Chart.roundedBarCharts.js"></script> -->
+    <!-- End custom js for this page-->
+
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../../vendors/sweetalert/sweetalert.min.js"></script>
+    <script src="../../vendors/jquery-bar-rating/jquery.barrating.min.js"></script>
+    <script src="../../vendors/chart.js/Chart.min.js"></script>
+    <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="../../vendors/jquery-toast-plugin/jquery.toast.min.js"></script>
+
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../js/toastDemo.js"></script>
+
+    <script src="../../js/off-canvas.js"></script>
+    <script src="../../js/hoverable-collapse.js"></script>
+    <script src="../../js/template.js"></script>
+    <script src="../../js/settings.js"></script>
+    <script src="../../js/todolist.js"></script>
+    <script src="../../js/profile-demo.js"></script>
+    <script src="../../js/alertp.js"></script>
+
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!-- <script src="../../js/chart.js"></script> -->
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.7/jquery.lazyload.js"></script>
+    <script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("div.lazy").lazyload({
+         effect : "fadeIn"
+     });
+
+  }); -->
+    </script>
+    <!-- <script>
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) || (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+    </script> -->
+</body>
+<audio id="audioBox">
+    <source src="../../audio/notify.mp3" type="audio/mpeg" />
+    <source src="../../audio/notify.wav" type="audio/wav" />
+    <source src="../../audio/notify.ogg" type="audio/ogg" />
+</audio>
+
+</html>

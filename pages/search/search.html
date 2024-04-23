@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+      shrink-to-fit=no">
+    <title>TrendStream</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../../css/style1.css">
+  <link rel="stylesheet" href="../../vendors/feather/feather.css">
+  <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+  <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="../../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="../../js/select.dataTables.min.css">
+
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="stylesheet" href="../../vendors/jquery-toast-plugin/jquery.toast.min.css">
+
+  <link rel="shortcut icon" href="../../images/favicon.png" />
+  <style>
+    .Error {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="align-content-center justify-content-center">
+    <div class="col-md-4 col-sm-6 grid-margin stretch-card m-auto pt-5" id="loader">
+        <div class="dot-opacity-loader">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<div class="body-content" style="display: none;">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top" id="navbar">
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div class="theme-setting-wrapper">
+        <div id="settings-trigger"><i class="ti-settings"></i></div>
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close ti-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+            <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+          </div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme">
+            <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+          </div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles success"></div>
+            <div class="tiles warning"></div>
+            <div class="tiles danger"></div>
+            <div class="tiles info"></div>
+            <div class="tiles dark"></div>
+            <div class="tiles default"></div>
+          </div>
+          <p class="settings-heading mt-2 divnotification">Notification</p>
+          <div class="mx-0 px-4 divnotification">
+            <div class="form-check form-check-success">
+              <div class="d-flex">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" id="notificationstatus">
+                </label>
+                <span id="notificationstatustext">Off</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      </nav>
+      <div class="main-panel">
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" id="modal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content" id="modal-content">
+            </div>
+          </div>
+        </div>
+        <div class="content-wrapper">
+          <!-- <div class="col-md-11"> -->
+          <div class="d-flex align-item-center">
+            <div class="col-lg-8">
+              <!-- <div class="form-group"> -->
+              <input type="text" class="form-control searchtextbox" id="searchvalue" placeholder="Search any words">
+              <!-- </div> -->
+            </div>
+            <select class="ms-3 form-control" id="languagebox">
+            </select>
+            <button class="btn btn-info btn-sm py-1 px-1 record ms-3" title="speak">
+              <i class="mdi mdi-microphone-off mdi-36px text-dark"></i>
+              <!-- <i class="mdi mdi-microphone mdi-36px text-dark"></i> -->
+            </button>
+            <button class="btn btn-primary ms-3 searchresult" data-type="button">Search</button>
+          </div>
+          <li class="nav-item dropdown d-none d-lg-block">
+            <div style="display: none;" id="dropdownment" aria-labelledby="messageDropdown">
+            </div>
+          </li>
+          <!-- </div> -->
+          <!-- <div class="col-12 mb-5"> -->
+          <!-- </div> -->
+          <div class="home-tab pt-3" id="alltab"></div>
+          <!-- <div class="row">
+
+            <div class="col-md-4 grid-margin stretch-card">
+
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-sm-flex flex-wrap text-start align-items-center">
+                    <img src="../../images/faces/face11.jpg" class="img-lg rounded" alt="profile image">
+                    <div class="ms-sm-3 ms-md-0 ms-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
+                      <h6 class="mb-0">Maria</h6>
+                      <p class="text-muted mb-1">blogs : 100</p>
+                      <p class="mb-0 text-success fw-bold">5.4k</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-sm-flex flex-wrap text-start align-items-center">
+                    <img src="../../images/faces/face9.jpg" class="img-lg rounded" alt="profile image">
+                    <div class="ms-sm-3 ms-md-0 ms-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
+                      <h6 class="mb-0">Thomas Edison</h6>
+                      <p class="text-muted mb-1">blogs : 33</p>
+                      <div class="mb-0 br-theme-fontawesome-stars">
+                        <div class="mb-0 br-widget"><a href="#" data-rating-value="1" data-rating-text="1"
+                            class="br-selected br-current"></a><a href="#" data-rating-value="2"
+                            data-rating-text="2"></a><a href="#" data-rating-value="3" data-rating-text="3"></a><a
+                            href="#" data-rating-value="4" data-rating-text="4"></a><a href="#" data-rating-value="5"
+                            data-rating-text="5"></a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div> -->
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- <div class="containerc"></div> -->
+      <!-- main-panel ends -->
+    </div>
+    <!-- <h1>aa</h1>
+    <img src="../../images/uploadimage/Screenshot (2).png"> -->
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <script src="./languages.js"></script>
+  <script src="../create/main.js"></script>
+  <script src="../../js/sidebar.js"></script>
+  <script src="../../js/navbar.js"></script>
+  <script>
+    $(document).ready(function () {
+      setlogindata();
+      // alert(1)
+      navbar();
+      sidebar();
+      checknotification();
+      $("#loader").hide()
+      $(".body-content").show();
+      serachbox = false;
+
+      $(document).on('keyup', '.searchtextbox', function () {
+        // alert($(this).val());
+        // if($(this).val())
+        // alert(1)
+        value = $(this).val();
+        if (serachbox == true) {
+          if (value.length == 0) {
+            $("#dropdownment").toggle(700);
+            $("#alltab").toggle(700);
+            serachbox = false;
+          } else {
+            // alert(1)
+            serachresult(value)
+          }
+        } else {
+          if (value.length >= 1) {
+            serachbox = true
+            $("#dropdownment").toggle(700);
+            $("#alltab").toggle(700);
+            serachresult(value)
+          }
+        }
+      })
+      function serachresult(value) {
+        $.ajax({
+          url: "../../api/search.php",
+          type: "POST",
+          data: JSON.stringify({ key: 'search', search: value }),
+          dataType: "JSON",
+          success: (data) => {
+            console.log(data);
+            if (data.status) {
+              // var keywords = ['new', 'blog', 'newblog'];
+              var keywords = value.split(" ");
+              // keywords.push(value.replace(/\s/g, ''))
+              console.log(keywords);
+              var results = data.text.filter(function (element) {
+                var lowerCaseText = element.text.toLowerCase();
+                return keywords.every(function (keyword) {
+                  return lowerCaseText.includes(keyword.toLowerCase());
+                });
+              });
+
+              console.log(results[0]);
+              // var results = data.text.filter(function (element) {
+              //   var lowerCaseText = element.text.toLowerCase();
+              //   return keywords.some(function (keyword) {
+              //     return lowerCaseText.includes(keyword.toLowerCase());
+              //   });
+              // });
+              // console.log(results);
+              // results = []
+              content = `<a class="dropdown-item pt-3">
+                <p class="mb-0 font-weight-medium float-left"><i class="menu-icon icon-search"></i> search value</p>
+              </a>
+              <div class="dropdown-divider"></div>`
+              console.log(results.length);
+              content += `
+                            <a class="dropdown-item py-3 searchresult" data-type="link" data-value = `+ value + `>
+                              <p class="mb-0 font-weight-medium float-left">`+ value + `</p>
+                            </a>`;
+              if (results.length >= 1) {
+                if (results.length == 1) {
+                  content += `
+                            <a class="dropdown-item py-3 searchresult" data-type="link" data-value = `+ results[0].text + `>
+                              <p class="mb-0 font-weight-medium float-left">`+ results[0].text + `</p>
+                            </a>`
+                }
+                else {
+                  for (i = 0; i < 2; i++) {
+                    content += `
+                            <a class="dropdown-item py-3 searchresult" data-type="link" data-value = `+ results[i].text + `>
+                              <p class="mb-0 font-weight-medium float-left">`+ results[i].text + `</p>
+                            </a>`
+                  }
+                  if (results.length > 2) {
+                    content += `
+                      <div class="d-flex align-items-center">
+                        <p class="ms-auto hover-cursor text-muted pt-2" id="viewmore">View more</p>
+                      </div>
+                      <div class="viewmore" style="display: none;">`
+                    for (i = 2; i < results.length; i++) {
+                      content += `
+                            <a class="dropdown-item py-3 searchresult" data-type="link" data-value = `+ results[i].text + `>
+                              <p class="mb-0 font-weight-medium float-left">`+ results[i].text + `</p>
+                            </a>`
+                    }
+                    content += `
+                      </div>`;
+                  }
+                }
+              }
+              if (data.users.length != 0) {
+                console.log(results);
+                content += `
+                    <!-- <p class="dropdown-item preview-item"> -->
+                    <div class="preview-item-content flex-grow py-2 ms-3">
+                      <p class="preview-subject ellipsis text-muted">Bloggers & Users</p>
+                      <div class="row">`
+                for (i = 0; i < 3; i++) {
+                  if (data.users[i] == undefined) {
+                    continue;
+                  } else {
+                    content += `
+                              <div class="col-md-4 grid-margin stretch-card">
+                                <div class="card profile hover-cursor" data-id= "`+ data.users[i].usid + `">
+                                  <div class="card-body">
+                                    <div class="d-sm-flex flex-wrap text-start align-items-center">`
+                    if (data.users[i].photo == null) {
+                      content += ` <img src="../../images/faces/profile/default.png" class="img-lg rounded" alt="profile image">`
+                    } else {
+                      content += ` <img src="../../images/faces/profile/` + data.users[i].photo + `" class="img-lg rounded" alt="profile image">`
+
+                    }
+                    content += `<div class="ms-sm-3 ms-md-0 ms-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">`
+                    if (data.users[i].ufname != null || data.users[i].ulname != null) {
+                      content += `
+                                                        <h6 class="mb-0">` + ((data.users[i].ufname != null) ? (data.users[i].ufname + " ") : "") + ((data.users[i].ulname != null) ? data.users[i].ulname : "") + `</h6>
+                                                        <p class="text-muted mb-1">`+ data.users[i].username + `</p>`
+                    } else {
+                      content += `
+                                                        <h6 class="mb-0">`+ data.users[i].username + `</h6>
+                                                        <p class="text-muted mb-1"></p>`
+                    }
+                    content += `
+                                        <!-- <p class="mb-0 text-success fw-bold">110</p> -->
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>`
+                  }
+                }
+                content += `
+                </div>
+              </div>`;
+              }
+              if (data.blogs.length != 0) {
+                var results = data.blogs.filter(function (element) {
+                  var lowerCaseText = element.blog_title.toLowerCase();
+                  return keywords.every(function (keyword) {
+                    return lowerCaseText.includes(keyword.toLowerCase());
+                  });
+                });
+
+                if (results.length == 0) {
+                  results = data.blogs;
+                }
+                console.log(results);
+                content += `
+               <div class="preview-item-content flex-grow py-2 ms-3">
+                <p class="preview-subject ellipsis text-muted">Blogs</p>
+                <div class="cards grid-row">`
+                j = 0;
+                for (var i = 0; i < results.length; i++) {
+                  if (results[i] == undefined || j == 4) {
+                    continue;
+                  }
+                  if (results[i].blog_status == "posted" && results[i].user_type == "blogger") {
+                    const postdate = results[i].blog_post_time.split(" ")[0].split("-");
+                    const sdate = new Date(postdate[0], postdate[1] - 1, postdate[2]);
+                    const date = sdate.toString().split(" ");
+                    var strdate = date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
+                    content += `<div class="card blog hover" id="card-` + results[i].blog_id + `" data-id="` + results[i].blog_id + `">
+                                <div class="dropdown" align= center>
+                                  <i class="mdi mdi-dots-horizontal" type="button" id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">`;
+                    if (data.luserdata.length == 0) {
+                      content += `<a class="dropdown-item" href="../login/index.html"><i class="mdi mdi-login text-info"></i><span class="ms-2">Login</span></a>`
+                    } else {
+                      if (data.luserdata[0].usid == results[i].usid) {
+                        content += `<a class="dropdown-item updateblog" href="../create/create.html?key=update&s=` + results[i].blog_id + `"><i class="mdi mdi-pencil text-info"></i><span class="ms-2">Update</span></a>
+                                           <a class="dropdown-item deleteblog" data-id="`+ results[i].blog_id + `"><i class="mdi mdi-delete text-info"></i><span class="ms-2">Delete</span></a>`;
+                      }
+                      // mdi mdi-pencil
+                      content += `<a class="dropdown-item savereadlater"  data-id="` + results[i].blog_id + `"><i class="mdi mdi-clock text-info"></i><span class="ms-2">Save to Read later</span></a>
+                                           <a class="dropdown-item savereadlist"  data-id="`+ results[i].blog_id + `" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="Add blog in read-list"><i class="mdi mdi-playlist-plus fw-bold text-info"></i><span class="ms-2">Save to Readlist</span></a>`
+                    }
+                    content += ` </div>
+                                                </div>
+                                                <div class="card-top blogpreview loding" data-id="`+ results[i].blog_id + `">
+                                              <img src="../../images/uploadimage/`+ results[i].blog_cover_photo + `" alt="` + results[i].blog_title + `">
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <span class="cspaan date">`+ strdate + `</span>
+                                              <p class="cp hover-cursor show-profile" data-id=`+ results[i].usid + `>`;
+                    if (results[i].photo == null) {
+                      content += `<img class="profile-pic" src="../../images/faces/profile/default.png">`
+                    } else {
+                      content += `<img class="profile-pic" src="../../images/faces/profile/` + results[i].photo + `">`
+                    }
+                    content += results[i].username + `</p>
+                                            </div>
+                                            <div class="card-info">
+                                              <h2 class="btitle">`+ results[i].blog_title + `</h2>
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <a class="btn btn-outline-primary btn-sm hover" href="../blogs/blog.html?s=`+ results[i].blog_id + `">Read
+                                              </a>
+                                              <p class="nav">
+                                              <i class="lcv mdi mdi-heart"></i>&nbsp;`+ results[i].likes + `
+                                              <i class="lcv mdi mdi-comment"></i>&nbsp;`+ results[i].comments + `
+                                              <i class="lcv mdi mdi-eye "></i>&nbsp;`+ results[i].totalviews + `
+                                              </p>  
+                                              </div> 
+                                              </div>`;
+                    j++;
+                  }
+                  //                           <div class="checkbox" style="display:none;">
+                  //     <input type="checkbox" checked="">
+                  // </div>
+                }
+                content += `
+                  </div>
+                   </div>
+                      <div class="d-flex align-items-center">
+                                <div class="ms-auto">
+                                  <button type="button" class="btn btn-outline-secondary btn-sm searchresult" data-type="button">
+                                    Search `+ value + `
+                                  </button>
+                      </div>
+              
+                      </div>`
+              }
+
+              $("#dropdownment").html("");
+              $("#dropdownment").append(content);
+
+            }
+          },
+          error: (error) => servererror(error)
+        })
+      }
+      const recordBtn = $(".record"),
+    sid = $(".searchtextbox"),
+    inputLanguage = $("#languagebox"),
+    clearBtn = $(".clear");
+  
+  let SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition,
+    recognition,
+    recording = false;
+  
+  function populateLanguages() {
+    languages.forEach((lang) => {
+      const option = $("<option></option>")
+        .val(lang.code)
+        .html(lang.name);
+      inputLanguage.append(option);
+    });
+  }
+  
+  populateLanguages();
+  
+  function speechToText() {
+    try {
+      recognition = new SpeechRecognition();
+      recognition.lang = inputLanguage.val();
+      recognition.interimResults = true;
+  
+      recordBtn.html("<i class='mdi mdi-microphone mdi-36px text-dark'></i>");
+  
+      recognition.start();
+      recognition.onresult = (event) => {
+        const speechResult = event.results[0][0].transcript;
+        if (event.results[0].isFinal) {
+          sid.val(sid.val() + " " + speechResult);
+        }
+      };
+      recognition.onspeechend = () => {
+        speechToText();
+      };
+      recognition.onerror = (event) => {
+        stopRecording();
+        if (event.error === "no-speech") {
+          // serachresult(sid.val());
+          // alert("No speech was detected. Stopping...");
+        } else if (event.error === "audio-capture") {
+          alert("No microphone was found. Ensure that a microphone is installed.");
+        } else if (event.error === "not-allowed") {
+          alert("Permission to use the microphone is blocked.");
+        } else if (event.error === "aborted") {
+          alert("Listening Stopped.");
+        }
+        // else {
+        //   alert("Error occurred in recognition: " + event.error);
+        // }
+      };
+    } catch (error) {
+      recording = false;
+      console.log(error);
+    }
+  }
+  
+  recordBtn.on("click", () => {
+    if (!recording) {
+      speechToText();
+      recording = true;
+    } else {
+      stopRecording();
+      value = $(".searchtextbox").val();
+      console.log(value);
+      if (serachbox == true) {
+        serachresult(value)
+      }else{
+        if (value.length >= 1) {
+            serachbox = true
+            $("#dropdownment").toggle(700);
+            $("#alltab").toggle(700);
+            serachresult(value)
+          }
+      }
+  
+      // if (serachbox == true) {
+      //       if (value.length == 0) {
+      //         $("#dropdownment").toggle(700);
+      //         $("#alltab").toggle(700);
+      //         serachbox = false;
+      //       } else {
+      //         // alert(1)
+      //         serachresult(value)
+      //       }
+      //     } else {
+      //       if (value.length >= 1) {
+  
+      //       }
+      //     }
+      // serachresult(sid.val());
+      
+    }
+  });
+  
+  function stopRecording() {
+    recognition.stop();
+    recordBtn.html("<i class='mdi mdi-microphone-off mdi-36px text-dark'></i>");
+    recording = false;
+    value = $(".searchtextbox").val();
+    if (serachbox == true) {
+        serachresult(value)
+      }else{
+        if (value.length >= 1) {
+            serachbox = true
+            $("#dropdownment").toggle(700);
+            $("#alltab").toggle(700);
+            serachresult(value)
+          }
+      }
+  }
+  
+  clearBtn.on("click", () => {
+    result.html("");
+    downloadBtn.prop("disabled", true);
+  });
+  $(document).on("click", ".searchresult", function () {
+    if(recording){
+      stopRecording();
+      recording = false;
+    }
+    type = $(this).data("type");
+    if (type == "button") {
+      value = $("#searchvalue").val();
+    } else if (type == "link") {
+      value = $(this).data("value");
+    }
+    if (value != null && value != undefined && value != "") {
+      $("#dropdownment").toggle(700);
+      $("#alltab").toggle(700);
+      serachbox = false;
+      console.log(value);
+      $("#alltab").html("");
+      $.ajax({
+        url: "../../api/search.php",
+        type: "POST",
+        data: JSON.stringify({ key: 'search', search: value }),
+        dataType: "JSON",
+        success: (data) => {
+          console.log(data);
+          if (data.status) {
+
+            content = `        
+                <h2>Search Result For<u class="ms-2">"`+ value + `"</u></h2>
+                    <p class="text-muted">About `+ (data.users.length + data.blogs.length) + ` results (` + data.executionTime + ` seconds)</p>
+                    <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                      <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link ps-0 active" id="home-tab" data-bs-toggle="tab" href="#Blogs" role="tab"
+                            aria-controls="Blogs" aria-selected="true">Users</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="read-list" data-bs-toggle="tab" href="#audiences" role="tab"
+                            aria-selected="false">blogs</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="tab-content tab-content-basic">
+                      <div class="tab-pane fade active show" id="Blogs" role="tabpanel" aria-labelledby="home-tab">
+                        <!-- <div class="cards"> -->
+                        <div class="row">`
+            for (i = 0; i < data.users.length; i++) {
+              if (data.users[i] == undefined) {
+                continue;
+              } else {
+                content += `
+                            <div class="col-md-4 grid-margin stretch-card">
+                              <div class="card profile hover-cursor" data-id= "`+ data.users[i].usid + `">
+                                <div class="card-body">
+                                  <div class="d-sm-flex flex-wrap text-start align-items-center">
+                                    `
+                if (data.users[i].photo == null) {
+                  content += ` <img src="../../images/faces/profile/default.png" class="img-lg rounded" alt="profile image">`
+                } else {
+                  content += ` <img src="../../images/faces/profile/` + data.users[i].photo + `" class="img-lg rounded" alt="profile image">`
+
+                }
+                content += `<div class="ms-sm-3 ms-md-0 ms-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">`
+                if (data.users[i].ufname != null || data.users[i].ulname != null) {
+                  content += `
+                                                      <h6 class="mb-0">` + ((data.users[i].ufname != null) ? (data.users[i].ufname + " ") : "") + ((data.users[i].ulname != null) ? data.users[i].ulname : "") + `</h6>
+                                                      <p class="text-muted mb-1">`+ data.users[i].username + `</p>`
+                } else {
+                  content += `
+                                                      <h6 class="mb-0">`+ data.users[i].username + `</h6>
+                                                      <p class="text-muted mb-1"></p>`
+                }
+                content += `
+                                    <!--  <p class="mb-0 text-success fw-bold">110</p> -->
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>`
+              }
+            }
+            content += `
+                        </div>
+                        <!-- </div> -->
+                      </div>
+                      <div class="tab-pane fade" id="audiences" role="tabpanel" aria-labelledby="read-list">
+                        <div class="cards grid-row"> `
+            var keywords = value.split(" ");
+            if (data.blogs.length != 0) {
+              var results = data.blogs.filter(function (element) {
+                var lowerCaseText = element.blog_title.toLowerCase();
+                return keywords.every(function (keyword) {
+                  return lowerCaseText.includes(keyword.toLowerCase());
+                });
+              });
+              if (results.length == 0) {
+                results = data.blogs;
+              } else {
+                $.merge(results, data.blogs);
+                results = $.unique(results);
+              }
+              // console.log(results);
+              for (var i = 0; i < results.length; i++) {
+                if (results[i] == undefined) {
+                  continue;
+                }
+                if (results[i].blog_status == "posted" && results[i].user_type == "blogger") {
+                  const postdate = results[i].blog_post_time.split(" ")[0].split("-");
+                  const sdate = new Date(postdate[0], postdate[1] - 1, postdate[2]);
+                  const date = sdate.toString().split(" ");
+                  var strdate = date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
+                  content += `<div class="card blog hover" id="card-` + results[i].blog_id + `" data-id="` + results[i].blog_id + `">
+                                <div class="dropdown" align= center>
+                                  <i class="mdi mdi-dots-horizontal" type="button" id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">`;
+                  if (data.luserdata.length == 0) {
+                    content += `<a class="dropdown-item" href="../login/index.html"><i class="mdi mdi-login text-info"></i><span class="ms-2">Login</span></a>`
+                  } else {
+
+                    if (data.luserdata[0].usid == results[i].usid) {
+                      content += `<a class="dropdown-item updateblog" href="../create/create.html?key=update&s=` + results[i].blog_id + `"><i class="mdi mdi-pencil text-info"></i><span class="ms-2">Update</span></a>
+                                          <a class="dropdown-item deleteblog" data-id="`+ results[i].blog_id + `"><i class="mdi mdi-delete text-info"></i><span class="ms-2">Delete</span></a>`;
+                    }
+                    // mdi mdi-pencil
+                    content += `<a class="dropdown-item savereadlater"  data-id="` + results[i].blog_id + `"><i class="mdi mdi-clock text-info"></i><span class="ms-2">Save to Read later</span></a>
+                                          <a class="dropdown-item savereadlist"  data-id="`+ results[i].blog_id + `" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="Add blog in read-list"><i class="mdi mdi-playlist-plus fw-bold text-info"></i><span class="ms-2">Save to Readlist</span></a>`
+                  }
+                  content += `   </div>
+                                                </div>
+                                                <div class="card-top blogpreview loding" data-id="`+ results[i].blog_id + `">
+                                              <img src="../../images/uploadimage/`+ results[i].blog_cover_photo + `" alt="` + results[i].blog_title + `">
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <span class="cspaan date">`+ strdate + `</span>
+                                              <p class="cp hover-cursor show-profile" data-id=`+ results[i].usid + `>`
+                  if (results[i].photo == null) {
+                    content += `<img class="profile-pic" src="../../images/faces/profile/default.png">`
+                  } else {
+                    content += `<img class="profile-pic" src="../../images/faces/profile/` + results[i].photo + `">`
+                  }
+                  content += results[i].username + `</p>
+                                            </div>
+                                            <div class="card-info">
+                                              <h2 class="btitle">`+ results[i].blog_title + `</h2>
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <a class="btn btn-outline-primary btn-sm hover" href="../blogs/blog.html?s=`+ results[i].blog_id + `">Read
+                                              </a>
+                                              <p class="nav">
+                                              <i class="lcv mdi mdi-heart"></i>&nbsp;`+ results[i].likes + `
+                                              <i class="lcv mdi mdi-comment"></i>&nbsp;`+ results[i].comments + `
+                                              <i class="lcv mdi mdi-eye "></i>&nbsp;`+ results[i].totalviews + `
+                                              </p>  
+                                              </div> 
+                                              </div>`;
+                }
+                //                           <div class="checkbox" style="display:none;">
+                //     <input type="checkbox" checked="">
+                // </div>
+              }
+            }
+            content += `
+                        </div>
+                      </div>
+                    </div> 
+            `;
+            $("#alltab").html(content);
+          }
+        },
+        error: (error) => servererror(error)
+      })
+    }
+    // alert(value)
+  })
+ 
+    });
+
+   
+    $(document).on("click", ".profile", function () {
+      window.location.href = "../profile/profile.html?p=" + $(this).data("id");
+    })
+    // $(document).on("click", ".viewmore", function () {
+    //   // alert($(this).data("type")) 
+    //   if ($(this).data("type") == "user") {
+    //     $("#dropdownment").toggle(700);
+    //     $("#alltab").toggle(700);
+    //     serachbox = false;
+    //   }
+    // })
+    viewmore = false;
+    $(document).on("click", "#viewmore", function () {
+      if (viewmore) {
+        $(this).text("View more");
+        viewmore = false
+      } else {
+        $(this).text("Hide");
+        viewmore = true
+      }
+      $(".viewmore").toggle(500)
+    })
+  </script>
+  <script src="./script.js"></script>
+
+  <script src="../../vendors/js/vendor.bundle.base.js"></script>
+  <!-- plugins:js -->
+  <!-- endinject -->
+  <script src="../../js/allfilefunction.js"></script>
+
+  <!-- Plugin js for this page -->
+  <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <script src="../../vendors/sweetalert/sweetalert.min.js"></script>
+  <script src="../../vendors/jquery-toast-plugin/jquery.toast.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../../js/off-canvas.js"></script>
+
+  <script src="../../js/hoverable-collapse.js"></script>
+  <script src="../../js/template.js"></script>
+  <script src="../../js/settings.js"></script>
+  <script src="../../js/todolist.js"></script>
+  <!-- endinject -->
+  <script src="../../js/toastDemo.js"></script>
+  <script src="../../js/popover.js"></script>
+  <script src="../../js/tooltips.js"></script>
+  <!-- Custom js for this page-->
+  <script src="../../js/jquery.cookie.js" type="text/javascript"></script>
+  <script src="../../js/dashboard.js"></script>
+  <script src="../../js/Chart.roundedBarCharts.js"></script>
+  <script src="../../js/alertp.js"></script>
+  <script src="../../js/modal-demo.js"></script>
+
+  <!-- End custom js for this page-->
+  <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.7/jquery.lazyload.js"></script>
+      <script type="text/javascript" charset="utf-8">
+  $(function() {
+    $("div.lazy").lazyload({
+      effect : "fadeIn"
+     });
+
+  }); -->
+  </script>
+</body>
+<audio id="audioBox">
+  <source src="../../audio/notify.mp3" type="audio/mpeg" />
+  <source src="../../audio/notify.wav" type="audio/wav" />
+  <source src="../../audio/notify.ogg" type="audio/ogg" />
+</audio>
+
+
+</html>

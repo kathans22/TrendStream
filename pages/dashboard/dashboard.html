@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+      shrink-to-fit=no">
+  <title>blogger pannel </title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../../css/style1.css">
+  <link rel="stylesheet" href="../../vendors/feather/feather.css">
+  <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+  <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="../../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="../../js/select.dataTables.min.css">
+
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="stylesheet" href="../../vendors/jquery-toast-plugin/jquery.toast.min.css">
+
+  <link rel="shortcut icon" href="../../images/favicon.png" />
+  <style>
+    .Error {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row" id="navbar">
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div class="theme-setting-wrapper">
+        <div id="settings-trigger"><i class="ti-settings"></i></div>
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close ti-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+            <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+          </div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme">
+            <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+          </div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles success"></div>
+            <div class="tiles warning"></div>
+            <div class="tiles danger"></div>
+            <div class="tiles info"></div>
+            <div class="tiles dark"></div>
+            <div class="tiles default"></div>
+          </div>
+        </div>
+      </div>
+      <div id="right-sidebar" class="settings-panel">
+        <i class="settings-close ti-close"></i>
+        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab"
+              aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab"
+              aria-controls="chats-section">CHATS</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="setting-content">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+            aria-labelledby="todo-section">
+            <div class="add-items d-flex px-3 mb-0">
+              <form class="form w-100">
+                <div class="form-group d-flex">
+                  <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                  <button type="submit" class="add btn btn-primary
+                      todo-list-add-btn" id="add-task">Add</button>
+                </div>
+              </form>
+            </div>
+            <div class="list-wrapper px-3">
+              <ul class="d-flex flex-column-reverse todo-list">
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Team review meeting at 3.00 PM
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Prepare for presentation
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Resolve all the low priority tickets due today
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li class="completed">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox" checked>
+                      Schedule meeting for next week
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li class="completed">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox" checked>
+                      Project review
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+              </ul>
+            </div>
+            <h4 class="px-3 text-muted mt-5 fw-light mb-0">Events</h4>
+            <div class="events pt-4 px-3">
+              <div class="wrapper d-flex mb-2">
+                <i class="ti-control-record text-primary me-2"></i>
+                <span>Feb 11 2018</span>
+              </div>
+              <p class="mb-0 font-weight-thin text-gray">Creating component
+                page build a js</p>
+              <p class="text-gray mb-0">The total number of sessions</p>
+            </div>
+            <div class="events pt-4 px-3">
+              <div class="wrapper d-flex mb-2">
+                <i class="ti-control-record text-primary me-2"></i>
+                <span>Feb 7 2018</span>
+              </div>
+              <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
+              <p class="text-gray mb-0 ">Call Sarah Graves</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      </nav>
+      <div class="main-panel">
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"
+          id="readlistcontent">
+          <!-- <div class="modal fade" id="exampleModal-4" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal-4" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal-4" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"> -->
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">Add blogs</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="listcontent">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"
+          id="previewcontent">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content" id="previewdatacontent">
+
+            </div>
+
+          </div>
+        </div>
+        <div class="content-wrapper">
+          <div class="d-flex align-items-center">
+            <h4 class="m-0">Blogs</h4>
+            <div class="ms-auto">
+              <div class="d-flex">
+                <div class="collapse" id="addbutton">
+                  <button type="button" class="btn btn-danger fw-bold  btn-rounded btn-sm" id="cancelselection">
+                    <i class="mdi mdi-close-circle-outline"></i><span class="ms-1">Cancel</span>
+                  </button>
+                  <a class="savereadlist btn btn-info fw-bold  btn-rounded btn-sm savereadlist" data-bs-toggle="modal"
+                    data-bs-target="#readlistcontent" data-whatever="Add blog in read-list"><i
+                      class="mdi mdi-playlist-plus"></i><span class="ms-2">Add readlist</span></a>
+                </div>
+                <button type="button" class="btn btn-outline-secondary btn-sm" id="blogselecting">
+                  <i class="mdi mdi-playlist-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="cards grid-row" id="content-cardc">
+          </div>
+        </div>
+      </div>
+      <!-- <div class="containerc"></div> -->
+      <!-- main-panel ends -->
+    </div>
+    <!-- <h1>aa</h1>
+    <img src="../../images/uploadimage/Screenshot (2).png"> -->
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <script src="../create/main.js"></script>
+  <script src="../../js/sidebar.js"></script>
+  <script src="../../js/navbar.js"></script>
+  <script>
+    //             var targetDiv = document.getElementById('content-cardc');
+    // var content = '<div class="card"><div align=center>                <i class="mdi mdi-dots-horizontal"></i>              </div>              <div class="card-top">                <img src="download.jpg" alt="Blog Name">              </div>              <div class="card-bottom flex-row">                <span class="cspaan date">Monday, Jan 20, 2021</span>                <p class="cp"><img class="profile-pic" src="images/faces/face1.jpg"> Blogger name</p>              </div>              <div class="card-info">                <h2 class="btitle">JavaScript Quote Generator</h2>              </div>              <div class="card-bottom flex-row">                <button type="button" class="btn btn-outline-primary btn-sm">blog c.</button>                <p class="nav">                  <i class="lcv mdi mdi-heart"></i>&nbsp;12                  <i class="lcv mdi mdi-comment"></i>&nbsp;20                  <i class="lcv mdi mdi-eye"></i>&nbsp;200                </p>              </div>            </div>';
+    // targetDiv.appendChild(content);
+    //             var targetDiv = document.getElementById('content-cardc');
+    //             // for(var i = 0 ; i<10 ;i++){
+    // targetDiv.innerHTML('');
+    // }
+    $(document).ready(function () {
+      navbar();
+      // showSwal('auto-close', "Not suport in your account", "Please convert bloger account.");
+      sidebar();
+      // showSwal('custom-html', "Not suport in your account", "Please convert bloger account.");
+      // swal({
+      //     content: {
+      //       element: "input",
+      //       attributes: {
+      //         placeholder: "Enter read list name",
+      //         type: "text",
+      //         id:"id1",
+      //         class: 'form-control'
+      //       },
+      //       element:"input"
+      //     },
+      //     button: {
+      //       text: "OK",
+      //       value: true,
+      //       visible: true,
+      //       className: "btn btn-primary btn-sm"
+      //     }
+      //   })
+      // showSuccessToast("hhh", "dd");
+      //  function showee() {
+      //   'use strict';
+      //   resetToastPosition();
+      //   $.toast({
+      //     heading: "info",
+      //     text: "Message",
+      //     showHideTransition: 'slide',
+      //     icon: 'success',
+      //     loaderBg: '#f96868',
+      //     position: 'top-right'
+      //   })
+      // }
+      // showee()
+      // $(function () {
+      //   // Find the target element to attach the popover to
+
+      // });
+      // $(document).on("popover",".blog",function(){
+
+      // })
+      // $('.blog').popover({
+      //               container: 'body',
+      //               title: '<h1 align = "center">hi popover</h1>',
+      //               content: "hello i'm popover hello i'm popover hello i'm popover hello i'm popover hello i'm popover hello i'm popover hello i'm popover hello i'm popover hello i'm popover hello i'm popover hello i'm popover hello i'm popover<table><tr><td>hi</td><td><img src = 'food-1.png'></td></tr></table>",
+      //               html: true,
+      //               delay: { show: 200, hide: 100 },
+      //               placement: 'right',
+      //               trigger: 'hover'
+      //           })
+      $.ajax({
+        url: "../../api/login.php",
+        type: "POST",
+        data: JSON.stringify({ fkey: 'checklogin' }),
+        dataType: "JSON",
+        success: (data) => {
+          // console.log(data);
+          // console.log(data.userdata[0].email);
+          if (data.status == 0) {
+            window.location.href = "../login/index.html";
+          } else {
+            $("#useremail").html(data.userdata[0].email);
+            $("#useruname").html(data.userdata[0].username);
+            if (data.userdata[0].user_type == "user") {
+              $("#myblogs").hide();
+            }
+          }
+        }
+      });
+      $("#signout").on("click", () => {
+        $.ajax({
+          url: "../../api/logout.php",
+          type: "GET",
+          dataType: "JSON",
+          success: (data) => {
+            if (data.status == 1) {
+              window.location.href = "../login/index.html";
+            }
+          }
+        });
+      })
+      showBlog = () => {
+        $.ajax({
+          url: "../../api/blogop.php",
+          type: "POST",
+          data: JSON.stringify({ fkey: 'blog_display' }),
+          dataType: "JSON",
+          success: (data) => {
+            $("#content-cardc").html(" ");
+            console.log(data);
+            for (var i = 0; i < data.allblogsdata.length; i++) {
+              if (data.allblogsdata[i].blog_status == "posted" && data.allblogsdata[i].user_type == "blogger") {
+                const postdate = data.allblogsdata[i].blog_post_time.split(" ")[0].split("-");
+                const sdate = new Date(postdate[0], postdate[1] - 1, postdate[2]);
+                const date = sdate.toString().split(" ");
+                var strdate = date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
+                //  const spdate = sdate.split(" ");
+                // console.log(strdate);
+                var blog = `<div class="card blog hover" id="card-` + data.allblogsdata[i].blog_id + `" data-id="` + data.allblogsdata[i].blog_id + `">
+                <div class="dropdown" align= center>
+                  <i class="mdi mdi-dots-horizontal" type="button" id="dropdownMenuSizeButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                              <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">`;
+                if (data.userdata[0].usid == data.allblogsdata[i].usid) {
+                  blog += `<a class="dropdown-item updateblog" href="../create/create.html?key=update&s=` + data.allblogsdata[i].blog_id + `"><i class="mdi mdi-pencil text-info"></i><span class="ms-2">Update</span></a>
+                         <a class="dropdown-item deleteblog" data-id="`+ data.allblogsdata[i].blog_id + `"><i class="mdi mdi-delete text-info"></i><span class="ms-2">Delete</span></a>`;
+                }
+                // mdi mdi-pencil
+                blog += `<a class="dropdown-item savereadlater"  data-id="` + data.allblogsdata[i].blog_id + `"><i class="mdi mdi-clock text-info"></i><span class="ms-2">Save to Read later</span></a>
+                         <a class="dropdown-item savereadlist"  data-id="`+ data.allblogsdata[i].blog_id + `" data-bs-toggle="modal" data-bs-target="#readlistcontent" data-whatever="Add blog in read-list"><i class="mdi mdi-playlist-plus fw-bold text-info"></i><span class="ms-2">Save to Readlist</span></a>
+                                                </div>
+                                                </div>
+                                                <div class="card-top preview loding" data-id="`+ data.allblogsdata[i].blog_id + `">
+                                              <img src="../../images/uploadimage/`+ data.allblogsdata[i].blog_cover_photo + `" alt="` + data.allblogsdata[i].blog_title + `">
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <span class="cspaan date">`+ strdate + `</span>
+                                              <p class="cp hover-cursor show-profile" data-id=`+ data.allblogsdata[i].usid + `>`
+                if (data.allblogsdata[i].photo == null) {
+                  blog += `  <img class="profile-pic" src="../../images/faces/profile/default.png">`
+                } else {
+                  blog += `  <img class="profile-pic" src="../../images/faces/profile/` + data.allblogsdata[i].photo + `">`
+                }
+                blog += data.allblogsdata[i].username + `</p>
+                                            </div>
+                                            <div class="card-info">
+                                              <h2 class="btitle">`+ data.allblogsdata[i].blog_title + `</h2>
+                                            </div>
+                                            <div class="card-bottom flex-row">
+                                              <a class="btn btn-outline-primary btn-sm hover" href="./blog.html?s=`+ data.allblogsdata[i].blog_id + `">Read
+                                              </a>
+                                              <p class="nav">
+                                              <i class="lcv mdi mdi-heart"></i>&nbsp;`+ data.allblogsdata[i].likes + `
+                                              <i class="lcv mdi mdi-comment"></i>&nbsp;`+ data.allblogsdata[i].comments + `
+                                              <i class="lcv mdi mdi-eye "></i>&nbsp;`+ data.allblogsdata[i].blog_view + `
+                                              </p>  
+                                              
+                                              </div> 
+                                              </div>`;
+                $("#content-cardc").append(blog);
+              }
+              //                           <div class="checkbox" style="display:none;">
+              //     <input type="checkbox" checked="">
+              // </div>
+            }
+          }
+        });
+      }
+      $(document).on('mouseenter', ".card", function () {
+        $(this).addClass("box-shadow");
+      });
+
+      $(document).on('mouseleave', ".card", function () {
+        $(this).removeClass("box-shadow");
+      });
+      $(document).on("click", ".show-profile", function () {
+        // alert($(this).data("id"));
+        window.location = "../profile/profile.html?p=" + $(this).data("id");
+      })
+      selectingblog = false
+      selectingblogid = [];
+      $(document).on("click", ".blog", function () {
+        // alert(1)
+        if (selectingblog) {
+          id = $(this).data("id");
+          if (jQuery.inArray(id, selectingblogid) == -1) {
+            $(this).addClass("card-inverse-info");
+            selectingblogid.push(id)
+          } else {
+            selectingblogid.splice($.inArray(id, selectingblogid), 1);
+            $(this).removeClass("card-inverse-info");
+            if (selectingblogid.length == 0) {
+              $("#addbutton").toggle(700);
+              $("#blogselecting").toggle(700);
+              selectingblog = false;
+            }
+          }
+          console.log(selectingblogid)
+          console.log()
+        }
+      })
+      $(document).on("mouseover", ".preview", function () {
+        var element = $(this);
+        var timeout = setTimeout(function () {
+          $.ajax({
+            url: "http://localhost/mycode/template/star1/api/blogop.php",
+            type: "POST",
+            data: JSON.stringify({ fkey: 'blog_read_one', 'blog_id': element.data("id") }),
+            dataType: "JSON",
+            async: false,
+            success: (data) => {
+              $("#previewdatacontent").html("");
+              content = `<div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">`+ data.readblogdata[0].blog_title + `</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body container-scroller" style="max-height: 350px; ">
+                `+ data.readblogdata[0].blog_content + `
+              </div>
+              <div class="modal-footer">
+                <a class="btn btn-success btn-sm btn-rounded" href="./blog.html?s=`+ data.readblogdata[0].blog_id + `">Read more
+                                              </a>
+                          <button type="button" class="btn btn-light btn-sm btn-rounded" data-bs-dismiss="modal">Cancel</button>
+                        </div>`;
+              $("#previewdatacontent").append(content);
+              $("#previewcontent").modal("show");
+
+              // console.log(data)
+              // target.popover({
+              //   container: 'body',
+              //   // title: 'Popover title',
+              //   content: data.readblogdata[0].blog_content,
+              //   html: true,
+              //   delay: { show: 1000, hide: 100 },
+              //   placement: 'auto',
+              //   trigger: 'hover'
+              // });
+            }
+          })
+        }, 1500); // Delay in milliseconds
+        element.data('timeout', timeout);
+      });
+      $(document).on("mouseout", ".preview", function () {
+        var element = $(this);
+        var timeout = element.data('timeout');
+        if (timeout) {
+          clearTimeout(timeout);
+          element.data('timeout', null);
+        }
+        // $("#readlistcontent").modal("hide");
+      });
+      $(document).on("click", "#blogselecting", function () {
+        $(this).toggle(700);
+        $("#addbutton").toggle(700);
+        selectingblog = true;
+        showInfoToast("Please select blogs", "Add multiple blogs in readlist.")
+      })
+      $(document).on("dblclick", ".blog", function () {
+        id = $(this).data("id")
+        if (selectingblogid.length == 0) {
+          $("#addbutton").toggle(700);
+          $("#blogselecting").toggle(700);
+          showInfoToast("Please select blogs", "Add multiple blogs in readlist.");
+          // $("#addbutton.very-slow").show(2000);
+          selectingblog = true;
+          if (jQuery.inArray(id, selectingblogid) == -1) {
+            $(this).addClass("card-inverse-info");
+            selectingblogid.push(id)
+          } else {
+            selectingblogid.splice($.inArray(id, selectingblogid), 1);
+            $(this).removeClass("card-inverse-info");
+          }
+        }
+      })
+      $(document).on("click", "#cancelselection", function () {
+        // alert(1)
+        $(".blog").removeClass("card-inverse-info");
+        selectingblogid = [];
+        $("#addbutton").toggle(700);
+        $("#blogselecting").toggle(700);
+        selectingblog = false;
+        console.log(selectingblogid);
+
+      })
+      $(document).on("click", ".savereadlater", function () {
+        // alert("READLATER");
+        // alert($(this).data("id"))
+        blog_id = $(this).data("id");
+        $.ajax({
+          url: "../../api/historysave.php",
+          type: "DELETE",
+          data: JSON.stringify({ key: 'blog_save', 'blog_id': blog_id }),
+          dataType: "JSON",
+          success: (data) => {
+            console.log(data);
+            if (data.status == 1) {
+              // showSwal('success-message', 'Blog posted', data.message, "okay");
+              showInfoToast("Save", data.message);
+              // $("#card-" + id).remove();
+            }
+          },
+          error: () => {
+            alert("error iin ajax");
+          }
+        });
+
+      })
+      var blog_id = null;
+      $(document).on("click", ".savereadlist", function () {
+        // alert("LIST");
+        console.log(selectingblog);
+        if (selectingblog) {
+          // addmultipleblog_show_readlist
+          $.ajax({
+            url: "../../api/historysave.php",
+            type: "DELETE",
+            data: JSON.stringify({ key: 'addmultipleblog_show_readlist' }),
+            dataType: "JSON",
+            success: (data) => {
+              console.log(data);
+              var content = `  <div class="d-flex align-items-center px-5 mb-1">
+                        <!-- <button type="button" class="btn btn-info ms-auto btn-rounded btn-sm">
+                          
+                        </button> -->
+                        <a data-bs-toggle="collapse" id="createreadlistb" href="#createreadlist" aria-expanded="false"
+                          aria-controls="createreadlist"
+                          class="collapsed ms-3 ml-3 show-reply btn btn-info ms-auto btn-rounded btn-sm">
+                          <i class="mdi mdi-plus-circle fw-bold ms-auto px-1 py-1 hover-cursor read-list-status"></i>
+                          Create ReadList
+                        </a>
+                      </div>
+                      <div class="cards" id="readlistcard">
+                  `;
+              if (data.status) {
+                for (i = 1; i < data.listcontent.length; i++) {
+                  console.log(data.listcontent[i]);
+
+                  content += `<div class="card" id="list-` + data.listcontent[i].list_id + `">
+                              <div class="card-body pb-0">
+                            <!-- <h4 class="card-title">`+ data.listcontent[i].list_title + `</h4> -->
+                            <div class="d-flex align-items-center">
+                              <div class="d-flex read-list hover-cursor">`;
+                  if (i == 1) {
+                    content += `<i class="mdi mdi-clock-alert img-sm rounded-10 mdi-36px"></i>`;
+                  } else {
+                    content += `<i class="mdi mdi-format-list-bulleted img-sm rounded-10 mdi-36px"></i>`;
+                  }
+                  content += `<div class="ms-3">
+                                  <h6 class="mb-1">`+ data.listcontent[i].list_title + `</h6>
+                                  <small class="text-muted mb-0"><i class="mdi mdi-format-list-bulleted me-1"></i>`+ data.listcontent[i].totalblog + `
+                                    Blogs</small>
+                                </div>
+                              </div>
+                    <i class="mdi mdi-plus-circle fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor content-update" data-listid='` + data.listcontent[i].list_id + `'></i>
+                  </div>
+                          </div>
+                        </div>
+                        </div>
+                <div id="createreadlist" class="collapse" role="tabpanel" aria-labelledby="createreadlist"
+                        data-bs-parent="#accordion-2">
+                        <div class="card">
+                          <div class="card-body pb-0">
+                            <!-- <h4 class="card-title">Read list</h4> -->
+                            <!-- <div class="d-flex align-items-center"> -->
+                            <div class="row">
+                              <div class="form-group">
+                                <label for="exampleInputName1">Name</label>
+                                <input type="text" class="form-control" id="readlistname"
+                                  placeholder="Enter Readlist Name">
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleSelectGender">Priavcy</label>
+                                <select class="form-control" id="readlistprivacy">
+                                  <option>Private</option>
+                                  <option>Public</option>
+                                </select>
+                              </div>
+                              <div class="d-flex align-items-center">
+                                <button type="button"
+                                  class="button btn btn-primary ms-auto btn-rounded btn-sm" id="createnewreadlist"><span>Create</span></button>
+                              </div>
+                            </div>
+                            <!-- </div> -->
+                          </div>
+                        </div>
+                      </div>`;
+                }
+                $("#listcontent").html(content)
+              }
+            }
+          })
+        } else {
+          blog_id = $(this).data("id");
+          $.ajax({
+            url: "../../api/historysave.php",
+            type: "DELETE",
+            data: JSON.stringify({ key: 'addblog_show_readlist', 'blog_id': blog_id }),
+            dataType: "JSON",
+            success: (data) => {
+              console.log(data);
+              var content = `  <div class="d-flex align-items-center px-5 mb-1">
+                        <!-- <button type="button" class="btn btn-info ms-auto btn-rounded btn-sm">
+                          
+                        </button> -->
+                        <a data-bs-toggle="collapse" id="createreadlistb" href="#createreadlist" aria-expanded="false"
+                          aria-controls="createreadlist"
+                          class="collapsed ms-3 ml-3 show-reply btn btn-info ms-auto btn-rounded btn-sm">
+                          <i class="mdi mdi-plus-circle fw-bold ms-auto px-1 py-1 hover-cursor read-list-status"></i>
+                          Create ReadList
+                        </a>
+                      </div>
+                      <div class="cards" id="readlistcard">
+                  `;
+              if (data.status) {
+                for (i = 1; i < data.listcontent.length; i++) {
+                  console.log(data.listcontent[i]);
+
+                  content += `<div class="card" id="list-` + data.listcontent[i].list_id + `">
+                              <div class="card-body pb-0">
+                            <!-- <h4 class="card-title">`+ data.listcontent[i].list_title + `</h4> -->
+                            <div class="d-flex align-items-center">
+                              <div class="d-flex read-list hover-cursor">`;
+                  if (i == 1) {
+                    content += `<i class="mdi mdi-clock-alert img-sm rounded-10 mdi-36px"></i>`;
+                  } else {
+                    content += `<i class="mdi mdi-format-list-bulleted img-sm rounded-10 mdi-36px"></i>`;
+                  }
+                  content += `<div class="ms-3">
+                                  <h6 class="mb-1">`+ data.listcontent[i].list_title + `</h6>
+                                  <small class="text-muted mb-0"><i class="mdi mdi-format-list-bulleted me-1"></i>`+ data.listcontent[i].totalblog + `
+                                    Blogs</small>
+                                </div>
+                              </div>`;
+                  if (data.listcontent[i].lcid == null) {
+                    content += `<i class="mdi mdi-plus-circle fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor content-update" data-listid='` + data.listcontent[i].list_id + `' data-op='add'></i>`;
+                  } else {
+                    content += `<i class="mdi mdi-minus-circle fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor content-update" data-listid='` + data.listcontent[i].list_id + `' data-lcid='` + data.listcontent[i].lcid + `' data-op='remove'></i>`;
+
+                  }
+                  content += `</div>
+                          </div>
+                        </div>`;
+                }
+                content += `</div>
+                <div id="createreadlist" class="collapse" role="tabpanel" aria-labelledby="createreadlist"
+                        data-bs-parent="#accordion-2">
+                        <div class="card">
+                          <div class="card-body pb-0">
+                            <!-- <h4 class="card-title">Read list</h4> -->
+                            <!-- <div class="d-flex align-items-center"> -->
+                            <div class="row">
+                              <div class="form-group">
+                                <label for="exampleInputName1">Name</label>
+                                <input type="text" class="form-control" id="readlistname"
+                                  placeholder="Enter Readlist Name">
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleSelectGender">Priavcy</label>
+                                <select class="form-control" id="readlistprivacy">
+                                  <option>Private</option>
+                                  <option>Public</option>
+                                </select>
+                              </div>
+                              <div class="d-flex align-items-center">
+                                <button type="button"
+                                  class="button btn btn-primary ms-auto btn-rounded btn-sm" id="createnewreadlist"><span>Create</span></button>
+                              </div>
+                            </div>
+                            <!-- </div> -->
+                          </div>
+                        </div>
+                      </div>`;
+              }
+              $("#listcontent").html(content)
+            }
+          })
+        }
+        // alert(blog_id);
+
+      })
+      $(document).on("click", ".content-update", function () {
+        var list_id = $(this).data("listid");
+        if (selectingblog) {
+          // alert(list_id);
+          $.ajax({
+            url: "../../api/historysave.php",
+            type: "POST",
+            data: JSON.stringify({ key: 'add_multiplecontent_to_readlist', 'blog_id': selectingblogid, list_id: list_id }),
+            dataType: "JSON",
+            success: (data) => {
+              console.log(data);
+              if (data.status) {
+                // $(".blog").removeClass("card-inverse-info");
+                // selectingblogid = [];
+                // $("#addbutton").toggle();
+                // selectingblog = false;
+                // console.log(selectingblogid);
+                content = `<div class="card-body pb-0">
+                          <div class="d-flex align-items-center">
+                            <div class="d-flex read-list hover-cursor">`;
+                if (data.listcontent.list_title == "Read Later") {
+                  content += `<i class="mdi mdi-clock-alert img-sm rounded-10 mdi-36px"></i>`;
+                } else {
+                  content += `<i class="mdi mdi-format-list-bulleted img-sm rounded-10 mdi-36px"></i>`;
+                }
+                content += `<div class="ms-3">
+                                <h6 class="mb-1">`+ data.listcontent.list_title + `</h6>
+                                <small class="text-muted mb-0"><i class="mdi mdi-format-list-bulleted me-1"></i>`+ data.listcontent.totalblog + `
+                                  Blogs</small>
+                              </div>
+                            </div>`;
+                content += `<i class="mdi mdi-check-circle fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor"></i>`;
+                `</div>
+                        </div>`;
+                $("#list-" + list_id).html(content);
+                showSuccessToast("Added", data.message)
+              }
+            }
+          })
+        } else {
+          var opration = $(this).data("op");
+          // var list_id = $(this).data("listid");
+          if (opration == "remove") {
+            // delete_content_from_readlist
+            var lcid = $(this).data("lcid");
+            $.ajax({
+              url: "../../api/historysave.php",
+              type: "DELETE",
+              data: JSON.stringify({ key: 'delete_content_from_readlist_h', 'blog_id': blog_id, list_id: list_id, lcid: lcid }),
+              dataType: "JSON",
+              success: (data) => {
+                console.log(data);
+                content = `<div class="card-body pb-0">
+                          <!-- <h4 class="card-title">`+ data.listcontent[0].list_title + `</h4> -->
+                          <div class="d-flex align-items-center">
+                            <div class="d-flex read-list hover-cursor">`;
+                if (data.listcontent[0].list_title == "Read Later") {
+                  content += `<i class="mdi mdi-clock-alert img-sm rounded-10 mdi-36px"></i>`;
+                } else {
+                  content += `<i class="mdi mdi-format-list-bulleted img-sm rounded-10 mdi-36px"></i>`;
+                }
+                content += `<div class="ms-3">
+                                <h6 class="mb-1">`+ data.listcontent[0].list_title + `</h6>
+                                <small class="text-muted mb-0"><i class="mdi mdi-format-list-bulleted me-1"></i>`+ data.listcontent[0].totalblog + `
+                                  Blogs</small>
+                              </div>
+                            </div>`;
+                if (data.listcontent[0].lcid == null) {
+                  content += `<i class="mdi mdi-plus-circle fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor content-update" data-listid='` + data.listcontent[0].list_id + `' data-op='add'></i>`;
+                } else {
+                  content += `<i class="mdi mdi-minus-circle fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor content-update" data-listid='` + data.listcontent[0].list_id + `' data-lcid='` + data.listcontent[0].lcid + `' data-op='remove'></i>`;
+
+                }
+                content += `</div>
+                        </div>`;
+                $("#list-" + list_id).html(content);
+                showSuccessToast("Remove", "Removed from " + data.listcontent[0].list_title)
+              }
+            })
+          } else if (opration == "add") {
+            // alert(list_id);
+            $.ajax({
+              url: "../../api/historysave.php",
+              type: "DELETE",
+              data: JSON.stringify({ key: 'add_content_to_readlist', 'blog_id': blog_id, list_id: list_id }),
+              dataType: "JSON",
+              success: (data) => {
+                console.log(data);
+                content = `<div class="card-body pb-0">
+                          <!-- <h4 class="card-title">`+ data.listcontent[0].list_title + `</h4> -->
+                          <div class="d-flex align-items-center">
+                            <div class="d-flex read-list hover-cursor">`;
+                if (data.listcontent[0].list_title == "Read Later") {
+                  content += `<i class="mdi mdi-clock-alert img-sm rounded-10 mdi-36px"></i>`;
+                } else {
+                  content += `<i class="mdi mdi-format-list-bulleted img-sm rounded-10 mdi-36px"></i>`;
+                }
+                content += `<div class="ms-3">
+                                <h6 class="mb-1">`+ data.listcontent[0].list_title + `</h6>
+                                <small class="text-muted mb-0"><i class="mdi mdi-format-list-bulleted me-1"></i>`+ data.listcontent[0].totalblog + `
+                                  Blogs</small>
+                              </div>
+                            </div>`;
+                if (data.listcontent[0].lcid == null) {
+                  content += `<i class="mdi mdi-plus-circle fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor content-update" data-listid='` + data.listcontent[0].list_id + `' data-op='add'></i>`;
+                } else {
+                  content += `<i class="mdi mdi-minus-circle fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor content-update" data-listid='` + data.listcontent[0].list_id + `' data-lcid='` + data.listcontent[0].lcid + `' data-op='remove'></i>`;
+                }
+                content += `</div>
+                        </div>`;
+                $("#list-" + list_id).html(content);
+                showSuccessToast("Add", "Added from " + data.listcontent[0].list_title)
+
+              }
+            })
+          }
+        }
+      })
+      $(document).on("click", "#createnewreadlist", function () {
+        // alert(1);
+        name = $("#readlistname").val();
+        if (name == "") {
+          $("#readlistname").addClass('Error');
+          showDangerToast("Please Check all field", "Enter readlist name");
+        } else {
+          // alert($("#readlistname").val())
+          // alert($("#readlistprivacy").prop('selectedIndex'));
+          if ($("#readlistprivacy").prop('selectedIndex') == 0) {
+            list_status = "private";
+          } else {
+            list_status = "public";
+          }
+          // create_readlist
+          $.ajax({
+            url: "../../api/historysave.php",
+            type: "DELETE",
+            data: JSON.stringify({ key: 'create_readlist', list_title: name, list_status: list_status }),
+            dataType: "JSON",
+            success: (data) => {
+              console.log(data);
+              if (data.status) {
+                $("#readlistname").removeClass('Error');
+                // showSuccessToast("create", name + " readlist Created.");
+                // $("#createreadlist").addClass('collapsing');
+                $("#createreadlist").toggle(500);
+                $("#readlistname").val("")
+                content = `<div class="card" id="list-` + data.listcontent[0].list_id + `">
+                  <div class="card-body pb-0">
+                          <!-- <h4 class="card-title">`+ data.listcontent[0].list_title + `</h4> -->
+                          <div class="d-flex align-items-center">
+                            <div class="d-flex read-list hover-cursor">`;
+                if (data.listcontent[0].list_title == "Read Later") {
+                  content += `<i class="mdi mdi-clock-alert img-sm rounded-10 mdi-36px"></i>`;
+                } else {
+                  content += `<i class="mdi mdi-format-list-bulleted img-sm rounded-10 mdi-36px"></i>`;
+                }
+                content += `<div class="ms-3">
+                                <h6 class="mb-1">`+ data.listcontent[0].list_title + `</h6>
+                                <small class="text-muted mb-0"><i class="mdi mdi-format-list-bulleted me-1"></i>`+ data.listcontent[0].totalblog + `
+                                  Blogs</small>
+                              </div>
+                            </div>`;
+                if (data.listcontent[0].lcid == null) {
+                  content += `<i class="mdi mdi-plus-circle fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor content-update" data-listid='` + data.listcontent[0].list_id + `' data-op='add'></i>`;
+                } else {
+                  content += `<i class="mdi mdi-minus-circle fw-bold ms-auto px-1 py-1 text-info mdi-24px hover-cursor content-update" data-listid='` + data.listcontent[0].list_id + `' data-lcid='` + data.listcontent[0].lcid + `' data-op='remove'></i>`;
+                }
+                content += `</div>
+                        </div>
+                        </div>`;
+                $("#readlistcard").append(content);
+                showSuccessToast("Add", "Added to " + data.listcontent[0].list_title)
+              }
+            }
+          })
+
+        }
+      })
+      showBlog();
+      // $(document).on("click", ".updateblog", function () {
+      //   alert(1);
+      // });
+      // $(".card").hover(function(){
+      //   alert(11);
+      // })
+      // $(".card").on("mouseover",()=>{
+      //   alert(1); 
+      //   // $(this).toggleClass("box-shadow");
+
+      // })
+      $(document).on("click", ".deleteblog", function () {
+        var id = $(this).data("id");
+        // alert(id);
+        swal({
+          title: 'Are you sure?',
+          text: "Do you want to delete your blog?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3f51b5',
+          cancelButtonColor: '#ff4081',
+          confirmButtonText: 'Great ',
+          buttons: {
+            cancel: {
+              text: "Cancel",
+              value: null,
+              visible: true,
+              className: "btn btn-danger btn-sm",
+              closeModal: true,
+            },
+            confirm: {
+              text: "Delete",
+              value: true,
+              visible: true,
+              className: "btn btn-primary btn-sm",
+              closeModal: true
+            }
+          }
+        }).then((result) => {
+          if (result) {
+            $.ajax({
+              url: "../../api/blogop.php",
+              type: "DELETE",
+              data: JSON.stringify({ fkey: 'blog_delete', 'blog_id': id }),
+              dataType: "JSON",
+              success: (data) => {
+                console.log(data);
+                if (data.status == 1) {
+                  // showSwal('success-message', 'Blog posted', data.message, "okay");
+                  showSuccessToast("deleted", data.message);
+                  $("#card-" + id).remove();
+                }
+              }
+            });
+          }
+        })
+      });
+      $("#createblog").on("click", (e) => {
+        createblog(e);
+      })
+
+
+    })
+
+  </script>
+  <script src="../../vendors/js/vendor.bundle.base.js"></script>
+  <!-- plugins:js -->
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <script src="../../vendors/sweetalert/sweetalert.min.js"></script>
+  <script src="../../vendors/jquery-toast-plugin/jquery.toast.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../../js/off-canvas.js"></script>
+
+  <script src="../../js/hoverable-collapse.js"></script>
+  <script src="../../js/template.js"></script>
+  <script src="../../js/settings.js"></script>
+  <script src="../../js/todolist.js"></script>
+  <!-- endinject -->
+  <script src="../../js/toastDemo.js"></script>
+  <script src="../../js/popover.js"></script>
+  <script src="../../js/tooltips.js"></script>
+  <!-- Custom js for this page-->
+  <script src="../../js/jquery.cookie.js" type="text/javascript"></script>
+  <script src="../../js/dashboard.js"></script>
+  <script src="../../js/Chart.roundedBarCharts.js"></script>
+  <script src="../../js/alertp.js"></script>
+  <script src="../../js/modal-demo.js"></script>
+
+  <!-- End custom js for this page-->
+  <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.7/jquery.lazyload.js"></script>
+      <script type="text/javascript" charset="utf-8">
+  $(function() {
+    $("div.lazy").lazyload({
+      effect : "fadeIn"
+     });
+
+  }); -->
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,2152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+      shrink-to-fit=no">
+  <title>TrendStream</title>
+    <link rel="stylesheet" href="../../css/style1.css">
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../vendors/jquery-bar-rating/css-stars.css">
+
+
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- <link rel="stylesheet" href="../../vendors/flag-icon-css/css/flag-icon.min.css" /> -->
+    <link rel="stylesheet" href="../../vendors/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../vendors/jquery-contextmenu/jquery.contextMenu.min.css">
+    <link rel="stylesheet" href="../../vendors/jquery-toast-plugin/jquery.toast.min.css">
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../../images/favicon.png" />
+    <style>
+        .c-badge {
+            background-color: #35b69f;
+            color: white;
+            height: 20px;
+            font-size: 11px;
+            width: 92px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2px;
+        }
+        
+        .bookmark{
+            background-color: yellow;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+        .comment-text {
+            font-size: 13px;
+        }
+
+        .wish {
+
+            color: #35b69f;
+        }
+
+        .comment-text-box {
+            height: 48px;
+            border-radius: 25px;
+        }
+
+        .user-feed {
+
+            font-size: 14px;
+            margin-top: 12px;
+        }
+
+        #sharing-menu {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            padding: 8px;
+            z-index: 999;
+            white-space: nowrap;
+            /* Prevent line breaks */
+        }
+
+        .sharing-menu-item {
+            display: block;
+            /* Display items as blocks */
+            margin-bottom: 4px;
+            /* Add margin between items */
+            padding: 4px;
+            border-radius: 4px;
+            color: #333;
+            font-size: small;
+            text-decoration: none;
+        }
+
+        .sharing-menu-item:hover {
+            background-color: #f4f4f4;
+        }
+
+        @media screen and (max-width: 600px) {
+            #sharing-menu {
+                padding: 4px;
+                /* Reduce padding for smaller screens */
+            }
+
+            .sharing-menu-item {
+                display: block;
+                /* Display items as blocks */
+                margin: 4px 0;
+                /* Add margin between items */
+            }
+        }
+        .overflow-auto::-webkit-scrollbar{
+            display: none;
+        }
+        .d-flex.overflow-auto::-webkit-scrollbar {
+            display: none; /* Hide the scrollbar on WebKit-based browsers */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="align-content-center justify-content-center">
+        <div class="col-md-4 col-sm-6 grid-margin stretch-card m-auto pt-5" id="loader">
+            <div class="dot-opacity-loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <div class="body-content" style="display: none;">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row" id="navbar">
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_settings-panel.html -->
+            <div class="theme-setting-wrapper">
+                <div id="settings-trigger"><i class="ti-settings"></i></div>
+                <div id="theme-settings" class="settings-panel">
+                    <i class="settings-close ti-close"></i>
+                    <p class="settings-heading">SIDEBAR SKINS</p>
+                    <div class="sidebar-bg-options selected" id="sidebar-light-theme">
+                        <div class="img-ss rounded-circle bg-light border me-3"></div>Light
+                    </div>
+                    <div class="sidebar-bg-options" id="sidebar-dark-theme">
+                        <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+                    </div>
+                    <p class="settings-heading mt-2">HEADER SKINS</p>
+                    <div class="color-tiles mx-0 px-4">
+                        <div class="tiles success"></div>
+                        <div class="tiles warning"></div>
+                        <div class="tiles danger"></div>
+                        <div class="tiles info"></div>
+                        <div class="tiles dark"></div>
+                        <div class="tiles default"></div>
+                    </div>
+
+                    <p class="settings-heading mt-2 divnotification">Notification</p>
+                    <div class="mx-0 px-4 divnotification">
+                        <div class="form-check form-check-success">
+                        <div class="d-flex">
+                            <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="notificationstatus">
+                            </label>
+                            <span id="notificationstatustext">Off</span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- partial -->
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            </nav>
+            <!-- <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="grid-margin stretch-card">
+                            <div class="card box-shadow">
+                                <div class="card-body">
+                                    <div id="blogcontent"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="main-panel" id="main-panel">
+                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" id="modal">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content" id="modal-content">
+                      </div>
+                    </div>
+                  </div>
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="home-tab" id="home-tab">
+                                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"
+                                id="likesusersdata">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="card card-rounded">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                        <div class="d-flex align-items-center align-content-center">
+                                                            <h4 class="card-title card-title-dash">
+                                                            Liked user
+                                                            </h4>
+                                                            <button type="button" class="badge badge-pill btn-outline-behance ms-auto" data-bs-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                    <div class="mt-3 overflow-auto" id="likesusersdatacontent" style="max-height: 500px">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                                <div class="tab-content tab-content-basic">
+                                    <div class="tab-pane fade show active" id="overview" role="tabpanel"
+                                        aria-labelledby="overview">
+
+                                        <div class="row">
+                                            <div class="col-lg-8 d-flex flex-column">
+                                                <div class="row">
+                                                    <div class="col-12 grid-margin stretch-card">
+                                                        <div class="card card-rounded" id="blogcontent">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 grid-margin stretch-card">
+                                                        <div class="card card-rounded">
+                                                            <div class="card-body">
+                                                                <h3 class="card-title card-title-dash mb-4">Comment</h3>
+                                                                <div class="justify-content-between align-items-start">
+                                                                    <!-- <div class="card-body card-rounded"> -->
+                                                                    <div class="d-flex">
+                                                                        <i class="img-sm fa fa-comments-o rounded-10 fa-2x pt-1"></i>
+                                                                        <!-- <img class="img-sm rounded-10"
+                                                                            src="https://i.imgur.com/zQZSWrt.jpg"
+                                                                            width="30" class="rounded-circle mr-2"> -->
+                                                                        <div class="ms-3"></div>
+                                                                        <input type="text"
+                                                                            class="comment-text-box form-control"
+                                                                            placeholder="Enter your comment"
+                                                                            id="newcomment">
+                                                                        <button
+                                                                            class="btn btn-outline-success btn-rounded ms-3"
+                                                                            style="height: 48px;" id="addcomment"><i
+                                                                                class="mdi mdi-send text-dark"></i></button>
+                                                                    </div>
+                                                                    <div id="commentcontent">
+
+                                                                    </div>
+
+                                                                    <!-- </div> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 d-flex flex-column">
+                                                <!-- <div class="row flex-grow"> -->
+                                                <div class="col12 grid-margin stretch-card">
+                                                    <div class="card card-rounded" id="profilecontent">
+                                                        <!-- <div class="card-body pb-0">
+                                                            <div class="border-bottom text-center pb-0">
+                                                                <img src="../../images/faces/face11.jpg" alt="profile"
+                                                                    class="img-lg rounded-circle mb-3" />
+                                                                <div class="mb-3">
+                                                                    <h3>David Grey. H</h3>
+                                                                    <div
+                                                                        class="d-flex align-items-center justify-content-center">
+                                                                        <select id="profile-rating" name="rating"
+                                                                            autocomplete="off">
+                                                                            <option value="1">1</option>
+                                                                            <option value="2">2</option>
+                                                                            <option value="3">3</option>
+                                                                            <option value="4">4</option>
+                                                                            <option value="5">5</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex justify-content-center">
+                                                                    <button class="btn btn-success" id="bloglike"><i
+                                                                            class="fa fa-thumbs-o-up">&nbsp;11</i></button>
+                                                                    <a href="#comment" class="btn btn-success"><i
+                                                                            class="fa fa-comments-o">&nbsp;12</i></a>
+                                                                    <button class="btn btn-success">Follow</button>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-12 grid-margin stretch-card">
+                                                    <div class="card card-rounded">
+                                                        <div class="card-body pb-0">
+                                                            <h4 class="card-title">Translate Blog</h4>
+                                                            <div class="form-group">
+                                                                <label>Language</label>
+                                                                <div id="languageboxcontent">
+                                                                    <select class="form-control" id="languagebox">
+                                                                        <option>Select language</option>
+                                                                        <option>l1</option>
+                                                                        <option>l2</option>
+                                                                        <option>l3</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <button
+                                                                class="btn btn-sm btn-primary float-end text-white">Translate</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                                <div class="col-12 grid-margin stretch-card">
+                                                    <div class="card card-rounded">
+                                                        <div class="card-body pb-0 mb-3">
+                                                            <h4 class="card-title">Blog Audible</h4>
+                                                            <div class="row align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="btn-wrapper">
+                                                                        <div class="dropdown language-dropdown">
+                                                                          <button class="btn btn-outline-info btn-sm dropdown-toggle" type="button" id="language-combobox" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                            Select Language
+                                                                          </button>
+                                                                        </div>
+                                                                    </div> 
+                                                                        <div id="blogaudiorefresh" class="btn btn-rounded btn-outline-danger ms-auto py-2 px-2 bs-tooltip-bottom bs-tooltip-bottom-demo" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Refresh" style="display: none;">
+                                                                            <i class="fa fa-refresh ms-1 fa-2x text-dark"></i>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="d-flex align-items-center">
+                                                                    <div id="blogaudio" class="badge badge-pill btn btn-outline-info py-3 px-3 bs-tooltip-bottom bs-tooltip-bottom-demo" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Listen">
+                                                                        <i class="ms-1 mdi mdi-volume-high mdi-18px text-dark"></i>
+                                                                    </div>
+
+                                                                    <!-- <div class="tooltip bs-tooltip-bottom bs-tooltip-bottom-demo" >
+                                                                        <div class="arrow"></div>
+                                                                        <div class="tooltip-inner">
+                                                                          Bottom Tooltip
+                                                                        </div>
+                                                                      </div> -->
+                                                                    <div id="showcaption" class="btn btn-rounded btn-outline-info ms-auto py-2 px-2 bs-tooltip-bottom bs-tooltip-bottom-demo collapse" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="sbow caption">
+                                                                        <i class="mdi mdi-closed-caption ms-1 mdi-18px text-dark"></i>
+                                                                    </div>
+                                                                    <div id="blogaudiocancle" class="btn btn-rounded btn-outline-danger ms-auto py-2 px-2 bs-tooltip-bottom bs-tooltip-bottom-demo collapse" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Cancel" >
+                                                                        <i class="mdi mdi-close-circle ms-1 mdi-18px text-dark"></i>
+                                                                    </div>
+                                                                    <!-- fa-refresh -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- </div> -->
+                                                <!-- <div class="row flex-grow"> -->
+                                                    <div class="col-12 grid-margin stretch-card">
+                                                        <div class="card card-rounded">
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div
+                                                                            class="d-flex justify-content-between align-items-center">
+                                                                            <div>
+                                                                                <h4 class="card-title card-title-dash">
+                                                                                Related blogger
+                                                                                </h4>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="relatedbloggerdata">
+                                                                            
+                                                                            <div
+                                                                                class="wrapper d-flex align-items-center justify-content-between pt-2">
+                                                                                <div class="d-flex">
+                                                                                    <img class="img-sm rounded-10"
+                                                                                        src="../../images/faces/face5.jpg"
+                                                                                        alt="profile">
+                                                                                    <div class="wrapper ms-3">
+                                                                                        <p class="ms-1 mb-1 fw-bold">
+                                                                                            Rafell John</p>
+                                                                                        <small
+                                                                                            class="text-muted mb-0">Alaska,
+                                                                                            USA</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="text-muted text-small">
+                                                                                    1h ago
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- </div> -->
+                                                    <!-- <div class="row flex-grow"> -->
+                                                        
+                                                        <div class="col-12 grid-margin stretch-card">
+                                                            <div class="card bg-transparent card-rounded">
+                                                                <div class="card-body">
+        
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12">
+                                                                            <div
+                                                                                class="d-flex justify-content-between align-items-center mb-3">
+                                                                                <div>
+                                                                                    <h4 class="card-title card-title-dash">
+                                                                                        Recommendation</h4>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mt-3">
+                                                                                <div class="d-flex overflow-auto scroll-wrapper" id="recommendedoptiondata"> 
+                                                                                    <div class="btn btn-outline-behance recommendedoption">value1</div>
+                                                                                    <div class="btn btn-behance ms-2 recommendedoption">value2</div>
+                                                                                    <div class="btn btn-outline-behance ms-2 recommendedoption">value3</div>
+                                                                                    <div class="btn btn-outline-behance ms-2 recommendedoption">value4</div>
+                                                                                    <div class="btn btn-outline-behance ms-2 recommendedoption">value5</div>
+                                                                                    <div class="btn btn-outline-behance ms-2 recommendedoption">valueSSS6</div>
+                                                                                </div>
+                                                                                <div id="recommendeddata">
+                                                                                    <div
+                                                                                        class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
+                                                                                        <div class="d-flex">
+                                                                                            <img class="img-sm rounded-10" style="width : 70px"
+                                                                                                src="../../images/uploadimage/Screenshot (11).png"
+                                                                                                alt="profile">
+                                                                                            <div class="wrapper ms-3">
+                                                                                                <p class="ms-1 mb-1 fw-bold">
+                                                                                                    Blog 1
+                                                                                                </p>
+                                                                                                <small class="text-muted mb-0 ms-1"><i class="fa fa-thumbs-o-up me-1"></i>3</small>
+                                                                                                    <small class="text-muted mb-0 ms-1"><i class="fa fa-comments-o me-1"></i>3</small>
+                                                                                                        <small class="text-muted mb-0 ms-1"><i class="mdi mdi-eye me-1"></i>3</small>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="text-muted text-small pt-3">
+                                                                                            <button class="btn btn-outline-success">Open</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
+                                                                                        <div class="d-flex">
+                                                                                            <img class="img-sm rounded-10" style="width : 70px"
+                                                                                                src="../../images/uploadimage/Screenshot (11).png"
+                                                                                                alt="profile">
+                                                                                            <div class="wrapper ms-3">
+                                                                                                <p class="ms-1 mb-1 fw-bold">
+                                                                                                    Blog 2
+                                                                                                </p>
+                                                                                                <small class="text-muted mb-0 ms-1"><i class="fa fa-thumbs-o-up me-1"></i>3</small>
+                                                                                                    <small class="text-muted mb-0 ms-1"><i class="fa fa-comments-o me-1"></i>3</small>
+                                                                                                        <small class="text-muted mb-0 ms-1"><i class="mdi mdi-eye me-1"></i>3</small>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="text-muted text-small pt-3">
+                                                                                            <button class="btn btn-outline-success">Open</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
+                                                                                        <div class="d-flex">
+                                                                                            <img class="img-sm rounded-10" style="width : 70px"
+                                                                                                src="../../images/uploadimage/Screenshot (11).png"
+                                                                                                alt="profile">
+                                                                                            <div class="wrapper ms-3">
+                                                                                                <p class="ms-1 mb-1 fw-bold">
+                                                                                                    Blog 3
+                                                                                                </p>
+                                                                                                <small class="text-muted mb-0 ms-1"><i class="fa fa-thumbs-o-up me-1"></i>3</small>
+                                                                                                    <small class="text-muted mb-0 ms-1"><i class="fa fa-comments-o me-1"></i>3</small>
+                                                                                                        <small class="text-muted mb-0 ms-1"><i class="mdi mdi-eye me-1"></i>3</small>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="text-muted text-small pt-3">
+                                                                                            <button class="btn btn-outline-success">Open</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
+                                                                                        <div class="d-flex">
+                                                                                            <img class="img-sm rounded-10" style="width : 70px"
+                                                                                                src="../../images/uploadimage/Screenshot (11).png"
+                                                                                                alt="profile">
+                                                                                            <div class="wrapper ms-3">
+                                                                                                <p class="ms-1 mb-1 fw-bold">
+                                                                                                    Blog 4
+                                                                                                </p>
+                                                                                                <small class="text-muted mb-0 ms-1"><i class="fa fa-thumbs-o-up me-1"></i>3</small>
+                                                                                                    <small class="text-muted mb-0 ms-1"><i class="fa fa-comments-o me-1"></i>3</small>
+                                                                                                        <small class="text-muted mb-0 ms-1"><i class="mdi mdi-eye me-1"></i>3</small>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="text-muted text-small pt-3">
+                                                                                            <button class="btn btn-outline-success">Open</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                               
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                <!-- </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+             <div class="align-items-center text-center fixed-bottom m-5 hover-cursor bs-tooltip-bottom bs-tooltip-bottom-demo" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Double click to hide caption box" id="blogcaption" style="display: none;">
+                    <div class="card card-light-blue shadow col-lg-7 mx-auto">
+                        <div class="card-body">
+                            <p>Speaking word : <b><span id="word" style="color:yellow;"></span></b></p>
+                            <b><div id="panel" style="color: white;"></div></b>
+                        </div>
+                </div>
+            </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    </div>
+                </footer>
+
+                
+                <!-- partial -->
+            </div>
+        </div>
+    </div>
+
+    <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <script src="../create/main.js"></script>
+    <script src="../../js/sidebar.js"></script>
+    <script src="../../js/navbar.js"></script>
+    <!-- <script src="../../js/consolehide.js"></script> -->
+    <script>
+        $(document).ready(() => {
+         setlogindata();
+
+            // $.ajax({
+            //     url: "../../api/login.php",
+            //     type: "POST",
+            //     data: JSON.stringify({ fkey: 'checklogin' }),
+            //     dataType: "JSON",
+            //     async: false,
+            //     success: (data) => {
+            //     console.log(data);
+            //     // console.log(data.userdata[0].email);
+            //     if (data.status) {
+            //         $("#useremail").html(data.userdata[0].email);
+            //         // $("#useruname").html(data.userdata[0].username);
+            //         if (data.userdata[0].user_type == "user") {
+            //         $("#myblogs").hide();
+            //         }
+            //     }
+            //     $("#useruname").html(data.userdata[0].username);
+            //         loginuserid = data.userdata[0].usid;
+            //     }
+            // });
+            console.log(loginuserid);
+            $(document).on("click",".recommendedoption",function(){
+                $(".recommendedoption").removeClass("btn-behance");
+                $(this).addClass("btn-behance");
+                value = $(this).data("value");
+                type = $(this).data("type");
+                $.ajax({
+                    url: "../../api/recommendation.php",
+                    type: "POST",
+                    data: JSON.stringify({ key: 'recommendation', value : value, type : type }),
+                    dataType: "JSON",
+                    success: (data) => {
+                        console.log(data);
+                        if(data.blogsdata.length > 0){
+                            content=``;
+                    if(data.blogsdata.length>0){
+                    for(i=0 ; i < 5;i++){
+                        if(data.blogsdata[i] == undefined){
+                            continue;
+                        }else{
+                            content += `
+                                                                                        <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom hover-cursor open-blog" data-value='`+data.blogsdata[i].blog_id+`'>
+                                                                                            <div class="d-flex">
+                                                                                                <img class="img-sm rounded-10" style="width : 70px"
+                                                                                                    src="../../images/uploadimage/Screenshot (11).png"
+                                                                                                    alt="profile">
+                                                                                                <div class="wrapper ms-3">
+                                                                                                    <p class="ms-1 mb-1 fw-bold">
+                                                                                                        `+data.blogsdata[i].blog_title+`
+                                                                                                    </p>
+                                                                                                    <small class="text-muted mb-0 ms-1"><i class="fa fa-thumbs-o-up me-1"></i>`+data.blogsdata[i].likes+`</small>
+                                                                                                        <small class="text-muted mb-0 ms-1"><i class="fa fa-comments-o me-1"></i>`+data.blogsdata[i].comments+`</small>
+                                                                                                            <small class="text-muted mb-0 ms-1"><i class="mdi mdi-eye me-1"></i>`+data.blogsdata[i].blog_view+`</small>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                    <div class="text-muted text-small pt-3">
+                                                                                        <button class="btn btn-outline-success open-blog" data-value = "`+ data.blogsdata[i].blog_id+`">Open</button>
+                                                                                    </div>
+                                                                                </div>`;
+                        }
+                    }
+                }
+                $("#recommendeddata").html("");
+                $("#recommendeddata").append(content);
+                        }
+                    },
+                    error: (error) => servererror(error)
+                })
+
+            })
+            menu = `    <div id="sharing-menu" class="dropdown-menu">
+                <a class="sharing-menu-item hover-cursor" data-service="bookmark">
+                    <i class="mdi mdi-bookmark text-info"></i><span class="ms-2">
+                        Bookmarks</span>
+                    </a>
+                <a class="sharing-menu-item hover-cursor" data-service="bookmarkdelete">
+
+                    <i class="mdi mdi-bookmark-remove text-info"></i><span class="ms-2">
+                        Bookmark delete</span></a>
+                <a class="sharing-menu-item" href="#" data-service="email">
+                    <i class="mdi mdi-email text-info"></i><span class="ms-2">
+                        Share on Email</span></a>
+                <a class="sharing-menu-item" href="#" data-service="facebook">
+                    <i class="mdi mdi-facebook text-info"></i><span class="ms-2">
+                        Share on Facebook</span></a>
+                <a class="sharing-menu-item" href="#" data-service="whatsapp">
+                    <i class="mdi mdi-whatsapp text-info"></i><span class="ms-2">
+                        Share on Whatsapp</span></a>
+            </div>`;
+            $('body').append(menu)
+            navbar();
+            sidebar();
+            var synthesis = window.speechSynthesis;
+            utterance = new SpeechSynthesisUtterance();
+            utterance.rate = 1; // Set the speaking rate (0.1 to 10)
+            utterance.pitch = 1; // Set the speaking pitch (0 to 2)
+            utterance.volume = 1; // Set the volume to max (0 to 1)
+            var sentenceIndex = 1;
+            var sentences = [];
+            var wordIndex = -1;
+            var global_words = [];
+            
+            function textToSpeech(text1)
+            {
+                stop();
+                
+                window.speechSynthesis.cancel();
+                console.log(text1);
+                    text = utterance.text = text1;
+                // }
+                // text = utterance.text = text1
+                text = text.replace(/\।/g, '.');
+                sentences = text.split(".");
+                // console.log(text);
+                global_words = [];
+                sentenceIndex = 0;
+                // Draw the text in a div
+                drawTextInPanel(sentences[sentenceIndex]);
+                utterance.text = sentences[sentenceIndex];
+                // speechSynthesis.speak(utterance);                
+                var voices = synthesis.getVoices();
+                var langCode = selectedlanguage;//'gu-IN';//$(".goog-te-combo").val();//'gu-IN'; // Set the language code to "gu-IN" for Gujarati
+                var voiceFound = false;
+                for (var i = 0; i < voices.length; i++) {
+                    if (voices[i].lang === langCode) {
+                        utterance.voice = voices[i]; // Set the voice for the specified language
+                        voiceFound = true;
+                        break;
+                    }
+                }
+                if (!voiceFound) {
+                    utterance.voice = voices[0]; // Set the default voice if the specified language voice is not found
+                }
+                utterance.lang = langCode; // Set the language of the text
+                synthesis.speak(utterance);
+            //     const speech = new SpeechSynthesisUtterance();
+            //     let voices = speechSynthesis.getVoices();
+            //     let convert;
+            //     // if(selectedlanguage == bloglanguage){
+            //     //     convert = $("#selected-text").text();
+            //     // }else{
+            //     //     convert = translatetext;
+            //     // }
+    
+            //     speech.text = convert;
+            //     //////////////
+            //     speech.lang = "gu-IN";
+
+            //     console.log(selectedlanguage);
+            //     //speech.lang = "hi-IN";
+        
+            //     speech.volume = 1;
+            //     speech.rate = 1;
+            //     speech.pitch = 1;
+        
+            //     speech.voice = voices[1];
+            //     speechSynthesis.speak(speech);
+            //     // if(audioplay)
+            //     // if(audiopause)
+            // // if(p == "pause")
+            // // {a
+            // //     speechSynthesis.cancel();
+            // // }
+            
+            }
+            utterance.onboundary = function(event) {
+                var sentence = sentences[sentenceIndex];
+                if (wordIndex === -1) {
+                wordIndex = 0;
+            }
+                var word = getWordAt(sentence, event.charIndex);
+                // Show Speaking word : x
+                document.getElementById("word").innerHTML = word;
+                // Increase index of span to highlight
+                //console.info(global_words[wordIndex]);
+                try {
+                    // console.log(wordIndex);
+                document.getElementById("word_span_" + wordIndex).style.color = "black";
+                
+                } catch (e) {}
+                
+                wordIndex++;
+            };
+
+            utterance.onend = function() {
+                document.getElementById("panel").innerHTML = "";
+                wordIndex = -1;
+                eraseSentence();
+            };
+            // Get the word of a string given the string and the index
+            function getWordAt(str, pos) {
+                // Perform type conversions.
+                str = String(str);
+                pos = Number(pos) >>> 0;
+
+                // Search for the word's beginning and end.
+                var left = str.slice(0, pos + 1).search(/\S+$/),
+                    right = str.slice(pos).search(/\s/);
+
+                // The last word in the string is a special case.
+                if (right < 0) {
+                return str.slice(left);
+                }
+                // Return the word, using the located bounds to extract it from the string.
+                return str.slice(left, right + pos);
+            }
+            function drawTextInPanel(sentence) {
+                var panel = document.getElementById("panel");
+                //panel.innerHTML = '<span id="sentence_span">' + sentence + '</span>';
+                //var words_array = sentence.split(" ");
+                var words_array = sentence.trim().split(" ");
+                var x
+                for (x = 0; x < words_array.length; x++) {
+                    var html = '<span id="word_span_' + x + '">' + words_array[x] + '</span>&nbsp;';
+                    panel.innerHTML += html;
+                }
+
+            }
+
+            function eraseSentence() {
+                var panel = document.getElementById("panel");
+                panel.innerHTML = "";
+                sentenceIndex++;
+                if (sentenceIndex < sentences.length) {
+                    console.log(1);
+                    drawTextInPanel(sentences[sentenceIndex]);
+                    utterance.text = sentences[sentenceIndex];
+                    //console.log(utterance.text);
+                    synthesis.speak(utterance);
+                }else{
+                    audioplay =true;
+                audiopause = false;
+                audioresume = false;
+                // speechSynthesis.cancel();
+                if(!blogcaption)
+                    $("#showcaption").toggle(600);
+                if(blogcaption){
+                    $("#blogcaption").toggle(600);
+                    blogcaption = false;
+                }
+                // $("#blogcaption").toggle(600);
+                $("#blogaudiorefresh").toggle(600);
+                $("#blogaudio").attr('data-bs-original-title',"Listen");
+                $("#blogaudio").html(`<i class="ms-1 mdi mdi-volume-high mdi-18px text-dark"></i>`);
+                document.getElementById("word").innerHTML = "";
+                document.getElementById("panel").innerHTML = "";
+                wordIndex = -1;
+                $("#blogaudiocancle").toggle(600);
+                selection = "";
+
+                }
+            }
+            blogcaption = false;
+            $(document).on("click", "#showcaption",function (e){
+                $(this).toggle(600);
+                blogcaption = true;
+                $("#blogcaption").toggle(600);
+            })
+            $(document).on("dblclick","#blogcaption",function(e){
+                $(this).toggle(600);
+                blogcaption = false;
+                $("#showcaption").toggle(600);
+            })
+            audioplay =true;
+            audiopause = false;
+            audioresume = false;
+            if(!audiopause && !audioresume && audioplay){
+                speechSynthesis.cancel();
+            }
+            $(document).on("click","#blogaudio",function(e){
+                // alert(1);
+                if(audioplay){
+
+                   console.log($("#blog-text").text());
+                //    console.log($("#textarea_blog").val());
+                    audioresume =false;
+                    audioplay = false;
+                    audiopause = true;
+                    $(this).html(`<i class="fa ms-1 fa-pause text-dark"></i>`);
+                    $(this).attr('data-bs-original-title',"Pause");
+                    $("#blogaudiorefresh").toggle(600);
+                    $("#blogaudiocancle").toggle(600);
+                        if(selection != ""){
+                            textToSpeech($("#blog-text1").text());
+                        }else{
+                            textToSpeech( $("#blog-text").text());
+                        }
+                   
+                    if(!blogcaption){
+                        $("#blogcaption").toggle(600);
+                        blogcaption = true;
+                    }
+                    // alert(1);
+                }else if(audioresume){
+                    audiopause = true;
+                    audioplay = false;
+                    audioresume = false;
+                    speechSynthesis.resume();
+                    p = "pause";
+                    $(this).html(`<i class="fa ms-1 fa-pause text-dark"></i>`);
+                    $(this).attr('data-bs-original-title',"Pause");
+                    // $(this).html(`<i class="fa ms-1 fa-stop text-dark"></i>`);
+                }else if(audiopause){
+                    audioplay = false;
+                    audiopause = false;
+                    audioresume = true;
+                    speechSynthesis.pause();
+                    $(this).html(`<i class="fa ms-1 fa-play text-dark"></i>`);
+                    $(this).attr('data-bs-original-title',"Resume");
+
+                }
+            })
+            $(document).on("click","#blogaudiorefresh",function(e){
+                audioresume =false;
+                audioplay = false;
+                audiopause = true;
+                if(!blogcaption){
+                    $("#blogcaption").toggle(600);
+                    blogcaption = true;
+                $("#showcaption").toggle(600);
+
+                }
+                $("#blogaudio").html(`<i class="fa ms-1 fa-pause text-dark"></i>`);
+                $("#blogaudio").attr('data-bs-original-title',"Pause");
+                document.getElementById("word").innerHTML = "";
+                document.getElementById("panel").innerHTML = "";
+                wordIndex = -1;
+                if(selection != ""){
+                            textToSpeech($("#blog-text1").text());
+                        }else{
+                            textToSpeech( $("#blog-text").text());
+                        }
+            })
+            $(document).on("click","#blogaudiocancle",function(e){
+                audioplay =true;
+                audiopause = false;
+                audioresume = false;
+                speechSynthesis.cancel();
+                if(!blogcaption)
+                    $("#showcaption").toggle(600);
+                if(blogcaption){
+                    $("#blogcaption").toggle(600);
+                    blogcaption = false;
+                }
+                selection = "";
+                // $("#blogcaption").toggle(600);
+                $("#blogaudiorefresh").toggle(600);
+                $("#blogaudio").attr('data-bs-original-title',"Listen");
+                $("#blogaudio").html(`<i class="ms-1 mdi mdi-volume-high mdi-18px text-dark"></i>`);
+                document.getElementById("word").innerHTML = "";
+                document.getElementById("panel").innerHTML = "";
+                wordIndex = -1;
+                $(this).toggle(600);
+            })
+            // $(document).on("hover","#blogselecting",function(){
+            //     alert(1)
+            // })
+            $("#signout").on("click", () => {
+                $.ajax({
+                    url: "../../api/logout.php",
+                    type: "GET",
+                    dataType: "JSON",
+                    success: (data) => {
+                        if (data.status == 1) {
+                            window.location.href = "../login/index.html";
+                        }
+                    }
+                });
+            })
+            var replyuid;
+            $(document).on("click", ".show-reply", function () {
+                // alert($(this).data("ruid"));
+                replyuid = $(this).data("ruid");
+                if ($(this).data("cpid") == undefined) {
+                    riid = "#replyibox-" + $(this).data("cid");
+                    ruid = "#replyuserdata-" + $(this).data("cid");
+                    reeid = "#replyibox-" + $(this).data("cid");
+                    $(riid).data("rcid", $(this).data("cid"));
+                } else {
+                    riid = "#replyibox-" + $(this).data("cpid");
+                    ruid = "#replyuserdata-" + $(this).data("cpid");
+                    reeid = "#replyibox-" + $(this).data("cpid");
+                    $(riid).data("rcid", $(this).data("cpid"));
+                }
+                $(reeid).focus();
+                $(ruid).text("Reply to " + $(this).data("username"))
+                $(riid).data("id", $(this).data("cid"));
+                $(riid).data("id", $(this).data("cid"));
+                var id = "#" + $(this).data("id");
+                if ($(this).attr("aria-expanded") == "true") {
+                    $(id).addClass("card-inverse-secondary");
+                } else {
+                    var cid = "#c" + $(this).data("id");
+                    if ($(cid).attr("aria-expanded") == "false" || $(cid).attr("aria-expanded") == undefined) {
+                        $(id).removeClass("card-inverse-secondary");
+                    }
+                }
+            })
+
+            $(document).on("click", ".show-comment", function () {
+
+                // $(".show-comment").attr("aria-expanded") = "false";
+                // var id =$(this).data('id');
+                // var text = "";
+                if ($(this).attr("aria-expanded") == "true") {
+                    // alert(1)
+                    var id = "#" + $(this).data("id");
+                    text = $(this).text();
+                    var content = `<span class="ml-3"><i class="fa fa-comments-o">&nbsp;Hide Reply</i></span>`;
+                    $(this).html(content);
+                    $(id).addClass(" card-inverse-secondary");
+                } else {
+                    var rid = "#r" + $(this).data("id");
+                    var id = "#" + $(this).data("id");
+                    if ($(rid).attr("aria-expanded") == "false") {
+                        // alert(1);
+                        $(id).removeClass(" card-inverse-secondary");
+                    }
+                    var content = `<span class="ml-3"><i class="fa fa-comments-o">&nbsp;` + $.trim(text) + `</i></span>`;
+                    $(this).html(content);
+                }
+                // alert($(this).attr("href"));
+
+            })
+            $.ajax({
+                url: "../../api/blogop.php",
+                type: "POST",
+                data: JSON.stringify({ fkey: 'blog_cat_lan' }),
+                dataType: "JSON",
+                success: (data) => {
+                    console.log(data);
+                    content = `<div class="dropdown-menu" aria-labelledby="language-combobox" style="max-height: 400px; overflow: hidden auto;">
+                                                                            <h6 class="dropdown-header">Select Language</h6>`
+                    for (i = 0; i < data.languagesdata.length; i++) {
+                        content += `<a class="dropdown-item select-language" data-value="`+ data.languagesdata[i].lcode + `">` + data.languagesdata[i].lname + `</a>`
+                    }
+                    content+=`</div>`;
+                    $(".language-dropdown").append(content);
+                }
+            })
+            function texttranslation(text){
+
+
+            }
+            selectedlanguage = c1in = c2out = null;
+            $(document).on("click", ".select-language", function () {
+                $("#language-combobox").text($(this).text());
+                selectedlanguage = $(this).data("value");
+                
+                c1in = bloglanguage;
+
+                c2out = selectedlanguage;
+
+                const inputText = $("#selected-text").text();
+                const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${c1in}&tl=${c2out}&dt=t&q=${encodeURI(inputText)}`;
+
+                fetch(url).then((response) => response.json()).then((json) => {
+                    translatetext = json[0].map((item) => item[0]).join("");
+                    // $("#t2").val(c);
+                    // $("#").html("");
+                    $("#blog-text").html("");
+                    $("#blog-text").text(translatetext);
+                    //highlight(c);
+                    if(!audioplay){
+                        audioplay =true;
+                        audiopause = false;
+                        audioresume = false;
+                        speechSynthesis.cancel();
+                        if(!blogcaption)
+                            $("#showcaption").toggle(600);
+                        if(blogcaption){
+                            $("#blogcaption").toggle(600);
+                            blogcaption = false;
+                        }
+                        $("#blogaudiorefresh").toggle(600);
+                        document.getElementById("word").innerHTML = "";
+                        document.getElementById("panel").innerHTML = "";
+                        wordIndex = -1;
+                        $("#blogaudio").html(`<i class="ms-1 mdi mdi-volume-high mdi-18px text-dark"></i>`);
+                        $("#blogaudio").attr('data-bs-original-title',"Listen");
+                        $("#blogaudiocancle").toggle(600);
+                    }
+                    // console.log($());
+                });
+
+            })
+            //   $(document).on("click", "#", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            // const checkid = urlParams.has('s');
+            // alert(checkid)
+            const blogid = urlParams.get('s');
+            $(document).on("click", ".addreply", function () {
+                if(loginuserid == 0){
+                    btn = `
+                            <div class="d-flex align-items-center">
+                                <div class="ms-auto">
+                                    <button type="button" class="btn btn-danger btn-sm gotologin">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>`
+                    showInfoToast("Reply Comment!!",'You must login to your TrendStream account to comment!<br>'+btn)
+                }else{
+                    id = $(this).data("id");
+                    // alert(id)
+    
+                    riid = "#replyibox-" + id;
+                    // alert($(riid).val());
+                    // $(riid).data("id",233);
+                    var comment = $(riid).val();
+                    pid = $(riid).data("id");
+                    // alert($(riid).data("id"));
+                    // contentid = "#collapse-" + $(riid).data("rcid")
+                    // alert(contentid)
+                    if (comment != "") {
+                        $.ajax({
+                            url: "../../api/comment.php",
+                            type: "POST",
+                            data: JSON.stringify({ key: 'blog_reply', blog_id: blogid, parent_comment_id: pid, comment: comment, mainid: id }),
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.status) {
+                                    $("#comment-" + id).html(data.content);
+                                    // showcomment();
+                                    var comment = $(riid).val("");
+                                    $("#allcomment").html(`<i class="fa fa-comments-o">&nbsp; ` + data.comments[0].comments + `</i>`);
+                                } else {
+                                    alert("comment not reply some error found")
+                                }
+                            },
+                            error: function () {
+                                alert("error in comment insert api")
+                            }
+                        })
+                    }
+                }
+                // coid = "#collapse-2"
+                // $(riid).data('value',id);
+            })
+            $(document).on("click",".gotologin",function(){
+                // alert(1);
+                window.location.href = "../login/index.html";
+            })
+            showcomment()
+            function showcomment() {
+                $.ajax({
+                    url: "../../api/comment.php",
+                    type: "POST",
+                    data: JSON.stringify({ key: 'blog_comment_display', blog_id: blogid }),
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        $("#commentcontent").html(data.content);
+                    },
+                    error: (error) => servererror(error)
+                })
+            }
+            $(document).on("click", "#addcomment", () => {
+                if(loginuserid == 0){
+                    btn = `
+                            <div class="d-flex align-items-center">
+                                <div class="ms-auto">
+                                    <button type="button" class="btn btn-danger btn-sm gotologin">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>`
+                    showInfoToast("Reply Comment!!",'You must login to your TrendStream account to comment!<br>'+btn)
+                }else{
+                    var comment = $("#newcomment").val();
+                    if (comment != "") {
+                        // alert(1)
+                        $.ajax({
+                            url: "../../api/comment.php",
+                            type: "POST",
+                            data: JSON.stringify({ key: 'blog_comment', blog_id: blogid, comment: comment }),
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.status) {
+                                    var commentcontent = $("#commentcontent").html();
+                                    $("#commentcontent").html("");
+                                    $("#commentcontent").append(data.content);
+                                    $("#commentcontent").append(commentcontent);
+                                    $("#newcomment").val("");
+                                    $("#allcomment").html(`<i class="fa fa-comments-o">&nbsp; ` + data.comments[0].comments + `</i>`);
+
+                                }
+                            },
+                            error: function () {
+                                alert("error in comment insert api")
+                            }
+                        })
+                    }
+                }
+            })
+            $(document).on("click", ".delete-comment", function (e) {
+                // e.preventDefault();
+                // alert($(this).data("id"));
+                id = $(this).data("id");
+                commentid = "#comment-" + id;
+                // type = 
+                //  alert($(this).data("type"))
+                cpid = 0;
+                if ($(this).data("type") == "reply") {
+                    cpid = $(this).data("cpid")
+                }
+                // alert(cpid);
+                // alert(commentid);
+                $.ajax({
+                    url: "../../api/comment.php",
+                    type: "POST",
+                    data: JSON.stringify({ key: 'blog_comment_delete', blog_id: blogid, blog_comment_id: $(this).data("id"), type: $(this).data("type"), cpid: cpid }),
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.status) {
+                            if (data.type == "reply") {
+                                // alert("11")
+                                $("#comment-" + cpid).html(data.content);
+                            }
+                            else {
+                                $(commentid).remove();
+                            }
+                            $("#allcomment").html(`<i class="fa fa-comments-o">&nbsp; ` + data.comments[0].comments + `</i>`);
+                            console.log(data);
+                            // var commentcontent = $("#commentcontent").html();
+                            // $("#commentcontent").html("");
+                            // $("#commentcontent").append(data.content);
+                            // $("#commentcontent").append(commentcontent);
+                            // $("#newcomment").val("");
+                        }
+                    },
+                    error: function () {
+                        alert("error in comment insert api")
+                    }
+                })
+                // $(commentid).remove();
+
+            })
+            // $(document).on("click", ".delete-reply-comment", function (e) {
+            //     // e.preventDefault();
+            //     // alert($(this).data("id"));
+
+            //     commentid = "#comment-" + $(this).data("id");
+            //     alert(commentid);
+            //     // $(commentid).remove();
+
+            // })
+            $(document).on("click", ".addcommentlike", function (e) {
+                e.preventDefault();
+                // alert($(this).text());
+                // alert($(this).data("id"))
+                if(loginuserid == 0){
+                    btn = `
+                            <div class="d-flex align-items-center">
+                                <div class="ms-auto">
+                                    <button type="button" class="btn btn-danger btn-sm gotologin">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>`
+                    showInfoToast("Like Comment!!",'You must login to your TrendStream account to Like comment!<br>'+btn)
+                }else{
+                    id = $(this).data("id");
+                    $.ajax({
+                        url: "../../api/comment_like.php",
+                        type: "POST",
+                        data: JSON.stringify({ key: 'comment_like_insert', blog_id: blogid, blog_comment_id: id }),
+                        dataType: "JSON",
+                        success: function (data) {
+
+                            if (data.status == "liked") {
+                                // alert(1);
+                                $("#commentlike-" + id).html(`<i class="fa fa-thumbs-up ">&nbsp;` + data.likes[0].likes + `</i>`);
+                                var value = $(this).text();
+                                // alert(value+1)
+                            } else if (data.status == "disliked") {
+                                // alert(2);
+                                $("#commentlike-" + id).html(`<i class="fa fa-thumbs-o-up ">&nbsp;` + data.likes[0].likes + `</i>`);
+                                // $("#commentlike-"+$(this).data("id")).html(`<i class="fa fa-thumbs-o-up">&nbsp;11</i>`);
+                            }
+                            console.log(data);
+                        },
+                        error: () => {
+                            alert("error");
+                        }
+                    })
+                }
+            })
+            $(document).on("click", "#addlike", () => {
+                // alert(blogid);
+                if(loginuserid == 0){
+                    btn = `
+                            <div class="d-flex align-items-center">
+                                <div class="ms-auto">
+                                    <button type="button" class="btn btn-danger btn-sm gotologin">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>`
+                    //showInfoToast("Like Blog..!",'You must login to your Blogsee account to Like!<br>'+btn)
+                    showInfoToast("Like Blog..!",'You must login to your TrendStream account to Like!<br>'+btn)
+                }else{
+                    $.ajax({
+                        url: "../../api/like.php",
+                        type: "POST",
+                        data: JSON.stringify({ fkey: 'blog_like_insert', blog_id: blogid }),
+                        dataType: "JSON",
+                        success: function (data) {
+                            if (data.status == "liked") {
+                                // alert(1);
+                                $("#addlike").html(`<i class="fa fa-thumbs-up">&nbsp;` + data.likes[0].likes + `</i>`);
+
+                            } else if (data.status == "disliked") {
+                                // alert(2);
+                                $("#addlike").html(`<i class="fa fa-thumbs-o-up">&nbsp;` + data.likes[0].likes + `</i>`);
+                            }
+                            console.log(data);
+
+                        },
+                        error: () => {
+                            alert(1)
+                        }
+                    })
+                }
+            })
+            
+            // alert(1);
+            // alert(blogid);
+
+
+            var blogcontent = "";
+            $.ajax({
+                url: "../../api/blogop.php",
+                type: "POST",
+                data: JSON.stringify({ fkey: 'blog_update_views', blog_id: blogid }),
+                dataType: "JSON",
+                async : false,
+                success: (data) => {
+                    console.log(data);
+                    if (data.status == 1) {
+                        // alert(data.readblogdata.length)
+                        if(data.readblogdata.length > 0){
+                            if(data.readblogdata[0].blog_status == "deleted")
+                            {
+                                $("#home-tab").html(`<div class="align-items-center text-center m-5">
+                                                <span>This blog has not available</span>
+                                             </div>`);
+
+                            }else{
+                                selectedlanguage = data.readblogdata[0].lcode;
+                                bloglanguage = data.readblogdata[0].lcode;
+                                var blogcontent = `<div class="dropdown" align=center>
+                                                                        <i class="mdi mdi-dots-horizontal" type="button"
+                                                                            id="dropdownMenuSizeButton3"
+                                                                            data-bs-toggle="dropdown" aria-haspopup="true"
+                                                                            aria-expanded="false"></i>
+                                                                        <div class="dropdown-menu"
+                                                                            aria-labelledby="dropdownMenuSizeButton3">`;
+                                if (data.userdata[0].usid == 0) {
+                                blogcontent += `<a class="dropdown-item updateblog" href="../login/index.html"><i class="mdi mdi-login text-info"></i><span class="ms-2">Login</span></a>`
+    
+                                } else {
+                                            if (data.userdata[0].username == data.readblogdata[0].username && data.userdata[0].user_type == "blogger") {
+                                                blogcontent += `<a class="dropdown-item updateblog" href="../create/create.html?key=update&s=` + data.readblogdata[0].blog_id + `"><i class="mdi mdi-pencil text-info"></i><span class="ms-2">Update</span></a>
+                                            <a class="dropdown-item deleteblog" data-id="`+ data.readblogdata[0].blog_id + `"><i class="mdi mdi-delete text-info"></i><span class="ms-2">Delete</span></a>`;
+                                            }
+                                            // mdi mdi-pencil
+                                            blogcontent += `<a class="dropdown-item savereadlater"  data-id="` + data.readblogdata[0].blog_id + `"><i class="mdi mdi-clock text-info"></i><span class="ms-2">Save to Read later</span></a>
+                                            <a class="dropdown-item savereadlist"  data-id="`+ data.readblogdata[0].blog_id + `" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="Add blog in read-list"><i class="mdi mdi-playlist-plus fw-bold text-info"></i><span class="ms-2">Save to Readlist</span></a>`
+                                            if(loginuserid != data.readblogdata[0].usid)
+                                            blogcontent+=`<a class="dropdown-item reportblog" data-id="`+ data.readblogdata[0].blog_id + `"><i class="mdi mdi-block-helper text-info"></i><span class="ms-2">Report</span></a>`
+                                }
+                                blogcontent+=`
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <h3 class="card-title">` + data.readblogdata[0].blog_title + `</h3>
+                                                                        <div class="justify-content-center">
+                                                                        <div class="mb-3" data-id="41">
+                                                                            <img src="../../images/uploadimage/`+data.readblogdata[0].blog_cover_photo+`" alt="Nature">
+                                                                        </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="d-sm-flex justify-content-between align-items-start">
+                                                                            <div class="select-text" id="selected-text">`+ data.readblogdata[0].blog_content + `</div>
+                                                                            <div id="blog-text" style='display:none;'>`+ data.readblogdata[0].blog_content + `</div>
+                                                                            <div id="blog-text1" style='display:none;'>`+ data.readblogdata[0].blog_content + `</div>
+                                                                        </div>
+                                                                    </div>`;
+                                $("#blogcontent").append(blogcontent);
+        
+                                var profilecontent = `<div class="card-body">
+                                                                    <div class="border-bottom text-center">`
+                                if (data.readblogdata[0].photo == null) {
+                                    profilecontent += `<img src="../../images/faces/profile/default.png" alt="profile"
+                                                                            class="img-lg rounded-circle mb-3" />`
+                                } else {
+                                    profilecontent += `<img src="../../images/faces/profile/` + data.readblogdata[0].photo + `" alt="profile"
+                                                                            class="img-lg rounded-circle mb-3" />`
+                                }
+                                profilecontent += `
+                                                                            <div class="mb-3">
+                                                                            <h4>`+ data.readblogdata[0].username + `</h4>
+                                                                            <!-- <div
+                                                                                class="d-flex align-items-center justify-content-center">
+                                                                                <select id="profile-rating" name="rating"
+                                                                                    autocomplete="off">
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                </select>
+                                                                            </div> -->
+                                                                        </div>
+                                                                        <div class="d-flex justify-content-center">
+                                                                            <button class="btn btn-success" id="addlike">`;
+                                if (data.likedata.length == 0) {
+                                    profilecontent += `<i class="fa fa-thumbs-o-up">&nbsp;` + data.readblogdata[0].likes + `</i>`;
+                                } else if (data.likedata[0].status_like_dislike == "like") {
+                                    profilecontent += `<i class="fa fa-thumbs-up">&nbsp;` + data.readblogdata[0].likes + `</i>`;
+                                } else {
+                                    profilecontent += `<i class="fa fa-thumbs-o-up">&nbsp;` + data.readblogdata[0].likes + `</i>`;
+                                }
+                                profilecontent += `</button>
+                                                                            <a href="#comment" id="allcomment" class="btn btn-success"><i
+                                                                                    class="fa fa-comments-o">&nbsp; `+ data.readblogdata[0].comments + `</i></a>
+                                                                            <a class="btn btn-success" href='../profile/profile.html?p=`+ data.readblogdata[0].usid + `'>Open</a>
+                                                                        </div>`
+                                                                        if(data.readblogdata[0].likes>0)
+                                                                        profilecontent+=`<div class="d-flex justify-content-center">
+                                                                            <span class="hover-cursor likesdata">`+data.readblogdata[0].likes+` Likes</span>    
+                                                                        </div>`
+                                                                        profilecontent+=`
+                                                                        <div class="text-muted text-small">
+                                                                            <span>`+timeconvert(data.readblogdata[0].blog_post_time)+`</span>    
+                                                                        </div>
+                                                                    </div>
+                                                                </div>`;
+                                $("#profilecontent").html(profilecontent);
+                                $('#profile-rating').barrating({
+                                    theme: 'css-stars',
+                                    showSelectedRating: false
+                                });
+                                console.log(data);
+                                //   showBlog();
+                                set_highlight();
+                                $("#language-combobox").text(data.readblogdata[0].lname)
+                                $("#recommendedoptiondata").html("");
+                                content = `<div class="btn btn-behance recommendedoption" data-value="all" data-type="all">All</div>`;
+                                content += `<div class="btn btn-outline-behance recommendedoption" data-value="`+data.readblogdata[0].lcode+`" data-type="language">`+data.readblogdata[0].lname+`</div>`;
+                                content += `<div class="btn btn-outline-behance recommendedoption" data-value="`+data.readblogdata[0].bcid+`" data-type="category">`+data.readblogdata[0].bcname+`</div>`;
+                                content += `<div class="btn btn-outline-behance recommendedoption" data-value="`+data.readblogdata[0].usid+`" data-type="user">`+data.readblogdata[0].username+`</div>`;
+                                tags = data.readblogdata[0].tags.split(",");
+                                console.log(tags.length);
+                                if(tags.length > 1){
+                                    for(i=0 ; i<tags.length;i++){
+                                        content += `<div class="btn btn-outline-behance recommendedoption" data-value="`+tags[i]+`" data-type="seo">`+tags[i]+`</div>`;
+                                    }
+                                }
+                                // <div class="btn btn-outline-behance ms-2 recommendedoption">valueSSS6</div>
+                                $("#recommendedoptiondata").append(content);
+                                $("#recommendeddata").html("");
+                                content=``;
+                                if(data.blogsdata.length>0){
+                                for(i=0 ; i < 5;i++){
+                                if(data.blogsdata[i] == undefined){
+                                    continue;
+                                }else{
+                                    if(i == 4){
+                                        content += `
+                                                                                                <div class="wrapper d-flex align-items-center justify-content-between py-2 hover-cursor open-blog" data-value='`+data.blogsdata[i].blog_id+`'>
+                                                                                                    <div class="d-flex">
+                                                                                                        <img class="img-sm rounded-10" style="width : 70px"
+                                                                                                            src="../../images/uploadimage/Screenshot (11).png"
+                                                                                                            alt="profile">
+                                                                                                        <div class="wrapper ms-3">
+                                                                                                            <p class="ms-1 mb-1 fw-bold">
+                                                                                                                `+data.blogsdata[i].blog_title+`
+                                                                                                            </p>
+                                                                                                            <small class="text-muted mb-0 ms-1"><i class="fa fa-thumbs-o-up me-1"></i>`+data.blogsdata[i].likes+`</small>
+                                                                                                                <small class="text-muted mb-0 ms-1"><i class="fa fa-comments-o me-1"></i>`+data.blogsdata[i].comments+`</small>
+                                                                                                                    <small class="text-muted mb-0 ms-1"><i class="mdi mdi-eye me-1"></i>`+data.blogsdata[i].blog_view+`</small>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                            <div class="text-muted text-small pt-3">
+                                                                                                <button class="btn btn-outline-success open-blog" data-value = "`+ data.blogsdata[i].blog_id+`">Open</button>
+                                                                                            </div>
+                                                                                        </div>`;                                
+                                    }else{
+                                        content += `
+                                                                                                    <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom hover-cursor open-blog" data-value='`+data.blogsdata[i].blog_id+`'>
+                                                                                                        <div class="d-flex">
+                                                                                                            <img class="img-sm rounded-10" style="width : 70px"
+                                                                                                                src="../../images/uploadimage/Screenshot (11).png"
+                                                                                                                alt="profile">
+                                                                                                            <div class="wrapper ms-3">
+                                                                                                                <p class="ms-1 mb-1 fw-bold">
+                                                                                                                    `+data.blogsdata[i].blog_title+`
+                                                                                                                </p>
+                                                                                                                <small class="text-muted mb-0 ms-1"><i class="fa fa-thumbs-o-up me-1"></i>`+data.blogsdata[i].likes+`</small>
+                                                                                                                    <small class="text-muted mb-0 ms-1"><i class="fa fa-comments-o me-1"></i>`+data.blogsdata[i].comments+`</small>
+                                                                                                                        <small class="text-muted mb-0 ms-1"><i class="mdi mdi-eye me-1"></i>`+data.blogsdata[i].blog_view+`</small>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                <div class="text-muted text-small pt-3">
+                                                                                                    <button class="btn btn-outline-success open-blog" data-value = "`+ data.blogsdata[i].blog_id+`">Open</button>
+                                                                                                </div>
+                                                                                            </div>`;
+                                    }
+                                }
+                                }                         
+                                }
+                                $("#recommendeddata").html("");
+                                $("#recommendeddata").append(content);
+                                    }
+                                    $("#relatedbloggerdata").html("");
+                                content = ``;
+                                if(data.bloggersdata.length>0){
+                                    for(i=0 ; i < 5;i++){
+                                        if(data.bloggersdata[i] == undefined){
+                                            continue;
+                                        }else{
+                                            if(i == 4){
+                                                content += `
+                                                            <div class="wrapper d-flex align-items-center justify-content-between py-2 hover-cursor open-profile" data-value = "`+data.bloggersdata[i].usid+`">
+                                                                <div class="d-flex">`
+                                                                    if (data.bloggersdata[i].photo == null) {
+                                content += `  <img class="img-sm rounded-10" src="../../images/faces/profile/default.png">`
+                                } else {
+                                content += `  <img class="img-sm rounded-10" src="../../images/faces/profile/`+ data.bloggersdata[i].photo+`" alt="profile">`
+                                }
+                                                                    content+=
+                                                                    `<div class="wrapper ms-3">
+                                                                        <p class="ms-1 mb-1 fw-bold">
+                                                                            `+data.bloggersdata[i].username+`</p>
+                                                                            <small class="text-muted mb-0"><i class="mdi mdi-format-list-bulleted me-1"></i>`+data.bloggersdata[i].totalblogs+`
+                                                    Blogs</small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="text-muted text-small pt-3">
+                                                                    <button class="btn btn-outline-success open-profile" data-value = "`+ data.bloggersdata[i].usid+`">Open</button>
+                                                                </div>
+                                                            </div>
+                                                `
+                                            }else{
+                                                content += `
+                                                            <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom hover-cursor open-profile" data-value = "`+data.bloggersdata[i].usid+`">
+                                                                <div class="d-flex">`
+                                                                    if (data.bloggersdata[i].photo == null) {
+                                content += `  <img class="img-sm rounded-10" src="../../images/faces/profile/default.png">`
+                                } else {
+                                content += `  <img class="img-sm rounded-10" src="../../images/faces/profile/`+ data.bloggersdata[i].photo+`" alt="profile">`
+                                }
+                                                                    content+=
+                                                                    `<div class="wrapper ms-3">
+                                                                        <p class="ms-1 mb-1 fw-bold">
+                                                                            `+data.bloggersdata[i].username+`</p>
+                                                                            <small class="text-muted mb-0"><i class="mdi mdi-format-list-bulleted me-1"></i>`+data.bloggersdata[i].totalblogs+`
+                                                    Blogs</small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="text-muted text-small pt-3">
+                                                                    <button class="btn btn-outline-success open-profile" data-value = "`+ data.bloggersdata[i].usid+`">Open</button>
+                                                                </div>
+                                                            </div>
+                                                `
+        
+                                            }
+                                        }
+                                    }
+                                }
+                                $("#relatedbloggerdata").append(content);
+                                content = ``;
+                                if(data.likeusersdata.length>0){
+                                    for(i=0 ; i < data.likeusersdata.length;i++){
+        
+                                        if(data.likeusersdata[i] == undefined){
+                                            continue;
+                                        }else{
+                                            if(i==data.likedata.length-1){
+                                                content += `
+                                                                <div class="wrapper d-flex align-items-center justify-content-between py-2 hover-cursor open-profile" data-value = "`+data.likeusersdata[i].usid+`">
+                                                                    <div class="d-flex">`;
+                                                if(data.likeusersdata[i].photo == null) {
+                                                    content += `  <img class="img-sm rounded-10" src="../../images/faces/profile/default.png">`
+                                                } else {
+                                                    content += `  <img class="img-sm rounded-10" src="../../images/faces/profile/`+ data.likeusersdata[i].photo+`" alt="profile">`
+                                                }
+                                                content+=
+                                                                        `<div class="wrapper ms-3">
+                                                                            <p class="ms-1 mb-1 fw-bold">
+                                                                                `+data.likeusersdata[i].username+`</p>
+                                                                                <small class="text-muted mb-0"><i class="fa fa-thumbs-o-up me-1"></i></small>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="text-muted text-small">
+                                                                            `+timeconvert(data.likeusersdata[i].liketime)+`
+                                                                    </div>
+                                                                </div>
+                                                    `
+                                                    
+                                                }else{
+                                                content += `
+                                                                <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom hover-cursor open-profile" data-value = "`+data.likeusersdata[i].usid+`">
+                                                                    <div class="d-flex">`;
+                                                if(data.likeusersdata[i].photo == null) {
+                                                    content += `  <img class="img-sm rounded-10" src="../../images/faces/profile/default.png">`
+                                                } else {
+                                                    content += `  <img class="img-sm rounded-10" src="../../images/faces/profile/`+ data.likeusersdata[i].photo+`" alt="profile">`
+                                                }
+                                                content+=
+                                                                        `<div class="wrapper ms-3">
+                                                                            <p class="ms-1 mb-1 fw-bold">
+                                                                                `+data.likeusersdata[i].username+`</p>
+                                                                                <small class="text-muted mb-0"><i class="fa fa-thumbs-o-up me-1"></i></small>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="text-muted text-small">
+                                                                            `+timeconvert(data.likeusersdata[i].liketime)+`
+                                                                    </div>
+                                                                </div>
+                                                    `
+                                            }
+                                        }
+                                    }
+                                    $("#likesusersdatacontent").html("");
+                                    $("#likesusersdatacontent").append(content);
+                                    // alert(2)
+                            }
+                        }
+                    }else{
+                        $("#home-tab").html(`<div class="align-items-center text-center m-5">
+                                                <span>This blog has not available</span>
+                                             </div>`);
+                        // alert(1)
+                    }
+                    $("#loader").hide();
+                    $(".body-content").show();
+                },
+                error: (error) => servererror(error)
+            });
+            function timeconvert(value){
+                var timeDiff = (new Date() - new Date(value));
+                var result;
+                console.log(new Date());
+                console.log(1);
+                console.log(new Date(value));
+                if (timeDiff < 60000) { // Less than 1 minute
+                    var secondsAgo = Math.floor(timeDiff / 1000);
+                    result = secondsAgo + " seconds ago";
+                } else if (timeDiff < 3600000) { // Less than 1 hour
+                    var minutesAgo = Math.floor(timeDiff / (1000 * 60));
+                    result = minutesAgo + " minutes ago";
+                } else if (timeDiff < 86400000) { // Less than 1 day
+                    var hoursAgo = Math.floor(timeDiff / (1000 * 60 * 60));
+                    result = hoursAgo + " hours ago";
+                } else if (timeDiff < 2592000000) { // Less than 1 month
+                    var daysAgo = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    result = daysAgo + " days ago";
+                } else if (timeDiff < 31536000000) { // Less than 1 year
+                    var monthsAgo = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30.44));
+                    result = monthsAgo + " months ago";
+                } else {
+                    var yearsAgo = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 365.25));
+                    result = yearsAgo + " years ago";
+                }
+                return result;
+            }
+            $(document).on("click",".likesdata",function(){
+                // alert(blogid)
+                $("#likesusersdata").modal("show")
+            //   $("#previewcontent").modal("show");
+
+            })
+            $(document).on("click",".open-blog",function(){
+                // console.log($(this).data("value"));
+                window.location.href = './blog.html?s='+$(this).data("value");
+            })
+            $(document).on("click",".open-profile",function(){
+                window.location.href = "../profile/profile.html?p="+$(this).data("value");
+            })
+            // const sharingMenuItems = sharingMenu.querySelectorAll('contex-menu-list');
+            //  $("#context-menu-simple");
+            // console.log(selectedText.textContent);
+            // // $(document).on("mouseup","#")
+            // selectedText.addEventListener('mouseup', function (e) {
+            //     const selectedText = document.getElementById('context-menu-simple');
+            //     const sharingMenu = document.getElementsByClassName('contex-menu-list');
+            //     const selection = window.getSelection().toString().trim();
+            //     if (selection !== '') {
+            //         const x = e.pageX;
+            //         const y = e.pageY;
+            //         sharingMenu.style.top = `${y}px`;
+            //         sharingMenu.style.left = `${x}px`;
+            //         sharingMenu.style.display = 'block';
+            //     } else {
+            //         sharingMenu.style.display = 'none';
+            //     }
+            // });
+            selection = "";
+            const sharingMenu = document.getElementById('sharing-menu');
+            $(document).on("mouseup", ".select-text", function (e) {
+                // selection = window.getSelection().toString();
+                
+                // word = selection.split(" ");
+                // if
+                e.preventDefault();
+                const selectedText = document.getElementById('selected-text');
+                selection = window.getSelection().toString().trim();
+                if(selectedlanguage == bloglanguage){
+                    $("#blog-text1").text(selection);
+                    console.log($("#blog-text1").text());
+                }else{
+                    // console.log(text1);
+                    console.log(bloglanguage);
+                    console.log(selectedlanguage);
+                    const urlt = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${bloglanguage}&tl=${selectedlanguage}&dt=t&q=${encodeURI(selection)}`;
+                    ttext = "";
+                    fetch(urlt).then((response) => response.json()).then((json) => {
+                        ttext = json[0].map((item) => item[0]).join("");
+                        console.log(ttext);
+                        $("#blog-text1").html("");
+                        ttext = ttext +"."
+                        $("#blog-text1").text(ttext);
+                        console.log($("#blog-text1").text());
+                    });
+                }
+                range = window.getSelection().getRangeAt(0);
+                preSelectionRange = range.cloneRange();
+                preSelectionRange.selectNodeContents($(".select-text")[0]);
+                preSelectionRange.setEnd(range.startContainer, range.startOffset);
+                start = preSelectionRange.toString().length;
+                prevText = selectedText.textContent.toLowerCase().substring(0,start).split(/\s/);
+                console.log(prevText);
+                // range = selection.getRangeAt(0);
+                selectedword = selection.split(' ');
+                checkduplicate = prevText.indexOf(selectedword[0].toString().toLowerCase());
+                console.log(checkduplicate)
+                if(checkduplicate != -1){
+                    checkduplicate = true 
+                }
+                else{
+                    checkduplicate = false;
+                }
+                console.log(checkduplicate);
+                console.log(selectedword[0].toString());
+                if (selection !== '') {
+                    const x = e.pageX;
+                    const y = e.pageY;
+                    sharingMenu.style.top = `${y}px`;
+                    sharingMenu.style.left = `${x}px`;
+                    sharingMenu.style.display = 'block';
+                } else {
+                    sharingMenu.style.display = 'none';
+                }
+            })
+            $(document).on("click",".sharing-menu-item",function(e){
+                e.preventDefault();
+                console.log(selection);
+                const service = $(this).data("service");
+                const selectedText = selection;
+                const url = encodeURIComponent(window.location.href);
+                const text = encodeURIComponent(selectedText);
+                console.log(text);
+                let shareUrl;
+                switch (service) {
+                    case 'facebook':
+                        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${text+"%20%20"+url}`;
+                        break;
+                    case 'whatsapp':
+                        shareUrl = `https://api.whatsapp.com/send?text=${text}%20${"URL=%20"+url}`;
+                        break;
+                    case 'email':
+                        shareUrl = `mailto:?subject='Share text'&body=${text}`;
+                          break;
+                    case 'bookmark':
+                        // shareUrl = `https://www.instagram.com/?url=${url}`;
+                        // alert(1);
+                        if(loginuserid == 0){
+                            btn = `
+                            <div class="d-flex align-items-center">
+                                <div class="ms-auto">
+                                    <button type="button" class="btn btn-danger btn-sm gotologin">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>`
+                            showInfoToast("Add bookmark!!",'You must login to your TrendStream account to bookmark!<br>'+btn)
+                        }else{
+                            var selectedWord = selection.split(' ');
+                            console.log(selectedWord);
+                            // var selectedWord = selectedWord.split(' '); 
+    
+                            if (selectedWord.length > 1){
+                                showWarningToast("Attention!", "Not bookmarking <b>More than one word<b>.");
+                            }else 
+                            {
+                                if(checkduplicate){
+                                showWarningToast("Attention!", "this word appears more than once in this blog please bookkmark unique word.");
+                                }else{
+                                    var type = "bookmark";
+                                    $(".bookmark").removeClass("bookmark");
+                                    $.ajax({
+                                        url: "../../api/bookmark.php",
+                                        type: "POST",
+                                        data: JSON.stringify({ key: 'bookmark', blog_id: blogid,word: selectedWord[0].toString(), type: type, pos: start }),
+                                        dataType: "JSON",
+                                        success: (data) => {
+                                            console.log(data);
+                                            if(data.status){
+                                                highlight(selectedWord[0].toString())
+                                                // set_highlight();
+                                                selection = "";
+                                                showSuccessToast("Bookmark!", "<b>"+selectedWord[0].toString()+"</b> is bookmarked.");
+                                            }else{
+                                                showDangerToast("Attention!", "<b>"+selectedWord[0].toString()+"</b> is not bookmarked.")
+                                            }
+                                        },
+                                        error: (error) => servererror(error)
+                                    })
+                                }
+                            }
+                        }
+
+                        break;
+                    case 'bookmarkdelete':
+                        // shareUrl = `https://www.instagram.com/?url=${url}`;
+                        // alert(2)
+                        if(loginuserid == 0){
+                            btn = `
+                            <div class="d-flex align-items-center">
+                                <div class="ms-auto">
+                                    <button type="button" class="btn btn-danger btn-sm gotologin">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>`
+                            showInfoToast("Add bookmark!!",'You must login to your TrendStream account to bookmark!<br>'+btn)
+                        }else{
+                                var type = "bookmark";
+                                        $.ajax({
+                                            url: "../../api/bookmark.php",
+                                            type: "POST",
+                                            data: JSON.stringify({ key: 'bookmark_delete', blog_id: blogid}),
+                                            dataType: "JSON",
+                                            success: (data) => {
+                                                console.log(data);
+                                                if(data.status){
+                                                    // showSuccessToast("Bookmark!", "<b>"+selectedWord[0].toString()+"</b> is bookmarked.");
+                                                    selection = "";
+                                                    $(".bookmark").removeClass("bookmark");
+                                                    showSuccessToast("Bookmark!", "Bookmark deleted.");
+                                                }else{
+                                                    showSuccessToast("Bookmark!", "Bookmark not deleted.");
+
+                                                    // showDangerToast("Attention!", "<b>"+selectedWord[0].toString()+"</b> is not bookmarked.")
+                                                }
+                                            },
+                                            error: (error) => servererror(error)
+                                        })
+                        }
+                        break;
+                    default:
+                        return;
+                }
+                selection = "";
+                if(service !="bookmark" && service != "bookmarkdelete"){
+                    window.open(shareUrl, '_blank');
+                // sharingMenu.style.display = 'none';
+                }
+                sharingMenu.style.display = 'none';
+
+            })
+            function highlight(text) {
+                var inputText = document.getElementById("selected-text");
+                console.log(inputText);
+                var innerHTML = inputText.innerHTML;
+
+                var index = innerHTML.indexOf(text);
+                if (index >= 0) 
+                { 
+                    innerHTML = innerHTML.substring(0,index) + "<span class='bookmark'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+                    inputText.innerHTML = innerHTML;
+                }
+            }
+            // function highlight(bookmarkedWord, bookmarkedPosition) 
+            // {
+            //     var inputText = document.getElementById("selected-text");
+            //     var innerHTML = inputText.innerHTML;
+            //     var startIndex = innerHTML.indexOf(bookmarkedWord, bookmarkedPosition);
+            //     var endIndex = startIndex + bookmarkedWord.length;
+            //     if (startIndex >= 0) {
+            //         // Wrap the bookmarked word with a span element for highlighting
+            //         innerHTML = innerHTML.substring(0, startIndex) + "<span class='bookmark'>" + innerHTML.substring(startIndex, endIndex) + "</span>" + innerHTML.substring(endIndex);
+            //         inputText.innerHTML = innerHTML;
+            //         // Scroll to the bookmarked position
+            //         //$("html,body").animate({ scrollTop: bookmarkedPosition }, 0);
+            //     }
+            // }
+            // function highlight(bookmarkedWord, bookmarkedPosition) 
+            // {
+            //     var inputText = document.getElementById("selected-text");
+            //     var innerHTML = inputText.innerHTML;
+            //     var startIndex = innerHTML.indexOf(bookmarkedWord, bookmarkedPosition);
+            //     var endIndex = startIndex + bookmarkedWord.length;
+
+            //     if (startIndex >= 0) {
+            //         // Wrap the bookmarked word with a span element for highlighting
+            //         innerHTML = innerHTML.substring(0, startIndex) + "<span class='bookmark'>" + innerHTML.substring(startIndex, endIndex) + "</span>" + innerHTML.substring(endIndex);
+            //         inputText.innerHTML = innerHTML;
+            //         // Scroll to the bookmarked position
+            //         //$("html,body").animate({ scrollTop: bookmarkedPosition }, 0);
+            //     }
+            // }
+            function set_highlight(){
+                if(loginuserid != 0){
+                    $.ajax({
+                        url: "../../api/bookmark.php",
+                        type: "POST",
+                        data: JSON.stringify({ key: 'get_boomark',type:'bookmark', blog_id: blogid}),
+                        dataType: "JSON",
+                        success: function(data)
+                        {
+                            if (data.status)
+                            {
+                                console.log(data);
+                                // alert(1)
+                                if(data.bdata.length > 0){
+                                    var bookmarkedWord = data.bdata[0].word;
+                                    var bookmarkedPosition = data.bdata[0].pos;
+                                    highlight(bookmarkedWord);
+                                }
+                                // //$("#test").html($("#test").text().replace(bookmarkedWord, '<span class="bookmark">' + bookmarkedWord + '</span>'));
+                                // //$("#test").text($("#test").text().replace(bookmarkedWord, '<span class="bookmark">' + bookmarkedWord + '</span>'));
+                                // $("html,body").animate({ scrollTop: bookmarkedPosition }, 0);                           
+                            } 
+                            else 
+                            {
+                                alert("No bookmark found.");
+                            }
+                        },
+                        error: (error) => servererror(error)
+
+                    });
+                }
+            // });
+            }
+            // alert(1);
+            // const toggleButton = document.getElementById('toggleButton');
+            // const contextMenu = document.getElementById('contextMenu');
+
+            // // toggleButton.addEventListener('click', function() {
+            //   contextMenu.classList.toggle('show-menu');
+            // });
+            // const selectedText = document.getElementById('selected-text');
+            // const sharingMenu = document.getElementsByClassName('contex-menu-list');
+            // const sharingMenuItems = sharingMenu.querySelectorAll('.sharing-menu-item');
+            // const x = e.pageX;
+            // const y = e.pageY;
+            // // sharingMenu.style.top = `${y}px`;
+            // // sharingMenu.style.left = `${x}px`;
+            // const sharingMenu = $(".context-menu-list");
+
+            // sharingMenu.css({
+            //     top: `${y}px`,
+            //     left: `${x}px`
+            // });
+            // console.log(x + " " + y);
+            // function (e) {
+            // show menu
+            // var $this = $(this);
+            // if ($this.data('contextMenuActive') && $currentTrigger && $currentTrigger.length && $currentTrigger.is($this) && !$this.hasClass('context-menu-disabled')) {
+            //     e.preventDefault();
+            //     e.stopImmediatePropagation();
+            //     $currentTrigger = $this;
+            //     $this.trigger($.Event('contextmenu', {data: e.data, pageX: e.pageX, pageY: e.pageY}));
+            // }
+
+            // $this.removeData('contextMenuActive');
+            // $(".context-menu-list").toggle();
+            // var $this = $(this),
+            //     $related = $(e.relatedTarget),
+            //     $document = $(document);
+
+            // // abort if we're coming from a menu
+            // if ($related.is('.context-menu-list') || $related.closest('.context-menu-list').length) {
+            //     return;
+            // }
+
+            // // abort if a menu is shown
+            // if ($currentTrigger && $currentTrigger.length) {
+            //     return;
+            // }
+
+            // hoveract.pageX = e.pageX;
+            // hoveract.pageY = e.pageY;
+            // hoveract.data = e.data;
+            // $document.on('mousemove.contextMenuShow', handle.mousemove);
+            // hoveract.timer = setTimeout(function () {
+            //     hoveract.timer = null;
+            //     $document.off('mousemove.contextMenuShow');
+            //     $currentTrigger = $this;
+            //     $this.trigger($.Event('contextmenu', {
+            //         data: hoveract.data,
+            //         pageX: hoveract.pageX,
+            //         pageY: hoveract.pageY
+            //     }));
+            // }, e.data.delay);
+
+            // })
+            // function settime() {
+            //     setInterval(() => {
+            //         alert(12)
+            //     }, 2000);
+            // }
+            // settime();
+            // function readblog(){
+            // $.ajax({
+            //     url: "../../api/blogop.php",
+            //     type: "POST",
+            //     data: JSON.stringify({ fkey: 'blog_read_one', 'blog_id': blogid }),
+            //     dataType: "JSON",
+            //     success: (data) => {
+            //         // console.log(data);
+            //         if (data.status == 1) {
+            //             console.log(data.readblogdata[0].blog_content);
+            //             //   showBlog();
+            //         }
+            //     }
+            // });
+
+            // }
+            var doughnutPieData = {
+                datasets: [{
+                    data: [90, 40, 30],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                }],
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: [
+                    'Like',
+                    'Unlike',
+                    'No responce',
+                ]
+            };
+            var doughnutPieOptions = {
+                responsive: true,
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            };
+            if ($("#doughnutChart").length) {
+                var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
+                var doughnutChart = new Chart(doughnutChartCanvas, {
+                    type: 'doughnut',
+                    data: doughnutPieData,
+                    options: doughnutPieOptions
+                });
+            }
+            // $.ajax({
+            //     url: "../../api/blogop.php",
+            //     type: "POST",
+            //     data: JSON.stringify({ fkey: 'blog_update_views', blog_id: blogid }),
+            //     dataType: "JSON",
+            //     async:false,
+            //     // async : false,
+            //     success: (data) => {
+            //         console.log(data);
+
+            //     }})
+                // $("#textarea_blog").val($("#selected-text").text());
+      checknotification();
+
+        })
+    </script>
+    <!-- plugins:js -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+  <script src="../../js/allfilefunction.js"></script>
+
+    <!-- Plugin js for this page -->
+    <script src="vendors/chart.js/Chart.min.js"></script>
+    <script src="vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="vendors/progressbar.js/progressbar.min.js"></script>
+
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <!-- <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/template.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!--    <script src="js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/Chart.roundedBarCharts.js"></script> -->
+    <!-- End custom js for this page-->
+
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+  <script src="../../vendors/sweetalert/sweetalert.min.js"></script>
+
+    <script src="../../vendors/jquery-bar-rating/jquery.barrating.min.js"></script>
+    <script src="../../vendors/chart.js/Chart.min.js"></script>
+  <script src="../../vendors/jquery-toast-plugin/jquery.toast.min.js"></script>
+
+    <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- <script src="../../vendors/jquery-contextmenu/jquery.contextMenu.min.js"></script> -->
+
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../js/off-canvas.js"></script>
+    <script src="../../js/hoverable-collapse.js"></script>
+    <script src="../../js/template.js"></script>
+  <script src="../../js/toastDemo.js"></script>
+
+    <script src="../../js/settings.js"></script>
+    <script src="../../js/todolist.js"></script>
+    <script src="../../js/profile-demo.js"></script>
+  <script src="../../js/tooltips.js"></script>
+  <script src="../../js/alertp.js"></script>
+
+
+    <!-- <script src="../../js/context-menu.js"></script> -->
+
+
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!-- <script src="../../js/chart.js"></script> -->
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.7/jquery.lazyload.js"></script>
+    <script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("div.lazy").lazyload({
+         effect : "fadeIn"
+     });
+
+  }); -->
+    </script>
+    <script>
+        // const selectedText = document.getElementById('selected-text');
+        // const sharingMenuItems = sharingMenu.querySelectorAll('.sharing-menu-item');
+
+        // // selectedText.addEventListener('mouseup', function (e) {
+
+        // // });
+
+        // sharingMenuItems.forEach(function (item) {
+        //     item.addEventListener('click', function (e) {
+                
+        //     });
+        // });
+
+
+
+    </script>
+</body>
+<audio id="audioBox">
+    <source src="../../audio/notify.mp3" type="audio/mpeg" />
+    <source src="../../audio/notify.wav" type="audio/wav" />
+    <source src="../../audio/notify.ogg" type="audio/ogg" />
+  </audio>
+  
+</html>
